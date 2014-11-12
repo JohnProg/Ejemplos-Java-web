@@ -7,10 +7,13 @@ package maristas.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import maristas.beans.PlanEstrategicoBean;
+import maristas.dao.planDAO;
 
 /**
  *
@@ -29,7 +32,17 @@ public class getPlanServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //variables
+        String pagina="/cotizacion/listaCotizacion.jsp";
         
+        //get parametes
+        int id_plan = Integer.parseInt(request.getParameter("id_plan"));
+            
+        planDAO i_s = new planDAO();
+        PlanEstrategicoBean objPlanBean = i_s.GetPlan(id_plan);
+        request.setAttribute("cotizaciones", cotizaciones);    
+        request.setAttribute("status","ok");
+        getServletContext().getRequestDispatcher(pagina).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
