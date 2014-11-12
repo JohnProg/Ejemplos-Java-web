@@ -2,7 +2,7 @@
 package maristas.dao;
 
 import maristas.conexion.connectionBD;
-import maristas.beans.IndicadoresBean;
+import maristas.beans.UnidadOrganicaBean;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import java.sql.*;
@@ -12,35 +12,33 @@ import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class indicadorDAO {
+
+public class UnidadOrganicaDAO {
     
-    ArrayList<IndicadoresBean> lista=null;
+    ArrayList<UnidadOrganicaBean> lista=null;
     Connection          cnn=null;
     PreparedStatement   pt=null;
     ResultSet           rs=null;
     
-    public ArrayList<IndicadoresBean> get_queryset(){
-       lista = new ArrayList<IndicadoresBean>();
+    public ArrayList<UnidadOrganicaBean> get_queryset(){
+       lista = new ArrayList<UnidadOrganicaBean>();
        
        try{
             connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
 
-            pt=cnn.prepareStatement("select id, id_actividad,"
-                    + " nombre,"
-                    + " tipo_logo, logro");
+            pt=cnn.prepareStatement("select id,"
+                    + " nombre"
+                    + " from UnidadOrganizativa");
 
             rs=pt.executeQuery();
 
 
             while(rs.next()){
-                IndicadoresBean objPlan=new IndicadoresBean();
+                UnidadOrganicaBean objPlan=new UnidadOrganicaBean();
 
                 objPlan.setId(rs.getInt(2));
-                objPlan.setId_actividad(rs.getInt(3));
-                objPlan.setNombre(rs.getString(4));
-                objPlan.setTipo_logo(rs.getString(5));
-                objPlan.setLogo(rs.getString(6));
+                objPlan.setNombre(rs.getString(3));
 
                 lista.add(objPlan);                            
             }
@@ -54,22 +52,19 @@ public class indicadorDAO {
        }
    }
     
-    public JSONArray get_Indicadores() throws SQLException{
+    public JSONArray get_UnidadOrganica() throws SQLException{
         //Se obtiene el resultado de la consulta
-        lista = new ArrayList<IndicadoresBean>();
+        lista = new ArrayList<UnidadOrganicaBean>();
         lista = get_queryset();
 
         JSONArray json_list = new JSONArray();
         
         JSONObject json_obj=new JSONObject();
         
-        for(IndicadoresBean obj:lista) {
+        for(UnidadOrganicaBean obj:lista) {
             Map mapa=new LinkedHashMap();
             mapa.put("id",obj.getId());
-            mapa.put("id_actividad",obj.getId_actividad());
             mapa.put("nombre",obj.getNombre());
-            mapa.put("tipo_logo",obj.getTipo_logo());
-            mapa.put("logro",obj.getLogo());
             ;
             
             json_list.add(mapa);
@@ -78,5 +73,4 @@ public class indicadorDAO {
         
         return json_list;
     }
-    
 }

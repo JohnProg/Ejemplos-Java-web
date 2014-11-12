@@ -2,7 +2,7 @@
 package maristas.dao;
 
 import maristas.conexion.connectionBD;
-import maristas.beans.IndicadoresBean;
+import maristas.beans.PlanOperativoBean;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import java.sql.*;
@@ -12,35 +12,37 @@ import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class indicadorDAO {
+public class PlanOperativoDAO {
     
-    ArrayList<IndicadoresBean> lista=null;
+    ArrayList<PlanOperativoBean> lista=null;
     Connection          cnn=null;
     PreparedStatement   pt=null;
     ResultSet           rs=null;
     
-    public ArrayList<IndicadoresBean> get_queryset(){
-       lista = new ArrayList<IndicadoresBean>();
+    public ArrayList<PlanOperativoBean> get_queryset(){
+       lista = new ArrayList<PlanOperativoBean>();
        
        try{
             connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
 
-            pt=cnn.prepareStatement("select id, id_actividad,"
-                    + " nombre,"
-                    + " tipo_logo, logro");
+            pt=cnn.prepareStatement("select id, nombre,"
+                    + " descripcion, id_plan_estrategico,"
+                    + " id_encargado, id_unidad_org"
+                    + " from PlanOperativo");
 
             rs=pt.executeQuery();
 
 
             while(rs.next()){
-                IndicadoresBean objPlan=new IndicadoresBean();
+                PlanOperativoBean objPlan=new PlanOperativoBean();
 
                 objPlan.setId(rs.getInt(2));
-                objPlan.setId_actividad(rs.getInt(3));
-                objPlan.setNombre(rs.getString(4));
-                objPlan.setTipo_logo(rs.getString(5));
-                objPlan.setLogo(rs.getString(6));
+                objPlan.setNombre(rs.getString(3));
+                objPlan.setDescripcion(rs.getString(4));
+                objPlan.setId_plan_estrategico(rs.getInt(5));
+                objPlan.setId_encargado(rs.getInt(6));
+                objPlan.setId_unidad_organica(rs.getInt(7));
 
                 lista.add(objPlan);                            
             }
@@ -54,22 +56,23 @@ public class indicadorDAO {
        }
    }
     
-    public JSONArray get_Indicadores() throws SQLException{
+    public JSONArray get_Planoperativo() throws SQLException{
         //Se obtiene el resultado de la consulta
-        lista = new ArrayList<IndicadoresBean>();
+        lista = new ArrayList<PlanOperativoBean>();
         lista = get_queryset();
 
         JSONArray json_list = new JSONArray();
         
         JSONObject json_obj=new JSONObject();
         
-        for(IndicadoresBean obj:lista) {
+        for(PlanOperativoBean obj:lista) {
             Map mapa=new LinkedHashMap();
             mapa.put("id",obj.getId());
-            mapa.put("id_actividad",obj.getId_actividad());
             mapa.put("nombre",obj.getNombre());
-            mapa.put("tipo_logo",obj.getTipo_logo());
-            mapa.put("logro",obj.getLogo());
+            mapa.put("descripcion",obj.getDescripcion());
+            mapa.put("id_plan_estrategico",obj.getId_plan_estrategico());
+            mapa.put("id_encargado",obj.getId_encargado());
+            mapa.put("id_unidad_org",obj.getId_unidad_organica());
             ;
             
             json_list.add(mapa);
@@ -78,5 +81,4 @@ public class indicadorDAO {
         
         return json_list;
     }
-    
 }
