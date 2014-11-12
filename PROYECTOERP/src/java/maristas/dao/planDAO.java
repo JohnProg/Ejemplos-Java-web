@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import maristas.conexion.conecctionBDMysql;
 
 public class planDAO {
     ArrayList<PlanEstrategicoBean> lista=null;
@@ -17,11 +18,12 @@ public class planDAO {
     PreparedStatement   pt=null;
     ResultSet           rs=null;
    
-   public ArrayList<PlanEstrategicoBean> get_queryset(){
+   public ArrayList<PlanEstrategicoBean> GetPlans(){
        lista = new ArrayList<PlanEstrategicoBean>();
        
        try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
+            //connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
 
             pt=cnn.prepareStatement("select id, nombre,"
@@ -55,36 +57,45 @@ public class planDAO {
            return lista;
        }
    }
-    
-   public JSONArray get_planes() throws SQLException{
-        //Se obtiene el resultado de la consulta
-        lista = new ArrayList<PlanEstrategicoBean>();
-        lista = get_queryset();
+   public PlanEstrategicoBean GetPlan(int id_plan){
+       PlanEstrategicoBean objPlan = new PlanEstrategicoBean();
+       
+       try{
+            conecctionBDMysql cn = new conecctionBDMysql();
+            //connectionBD cn = new connectionBD();
+            cnn = cn.getConnection();
 
-        JSONArray json_list = new JSONArray();
-        
-        JSONObject json_obj=new JSONObject();
-        
-        for(PlanEstrategicoBean obj:lista) {
-            Map mapa=new LinkedHashMap();
-            mapa.put("nombre",obj.getNombre());
-            mapa.put("fecha_vigencia",obj.getFec_vigencia());
-            mapa.put("fecha_termino",obj.getFec_termino());
-            mapa.put("inicio",obj.getAnio_inicio());
-            mapa.put("termino",obj.getAnio_termino());
-            mapa.put("aprobado por",obj.getAprobado_por());
-            mapa.put("descripcion",obj.getDescripcion());
-            json_list.add(mapa);
-        }
-         System.out.print(json_list);
-        
-        return json_list;
-    }
-    
+            pt=cnn.prepareStatement("select id, nombre,"
+                    + " fecha_vigencia, fecha_termino,"
+                    + " anio_inicio, anio_termino,"
+                    + " aprobado_por, descripcion"
+                    + " from Planes where id=?");
+            pt.setInt(1, id_plan);
+            rs=pt.executeQuery();
+
+                objPlan.setNombre(rs.getString(2));
+                objPlan.setFec_vigencia(rs.getString(3));
+                objPlan.setFec_termino(rs.getString(4));
+                objPlan.setAnio_inicio(rs.getString(5));
+                objPlan.setAnio_termino(rs.getString(6));
+                objPlan.setAprobado_por(rs.getInt(7));
+                objPlan.setDescripcion(rs.getString(8));
+            rs.close();
+            pt.close();
+            cnn.close();
+            return objPlan;
+       } 
+       catch(Exception e){
+           return objPlan;
+       }
+   }
+   
+
     public int InsertarPlan(PlanEstrategicoBean objPlan) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
+            //connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("insert into Planes(nombre, fecha_vigencia, fecha_termino, anio_inicio, anio_termino, aprobado_por, descripcion) " +
                     "values(?, ?, ?, ?, ?, ?, ?)");
@@ -107,7 +118,8 @@ public class planDAO {
     public int ActualizarPlan(PlanEstrategicoBean objPlan) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
+            //connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("update Planes set "
                     + " nombre = ?,"
@@ -138,7 +150,8 @@ public class planDAO {
     public int EliminarPlan(PlanEstrategicoBean objPlan) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
+            //connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("delete Planes where id=?");
             pt.setInt(1, objPlan.getId());
