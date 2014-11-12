@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Bienvenido</title>
+		<link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/font-awesome.min.css">
+        <link rel="stylesheet" href="./css/main-personal.css">
+</head>
+<body>
+	<div class="container">
+		<br>
+		<div class="alert alert-info">Bienvenido al sistema. <i class="fa fa-remove"></i></div>
+		<header>
+			<h1>Usuario: <span id="name"></span> <a href="index.html" class="pull-right btn btn-danger" id="btnSalir">Salir</a></h1>
+			<hr>
+		</header>		
+		<br>
+		<section class="col-sm-6 col-sm-offset-3" id="plan_presupuesto">	
+			<h1 class="text-center"> Plan Presupuestal </h1>
+			<form role="form" name="form">
+				<div class="form-group">
+					<label> Nombre :</label>
+					<input type="text" name="txtnombre" class="form-control" placeholder=" ingresa un nombre ">
+				</div>	
+				<div class="form-group">
+					<label> Monto :</label>
+					<input type="text" name="txtmonto" class="form-control" placeholder=" 0.00 ">
+				</div>
+				<select class="form-control">
+					<OPTION> ---- Escoga una moneda --- </OPTION>
+					<option> Nuevo Sol </option>
+					<OPTION> Dolar </OPTION>
+					<option> Euro </option>
+				</select>
+				<div class="form-group">
+					<label class="label-control" >Fecha de vigencia: </label>
+					<input type="date" class="form-control" id="txtVigency" placeholder=" ">
+  				</div>
+  				<div class="form-group">
+					<label class="label-control" >Fecha de vigencia: </label>
+					<input type="date" class="form-control" id="txtVigency" placeholder=" ">	
+  				</div>
+  				<div class="col-sm-6 col-sm-offset-4">
+					<input type="submit" class="btn btn-hot text-uppercase btn-lg" id="btnEnter" value="Aceptar">
+				</div>
+			</form>
+		</section>
+	</div>
+	<script type="text/javascript" src="./scripts/main.js"></script>
+</body>
+</html>

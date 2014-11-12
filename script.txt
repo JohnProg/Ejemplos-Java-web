@@ -1,0 +1,63 @@
+use master;
+create database maristas;
+GO
+use maristas;
+GO
+create table Planes(
+	id int primary key IDENTITY,
+	nombre varchar(100),
+	fecha_vigencia datetime,
+	fecha_termino datetime,
+	anio_inicio char(4),
+	anio_termino char(4),
+	aprobado_por int not null,
+	descripcion varchar(100)
+)
+
+create table Linea(
+	id int not null primary key IDENTITY,
+	planes int not null foreign key references Planes,
+	nombre varchar(30) not null, 
+	descripcion varchar(30)
+)
+
+
+create table objetivo(
+	id int not null primary key IDENTITY,
+	linea int not null foreign key references Linea,
+	nombre varchar(50) not null,
+	descripcion varchar(150) not null
+)
+
+
+create table sub_objetivo(
+	id int not null primary key IDENTITY,
+	objetivo int not null foreign key references objetivo,
+	nombre varchar(50) not null,
+	descripcion varchar(150) not null
+)
+
+
+create table indicador(
+	id int not null primary key IDENTITY,
+	nombre varchar(30) not null,
+	tipo_logo varchar(30) not null,
+	logro varchar(50) not null,
+)
+
+create table sub_objetivo_indicador(
+	id int not null primary key,
+	indicador_id int not null foreign key references indicador,
+	sub_objetivo_id int not null foreign key references sub_objetivo
+)
+
+
+insert into Planes(nombre, fecha_vigencia, fecha_termino, anio_inicio, anio_termino, aprobado_por, descripcion) 
+values('Plan integral', '12/08/2014', '14/09/2014', '2014', '2014', 1, 'Plan principal de toda la escuela')
+
+
+
+insert into Planes(nombre, fecha_vigencia, fecha_termino, anio_inicio, anio_termino, aprobado_por, descripcion) 
+values('Plan Secundario', '10/08/2013', '14/09/2015', '2013', '2015', 1, 'Plan para la economia de la escuela')
+
+select id, nombre, fecha_vigencia, fecha_termino, anio_inicio, anio_termino, aprobado_por, descripcion from Planes

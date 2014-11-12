@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Bienvenido</title>
+	<link rel="stylesheet" href="../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="container">
+		
+		<header>
+			<h1>Usuario: <span id="name"></span> <a href="index.html" class="pull-right btn btn-danger" id="btnSalir">Salir</a></h1>
+			<hr>
+		</header>		
+<!-- 		<br>
+		<ul class="nav nav-bar">
+			<li>
+				<a href="">Planeamiento Estratégico director</a>
+			</li>
+			<li>
+				<a href="">Planeamiento Presupuestal admn. presupiuetal</a>
+			</li>
+			<li>
+				<a href="">Planeamiento Operativo jefe de area</a>
+			</li>
+		</ul> -->
+		<br>
+		<section class="row">
+			<form class="col-sm-12">
+				<fieldset class="form-group">
+					<div class="row">
+						<div class="col-sm-2">
+							<label class="label-control" >Titulo: </label>
+						</div>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" autofocus="true" id="txtTitle" placeholder=" Ingresa el titlo">
+						</div>			
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-2">
+							<label class="label-control" >Línea: </label>
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" id="cboLine">
+								<option value="linea-1">Linea 1</option>
+								<option value="linea-2">Linea 2</option>
+								<option value="linea-3">Linea 3</option>
+								<option value="linea-4">Linea 4</option>
+							</select>
+						</div>	
+						<div class="col-sm-1">
+							<a href="./views/line/create.html" class="btn btn-primary btn-block">+</a>		
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-2">
+							<label class="label-control">Objetivo: </label>
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" id="cboGoal">
+								<option value="1">Objetivo 1</option>
+								<option value="2">Objetivo 2</option>
+								<option value="3">Objetivo 3</option>
+								<option value="4">Objetivo 4</option>
+							</select>
+						</div>	
+						<div class="col-sm-1">
+							<a href="./views/goal/create.html" class="btn btn-primary btn-block">+</a>		
+						</div>
+					</div>	
+					<br>
+					<div class="row">
+						<div class="col-sm-2">
+							<label class="label-control">Sub objetivo: </label>
+						</div>
+						<div class="col-sm-4">
+							<select class="form-control" id="cboSubGoal">
+								<option value="1">sub Objetivo 1</option>
+								<option value="2">sub Objetivo 2</option>
+								<option value="3">sub Objetivo 3</option>
+								<option value="4">sub Objetivo 4</option>
+							</select>
+						</div>	
+						<div class="col-sm-1">
+							<a href="./views/subgoal/create.html" class="btn btn-primary btn-block">+</a>		
+						</div>
+					</div>	
+					<br>
+					<div class="row">
+						<div class="col-sm-2">
+							<label class="label-control">Indicadores: </label>
+						</div>
+						<div class="col-sm-4">
+							<select multiple="multiple" id="cboIndicators" class="form-control">
+								<option value="1">Indicador 1</option>
+								<option value="2">Indicador 2</option>
+								<option value="3">Indicador 3</option>
+								<option value="4">Indicador 4</option>
+							</select>
+						</div>	
+						<div class="col-sm-1">
+							<a href="./views/indicator/create.html" class="btn btn-primary btn-block">+</a>		
+						</div>	
+					</div>	
+					<br>
+					<div class="row">
+						<div class="col-sm-offset-2 col-sm-4">
+							<input type="submit" value="Agregar" id="btnAdd" class="btn btn-block btn-lg btn-success">
+						</div>
+					</div>
+				</fieldset>
+				<br>
+				<fieldset>
+					<table class="table table-stripped table-responsive">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Titulo</th>
+								<th>Linea</th>
+								<th>Objetivo</th>
+								<th>SubObjetivo</th>
+								<th>Indicadores</th>
+								<th>Opciones</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</fieldset>
+			</form>
+		</section>
+	</div>
+	<script type="text/javascript" src="../static/js/inside.js"></script>
+</body>
+</html>

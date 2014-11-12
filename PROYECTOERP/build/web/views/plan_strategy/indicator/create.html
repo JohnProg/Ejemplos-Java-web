@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>Indicador</title>
+		<link rel="stylesheet" href="../../../static/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../../../static/css/font-awesome.min.css">
+</head>
+<body>
+	<div class="container">
+		
+		<br>
+		<header>
+			<a href="list.html" class="pull-right btn btn-info btn-lg">Regresar</a>
+			<br>
+			<br>
+			<h1>Crear Indicador:</h1>
+			<hr>
+		</header>		
+		<br>
+		<section class="row">
+			<form class="col-sm-12">
+				<fieldset class="form-group">
+					<div class="row">
+						<div class="col-sm-2">
+							<label class="label-control" >Nombre: </label>
+						</div>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" autofocus="true" id="txtName" placeholder=" Ingresa el nombre">
+						</div>			
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-2">
+							<label class="label-control" >Tipo de logro: </label>
+						</div>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" autofocus="true" id="txtType" placeholder=" Ingresa el tipo de logro">
+						</div>			
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-2">
+							<label class="label-control" >Logro: </label>
+						</div>
+						<div class="col-sm-4">
+							<textarea class="form-control" id="txtDescription" col="3" placeholder="Ingresa el logro"></textarea>
+						</div>			
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-sm-offset-2 col-sm-2">
+							<input type="submit" value="Crear" id="btnAdd" class="btn btn-block btn-lg btn-success">
+						</div>
+						<div class="col-sm-2">
+							<a href="list.html" class="btn btn-block btn-lg btn-danger">Cancelar</a>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</section>
+	</div>
+	<script type="text/javascript" src="../../../static/js/indicator.js"></script>
+</body>
+</html>
