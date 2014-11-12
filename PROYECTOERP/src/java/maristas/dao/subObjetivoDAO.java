@@ -38,10 +38,10 @@ public class subObjetivoDAO {
                 objSubObjetivo.setId(rs.getInt(1
                 ));
                 objSubObjetivo.setNombre(rs.getString(2));
-                objSubObjetivo.setId_linea(rs.getInt(3));
+                objSubObjetivo.setId_objetivo(rs.getInt(3));
                 objSubObjetivo.setDescripcion(rs.getString(4));
 
-                lista.add(objObjetivo);                            
+                lista.add(objSubObjetivo);                            
             }
             rs.close();
             pt.close();
@@ -66,7 +66,7 @@ public class subObjetivoDAO {
             Map mapa=new LinkedHashMap();
             mapa.put("id",obj.getId());
             mapa.put("nombre",obj.getNombre());
-            mapa.put("linea",obj.getId_linea());
+            mapa.put("linea",obj.getId_objetivo());
             mapa.put("descripcion",obj.getDescripcion());
             json_list.add(mapa);
         }
@@ -81,7 +81,7 @@ public class subObjetivoDAO {
             connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("insert into Objetivo(id_linea, nombre, descripcion) values(?,?,?)");
-            pt.setInt(1, objObjetivo.getId_linea());
+            pt.setInt(1, objObjetivo.getId_objetivo());
             pt.setString(2, objObjetivo.getNombre());
             pt.setString(3, objObjetivo.getDescripcion());
             estado = pt.executeUpdate();
@@ -103,7 +103,7 @@ public class subObjetivoDAO {
                     + " nombre=?,"
                     + " descripcion=?,"
                     + " where id = ?");
-            pt.setInt(1, objPlan.getId_linea());
+            pt.setInt(1, objPlan.getId_objetivo());
             pt.setString(2, objPlan.getNombre());
             pt.setString(3, objPlan.getDescripcion());
             pt.setInt(4, objPlan.getId());
