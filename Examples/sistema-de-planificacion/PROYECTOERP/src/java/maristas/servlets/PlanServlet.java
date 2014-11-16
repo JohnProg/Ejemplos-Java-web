@@ -19,16 +19,41 @@ public class PlanServlet extends HttpServlet {
             throws ServletException, IOException {
         
         
-        String opcad = request.getParameter("op"),
+        
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        //variables
+        String pagina="/views/planEstrategico/listPlan.jsp";
+        
+        if(request.getSession().getAttribute("DatosUsuario") != null) {
+            planDAO i_s = new planDAO();
+            ArrayList<PlanEstrategicoBean> plans = i_s.GetPlans();
+            request.setAttribute("plans", plans);  
+        } else {
+            pagina="/iniciarSesion.jsp";
+
+        }
+        getServletContext().getRequestDispatcher(pagina).forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String opcad = request.getParameter("accion"),
             pagina = "";
-        int estado = 0,
-            op=Integer.parseInt(opcad);
+        int estado = 0;
+        int op;
+            if(opcad != null) op = Integer.parseInt(opcad);
+            else op = 5;
         
         switch (op) {
             case 1: { 
                     pagina = "/views/planEstrategico/createPlan.jsp";
                     String nombre=request.getParameter("nombre");
-                    String fec_vigencia=request.getParameter("fec_inicio");
+                    String fec_inicio=request.getParameter("fec_inicio");
                     String fec_termino=request.getParameter("fec_termino");
                     String anio_inicio=request.getParameter("anio_inicio");
                     String anio_termino=request.getParameter("anio_termino");
@@ -36,7 +61,7 @@ public class PlanServlet extends HttpServlet {
                     String descripcion=request.getParameter("descripcion");
                     PlanEstrategicoBean objPlanBean=new PlanEstrategicoBean();
                                 objPlanBean.setNombre(nombre);
-                                objPlanBean.setFec_vigencia(fec_vigencia);
+                                objPlanBean.setFec_vigencia(fec_inicio);
                                 objPlanBean.setFec_termino(fec_termino);
                                 objPlanBean.setAnio_inicio(anio_inicio);
                                 objPlanBean.setAnio_termino(anio_termino);
@@ -114,27 +139,17 @@ public class PlanServlet extends HttpServlet {
                     }
                     break;
             }
+            case 5: {
+                    //variables
+                    pagina="/views/planEstrategico/listPlan.jsp";
+
+                    planDAO i_s = new planDAO();
+                    ArrayList<PlanEstrategicoBean> plans = i_s.GetPlans();
+                    request.setAttribute("plans", plans);  
+            }
         }
         
         getServletContext().getRequestDispatcher(pagina).forward(request, response);
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        //variables
-        String pagina="/views/planEstrategico/listPlan.jsp";
-            
-        planDAO i_s = new planDAO();
-        ArrayList<PlanEstrategicoBean> plans = i_s.GetPlans();
-        request.setAttribute("plans", plans);  
-        getServletContext().getRequestDispatcher(pagina).forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     @Override

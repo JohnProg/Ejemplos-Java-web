@@ -7,18 +7,18 @@ package maristas.beans;
  */
 public class UsuarioBean {
         private int id;
-        private String nombre;
-        private String password;
-        private int rol;
+        private String username;
+        private String contra;
+        private int id_rol;
 
     public UsuarioBean() {
     }
 
-    public UsuarioBean(int id, String nombre, String password, int rol) {
+    public UsuarioBean(int id, String username, String contra, int id_rol) {
         this.id = id;
-        this.nombre = nombre;
-        this.password = password;
-        this.rol = rol;
+        this.username = username;
+        this.contra = contra;
+        this.id_rol = id_rol;
     }
 
     /**
@@ -36,45 +36,47 @@ public class UsuarioBean {
     }
 
     /**
-     * @return the nombre
+     * @return the username
      */
-    public String getNombre() {
-        return nombre;
+    public String getUsername() {
+        return username;
     }
 
     /**
-     * @param nombre the nombre to set
+     * @param username the username to set
      */
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     /**
-     * @return the password
+     * @return the contra
      */
-    public String getPassword() {
-        return password;
+    public String getContra() {
+        return contra;
     }
 
     /**
-     * @param password the password to set
+     * @param contra the contra to set
      */
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContra(String contra) {
+        this.contra = contra;
     }
 
     /**
-     * @return the rol
+     * @return the id_rol
      */
-    public int getRol() {
-        return rol;
+    public int getId_rol() {
+        return id_rol;
     }
 
     /**
-     * @param rol the rol to set
+     * @param id_rol the id_rol to set
      */
-    public void setRol(int rol) {
-        this.rol = rol;
+    public void setId_rol(int id_rol) {
+        this.id_rol = id_rol;
     }
+
+    
         
 }

@@ -9,18 +9,10 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/main.css">
     </head>
     <body>
-        <script>
-            function listar() {
-                document.form.action = "<%=request.getContextPath()%>/listPlanServlet";
-                document.form.method = "GET";
-                document.form.accion.value="LIST";
-                document.form.submit();
-            }
-        </script>
         <div class="container">
                 <br>
                 <header>
-                    <a href="/PROYECTOERP/listPlanServlet" onclick="javascript:listar()" class="pull-right btn btn-info btn-lg">Regresar</a>
+                    <a href="<%=request.getContextPath()%>/PlanServlet" class="pull-right btn btn-info btn-lg">Regresar</a>
                         <br>
                         <br>
                         <h1>Crear plan estratégico:</h1>
@@ -38,8 +30,9 @@
                                 <%=request.getAttribute("mensaje") %>
                             </div>
                         <%}%>
-                        <form class="col-sm-12" method="POST" action="<%=request.getContextPath()%>/createPlanServlet">
-                                    <fieldset class="form-group">
+                        <form class="col-sm-12" method="post" action="<%=request.getContextPath()%>/PlanServlet">
+                            <input type="hidden" name="accion" value="1">    
+                                <fieldset class="form-group">
                                             <div class="row">
                                                     <div class="col-sm-2">
                                                             <label class="label-control" >Nombre: </label>
@@ -54,7 +47,7 @@
                                                             <label class="label-control" >Fecha de vigencia: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="date" name="fecha_inicio"class="form-control" id="txtVigency" placeholder=" ">
+                                                        <input type="date" name="fec_inicio"class="form-control" id="txtVigency" placeholder=" ">
                                                     </div>			
                                             </div>	
                                             <br>
@@ -63,7 +56,7 @@
                                                             <label class="label-control" >Fecha de término: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="date" name="fecha_termino"class="form-control" id="txtFinish" placeholder=" ">
+                                                        <input type="date" name="fec_termino"class="form-control" id="txtFinish" placeholder=" ">
                                                     </div>			
                                             </div>	
                                             <br>
@@ -108,7 +101,7 @@
                                                             <input type="submit" value="Crear" id="btnAdd" class="btn btn-block btn-lg btn-success">
                                                     </div>
                                                     <div class="col-sm-2">
-                                                            <a href="/PROYECTOERP/listPlanServlet" onclick="javascript:listar()" class="btn btn-block btn-lg btn-danger">Cancelar</a>
+                                                            <a href="<%=request.getContextPath()%>/PlanServlet" class="btn btn-block btn-lg btn-danger">Cancelar</a>
                                                     </div>
                                             </div>
                                     </fieldset>

@@ -1,21 +1,16 @@
 
 /******** GENERAL ***********/
 
-
-.alert {
-	display: none;
-}
-
-body{
+#login{
 	background-image: url(../img/FondoInicio.jpg);
 }
 
-.container{
+#login .container{
 	padding-top: 100px;
 	width: 100%;
 }
 
-.jumbotron {
+#login .jumbotron {
 
     width: 45%;
 	margin: 0 auto;
