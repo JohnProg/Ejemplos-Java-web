@@ -5,8 +5,8 @@
         <servlet-class>maristas.servlets.PlanServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>PlanOperativoServlet</servlet-name>
-        <servlet-class>maristas.servlets.PlanOperativoServlet</servlet-class>
+        <servlet-name>CreatePlanOperativoServlet</servlet-name>
+        <servlet-class>maristas.servlets.CreatePlanOperativoServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UsuarioServlet</servlet-name>
@@ -17,9 +17,10 @@
         <url-pattern>/PlanServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>PlanOperativoServlet</servlet-name>
-        <url-pattern>/PlanOperativoServlet</url-pattern>
+        <servlet-name>CreatePlanOperativoServlet</servlet-name>
+        <url-pattern>/CreatePlanOperativoServlet</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>UsuarioServlet</servlet-name>
         <url-pattern>/UsuarioServlet</url-pattern>
