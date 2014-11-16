@@ -19,7 +19,7 @@ public class PlanOperativoDAO {
     PreparedStatement   pt=null;
     ResultSet           rs=null;
     
-    public ArrayList<PlanOperativoBean> get_queryset(){
+    public ArrayList<PlanOperativoBean> getPlanO(){
        lista = new ArrayList<PlanOperativoBean>();
        
        try{
@@ -35,16 +35,16 @@ public class PlanOperativoDAO {
 
 
             while(rs.next()){
-                PlanOperativoBean objPlan=new PlanOperativoBean();
+                PlanOperativoBean objPlanOp=new PlanOperativoBean();
 
-                objPlan.setId(rs.getInt(2));
-                objPlan.setNombre(rs.getString(3));
-                objPlan.setDescripcion(rs.getString(4));
-                objPlan.setId_plan_estrategico(rs.getInt(5));
-                objPlan.setId_encargado(rs.getInt(6));
-                objPlan.setId_unidad_organica(rs.getInt(7));
+                objPlanOp.setId(rs.getInt(2));
+                objPlanOp.setNombre(rs.getString(3));
+                objPlanOp.setDescripcion(rs.getString(4));
+                objPlanOp.setId_plan_estrategico(rs.getInt(5));
+                objPlanOp.setId_encargado(rs.getInt(6));
+                objPlanOp.setId_unidad_organica(rs.getInt(7));
 
-                lista.add(objPlan);                            
+                lista.add(objPlanOp);                            
             }
             rs.close();
             pt.close();
@@ -55,30 +55,26 @@ public class PlanOperativoDAO {
            return lista;
        }
    }
-    
-    public JSONArray get_Planoperativo() throws SQLException{
-        //Se obtiene el resultado de la consulta
-        lista = new ArrayList<PlanOperativoBean>();
-        lista = get_queryset();
-
-        JSONArray json_list = new JSONArray();
+   
+   public int InsertarPlanOp(PlanOperativoBean objPlanOp) {
+        int estado = 0;
+        try{
+            connectionBD cn = new connectionBD();
+            cnn = cn.getConnection();
+            pt=cnn.prepareStatement("insert into PlanOperativo(id,nombre,descripcion,id_plan_estrategico,id_encargado,id_unidad_org)" +
+                    "values('?,?,?,?,?,?,?)");
+            pt.setInt(2, objPlanOp.getId());
+            pt.setString(3, objPlanOp.getNombre());
+            pt.setString(4, objPlanOp.getDescripcion());
+            pt.setInt(5, objPlanOp.getId_plan_estrategico());
+            pt.setInt(6, objPlanOp.getId_encargado());
+            pt.setInt(7, objPlanOp.getId_unidad_organica());
+            estado = pt.executeUpdate();
+            pt.close();
+            cnn.close();
         
-        JSONObject json_obj=new JSONObject();
-        
-        for(PlanOperativoBean obj:lista) {
-            Map mapa=new LinkedHashMap();
-            mapa.put("id",obj.getId());
-            mapa.put("nombre",obj.getNombre());
-            mapa.put("descripcion",obj.getDescripcion());
-            mapa.put("id_plan_estrategico",obj.getId_plan_estrategico());
-            mapa.put("id_encargado",obj.getId_encargado());
-            mapa.put("id_unidad_org",obj.getId_unidad_organica());
-            ;
-            
-            json_list.add(mapa);
+        } catch(Exception e){           
         }
-         System.out.print(json_list);
-        
-        return json_list;
+        return estado;
     }
 }
