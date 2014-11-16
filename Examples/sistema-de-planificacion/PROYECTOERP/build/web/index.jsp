@@ -56,7 +56,7 @@
     <header id="header" class="header">  
         <div class="container">       
             <h1 class="logo">
-                <a href=""><span class="text">Planning</span></a>
+                <a href=""><span class="text"> PLANNING</span></a>
             </h1><!--//logo-->
             <nav class="main-nav navbar-right" role="navigation">
                 <div class="navbar-header">
@@ -69,7 +69,7 @@
                 </div><!--//navbar-header-->
                 <form name='form' id="navbar-collapse" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active nav-item"><a href="/">Inicio</a></li>                      
+                        <li class="active nav-item"><a href="#">Inicio</a></li>                      
                         <li class="nav-item">
                             <a href="#" onclick="goToLoginView()">Iniciar Sesión</a>
                         </li>

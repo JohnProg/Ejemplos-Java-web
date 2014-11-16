@@ -4,10 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-planificacion/PROYECTOERP/src/java/maristas/servlets/CreatePlanOperativoServlet.java</file>
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-planificacion/PROYECTOERP/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-planificacion/PROYECTOERP/web/iniciarSesion.jsp</file>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-planificacion/PROYECTOERP/src/java/maristas/dao/PlanOperativoDAO.java</file>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-planificacion/PROYECTOERP/web/views/JefeArea.jsp</file>
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-planificacion/PROYECTOERP/web/index.jsp</file>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-planificacion/PROYECTOERP/web/views/PlanOperativo/CreatePlanOperativo.jsp</file>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-planificacion/PROYECTOERP/src/java/maristas/beans/PlanOperativoBean.java</file>
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-planificacion/PROYECTOERP/web/views/PlanOperativo/CreateActividades.jsp</file>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-planificacion/PROYECTOERP/web/crearCuenta.jsp</file>
         </group>
     </open-files>
