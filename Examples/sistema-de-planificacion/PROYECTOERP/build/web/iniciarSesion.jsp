@@ -27,14 +27,14 @@
                             ${mensaje}<a href="#" aria-hidden="true" class="close"><i class="fa fa-remove">×</i></a>
                         </div>
                     <% }%>
-                        <form class="col-sm-12" action="UsuarioServlet" method="post">
+                        <form class="col-sm-12" action="UsuarioServlet" method="post" name="form">
                                 <fieldset class="form-group">
                                         <div class="row">
                                                 <div class="col-sm-2">
                                                         <label class="label-control" >Usuario: </label>
                                                 </div>
                                                 <div class="col-sm-10 col-sm-offset-0">
-                                                        <input type="text" class="form-control" name="username" id="txtUsername" autofocus placeholder=" Ingresa tu usuario">
+                                                        <input type="text" required="" class="form-control" name="username" id="txtUsername" autofocus placeholder=" Ingresa tu usuario">
                                                 </div>			
                                         </div>
                                         <br>
@@ -43,7 +43,7 @@
                                                         <label class="label-control">Password: </label>
                                                 </div>
                                                 <div class="col-sm-10">
-                                                        <input type="password" class="form-control" name="contra" id="txtPassword" placeholder=" Ingresa tu password">
+                                                        <input type="password" required="" class="form-control" name="contra" id="txtPassword" placeholder=" Ingresa tu password">
                                                 </div>			
                                         </div>	
                                         <br>
@@ -57,5 +57,7 @@
                 </section>
             </div>	
 	</div>
+            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script src="<%=request.getContextPath()%>/static/js/ValidacionAldo.js"></script> 
     </body>
 </html>
