@@ -18,14 +18,14 @@
     <body>
         <div class="container">
             <br>
-            <button class="btn btn-lg btn-danger"> Salir </button>
+            <a class="btn btn-lg btn-danger" href="<%=request.getContextPath()%>/views/JefeArea.jsp"> Salir </a>
             <br><br><br>
             <section class="row col-sm-4 col-sm-offset-4" style="">
                 <div class="col-sm-4 col-sm-offset-1" id="plan-operativo">
                     <h2 style="width:200px; text-align:center;">Plan Operativo</h2>
                     <br><br>
 
-                    <form role="form" name="form" method="post" id="miFormulario" >
+                    <form role="form" name="form" method="post" id="miFormulario" action="<%=request.getContextPath()%>/CreatePlanOperativoServlet">
                         <div class="form-group" style="width: 300px;">
                             <label for="nombre">Nombre :</label>
                             <input id="nombre" type="text" name="nombre" class="form-control" placeholder="Nombre y Apellido"  required=""/>                  
@@ -46,7 +46,7 @@
                     </form>
                 </div>
             </section>   
-
+        </div>
             <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
             <script src="<%=request.getContextPath()%>/static/js/ValidacionAldo.js"></script> 
 

@@ -25,7 +25,7 @@
         <div class="container">
             <br>
             <header>
-                <h1> Plan Operativo <a href="<%=request.getContextPath()%>/views/PlanOperativo/CrearPlanOperativo.jsp" class="pull-right btn btn-lg btn-info" id="btnCrear"> Crear </a></h1>
+                <h1> Plan Operativo <a href="<%=request.getContextPath()%>/views/PlanOperativo/CreatePlanOperativo.jsp" class="pull-right btn btn-lg btn-info" id="btnCrear"> Crear </a></h1>
                 <hr>
             </header>
 
