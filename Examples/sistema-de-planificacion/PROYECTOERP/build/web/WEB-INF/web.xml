@@ -8,26 +8,6 @@
         <servlet-name>PlanOperativoServlet</servlet-name>
         <servlet-class>maristas.servlets.PlanOperativoServlet</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>listPlanServlet</servlet-name>
-        <servlet-class>maristas.servlets.listPlanServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>createPlanServlet</servlet-name>
-        <servlet-class>maristas.servlets.createPlanServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>updatePlanServlet</servlet-name>
-        <servlet-class>maristas.servlets.updatePlanServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>deletePlanServlet</servlet-name>
-        <servlet-class>maristas.servlets.deletePlanServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>getPlanServlet</servlet-name>
-        <servlet-class>maristas.servlets.getPlanServlet</servlet-class>
-    </servlet>
     
     <servlet-mapping>
         <servlet-name>PlanServlet</servlet-name>
@@ -37,27 +17,6 @@
         <servlet-name>PlanOperativoServlet</servlet-name>
         <url-pattern>/PlanOperativoServlet</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>listPlanServlet</servlet-name>
-        <url-pattern>/listPlanServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>createPlanServlet</servlet-name>
-        <url-pattern>/createPlanServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>updatePlanServlet</servlet-name>
-        <url-pattern>/updatePlanServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>deletePlanServlet</servlet-name>
-        <url-pattern>/deletePlanServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>getPlanServlet</servlet-name>
-        <url-pattern>/getPlanServlet</url-pattern>
-    </servlet-mapping>
-    
     
     <session-config>
         <session-timeout>
