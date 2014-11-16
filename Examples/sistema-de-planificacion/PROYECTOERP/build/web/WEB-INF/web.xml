@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <servlet>
+        <servlet-name>PlanServlet</servlet-name>
+        <servlet-class>maristas.servlets.PlanServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PlanOperativoServlet</servlet-name>
+        <servlet-class>maristas.servlets.PlanOperativoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>listPlanServlet</servlet-name>
+        <servlet-class>maristas.servlets.listPlanServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>createPlanServlet</servlet-name>
+        <servlet-class>maristas.servlets.createPlanServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updatePlanServlet</servlet-name>
+        <servlet-class>maristas.servlets.updatePlanServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deletePlanServlet</servlet-name>
+        <servlet-class>maristas.servlets.deletePlanServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>getPlanServlet</servlet-name>
+        <servlet-class>maristas.servlets.getPlanServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>PlanServlet</servlet-name>
+        <url-pattern>/PlanServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PlanOperativoServlet</servlet-name>
+        <url-pattern>/PlanOperativoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>listPlanServlet</servlet-name>
+        <url-pattern>/listPlanServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>createPlanServlet</servlet-name>
+        <url-pattern>/createPlanServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updatePlanServlet</servlet-name>
+        <url-pattern>/updatePlanServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deletePlanServlet</servlet-name>
+        <url-pattern>/deletePlanServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getPlanServlet</servlet-name>
+        <url-pattern>/getPlanServlet</url-pattern>
+    </servlet-mapping>
+    
+    
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+</web-app>
