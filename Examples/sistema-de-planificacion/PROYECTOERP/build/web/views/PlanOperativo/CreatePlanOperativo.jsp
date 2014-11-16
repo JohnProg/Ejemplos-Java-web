@@ -6,6 +6,7 @@
 
 <%@page import="maristas.beans.PlanOperativoBean"%>
 <%@page import="java.util.ArrayList"%>
+<% ArrayList<PlanOperativoBean> PlanOperativo = (ArrayList<PlanOperativoBean>)request.getAttribute("PlanOperativo");%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -6,9 +6,15 @@ JSP
 + 0 CreatePlanOperativo.jsp
 views/PlanOperativo/CreatePlanOperativo.jsp
 *L
-5,9:46
-14,2:55,3
-16,35:61
-51:96,3
-52,6:99
+5,5:46
+9:50,2
+10,5:52
+15,2:57,3
+17,5:63
+22:68,3
+23,6:71
+29:77,3
+30,22:80
+52:102,3
+53,6:105
 *E
