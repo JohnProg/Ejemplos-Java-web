@@ -1,8 +1,10 @@
+<%@page import="maristas.beans.UsuarioBean"%>
 <%@page import="maristas.dao.planDAO"%>
 <%@page import="maristas.beans.PlanEstrategicoBean"%>
 <%@page import="java.util.ArrayList"%>
 <%
     PlanEstrategicoBean  objEmpleBean = null;
+    UsuarioBean  userBean = null;
     ArrayList<PlanEstrategicoBean> plans=null;
 %>
 <!DOCTYPE html>
@@ -17,7 +19,7 @@
     <body>
         <script>
             function crear() {
-                document.form.action = "<%=request.getContextPath()%>/createPlanServlet";
+                document.form.action = "<%=request.getContextPath()%>/PlanServlet";
                 document.form.method = "GET";
                 document.form.accion.value="CREATE";
                 document.form.submit();
@@ -34,16 +36,27 @@
                 document.form.accion.value="DELETE";
                 document.form.submit();
             }
+            function cerrarSesion() {
+                document.form.action = "<%=request.getContextPath()%>/UsuarioServlet";
+                document.form.method = "GET";
+                document.form.accion.value="SALIR";
+                document.form.submit();
+            }
         </script>
         <div class="container">
             <br>
             <header>
-                    <a href="../../index.html" class="pull-right btn btn-danger btn-lg" id="btnSalir">Salir</a>
+                <a href="#" onclick="cerrarSesion()" class="pull-right btn btn-danger btn-lg" id="btnSalir">Salir</a>
                     <br>
                     <br>
-                    <h1>Planes estratégicos: <a href="#" onclick='javascript:crear()'class="pull-right btn btn-primary btn-lg">+ Crear</a></h1>
+                    <h1>Planes estratégicos: <a href="<%=request.getContextPath()%>/views/planEstrategico/createPlan.jsp" class="pull-right btn btn-primary btn-lg">+ Crear</a></h1>
                     <hr>
-            </header>		
+            </header>	
+            <%  userBean = (UsuarioBean)session.getAttribute("DatosUsuario"); 
+                if(userBean != null) {
+                    out.println(userBean.getUsername());
+                }
+            %>
             <br>
             <section class="row">            
                     <form class="col-sm-12" name="form">
