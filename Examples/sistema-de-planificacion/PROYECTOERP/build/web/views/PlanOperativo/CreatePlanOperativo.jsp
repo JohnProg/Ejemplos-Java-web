@@ -34,7 +34,7 @@
                         <div class="form-group" style="width: 300px;">
                             <label for="cboarea">Email :</label>
                             <select class="form-control" required="true" name="cboarea">
-                                <option value="default"> --- Escoge un area ---</option>
+                                <option value="" selected> --- Escoge un area ---</option>
                                 <option> Area 1 </option>
                                 <option> Area 2 </option>
                             </select>

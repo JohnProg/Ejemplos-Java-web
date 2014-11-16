@@ -3,6 +3,8 @@ package org.apache.jsp.views.PlanOperativo;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import maristas.beans.PlanOperativoBean;
+import java.util.ArrayList;
 
 public final class CreatePlanOperativo_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -44,6 +46,8 @@ public final class CreatePlanOperativo_jsp extends org.apache.jasper.runtime.Htt
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
@@ -75,7 +79,7 @@ public final class CreatePlanOperativo_jsp extends org.apache.jasper.runtime.Htt
       out.write("                        <div class=\"form-group\" style=\"width: 300px;\">\n");
       out.write("                            <label for=\"cboarea\">Email :</label>\n");
       out.write("                            <select class=\"form-control\" required=\"true\" name=\"cboarea\">\n");
-      out.write("                                <option value=\"default\"> --- Escoge un area ---</option>\n");
+      out.write("                                <option value=\"\" selected> --- Escoge un area ---</option>\n");
       out.write("                                <option> Area 1 </option>\n");
       out.write("                                <option> Area 2 </option>\n");
       out.write("                            </select>\n");

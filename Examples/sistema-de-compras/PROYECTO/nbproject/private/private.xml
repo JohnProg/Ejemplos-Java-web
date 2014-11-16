@@ -3,27 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/servlet/SrvCotizacion.java</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/web/menu.jsp</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/dao/usuarioDAO.java</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/web/pedido/listaPedidos.jsp</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/servlet/SrvPedido.java</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/web/login.jsp</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/beans/pedidoBean.java</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/beans/cotizacionBean.java</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/dao/pedidoDAO.java</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/beans/usuarioBean.java</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/web/index.jsp</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/conexion/AccesoCalidad.java</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/web/css/master.css</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/conexion/login.java</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/web/cotizacion/listaCotizacion.jsp</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/web/ordenCompra/crearOrdenCompra.jsp</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/web/WEB-INF/web.xml</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/web/cotizacion/crearCotizacion.jsp</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/conexion/Conexion.java</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/dao/cotizacionDAO.java</file>
-            <file>file:/Users/johnmachahuay/NetBeansProjects/exa1/src/java/compraProveedores/servlet/SrvUsario.java</file>
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/web/cotizacion/listaCotizacion.jsp</file>
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/beans/pedidoBean.java</file>
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/servlet/SrvCotizacion.java</file>
         </group>
     </open-files>
 </project-private>
