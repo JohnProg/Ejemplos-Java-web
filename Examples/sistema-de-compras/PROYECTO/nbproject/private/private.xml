@@ -3,10 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/dao/pedidoDAO.java</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/beans/roleBean.java</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/servlet/SrvUsario.java</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/web/ordenCompra/crearOrdenCompra.jsp</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/web/login.jsp</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/web/menu.jsp</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/servlet/SrvPedido.java</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/conexion/Conexion.java</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/dao/cotizacionDAO.java</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/dao/usuarioDAO.java</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/web/css/master.css</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/web/cotizacion/listaCotizacion.jsp</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/beans/usuarioBean.java</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/web/pedido/listaPedidos.jsp</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/beans/cotizacionBean.java</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/servlet/SrvOrden.java</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/web/cotizacion/crearCotizacion.jsp</file>
+            <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/servlet/SrvCotizacion.java</file>
+=======
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/web/cotizacion/listaCotizacion.jsp</file>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/beans/pedidoBean.java</file>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/dao/cotizacionDAO.java</file>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/servlet/SrvCotizacion.java</file>
+>>>>>>> d4a6a94fea0f6caafae9b4ac0d4b7331759ecb8c
         </group>
     </open-files>
 </project-private>

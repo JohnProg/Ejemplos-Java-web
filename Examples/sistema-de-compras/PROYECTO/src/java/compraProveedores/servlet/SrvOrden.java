@@ -6,22 +6,20 @@
 package compraProveedores.servlet;
 
 import compraProveedores.beans.pedidoBean;
+import compraProveedores.beans.usuarioBean;
 import compraProveedores.dao.pedidoDAO;
+import compraProveedores.dao.usuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-public class SrvPedido extends HttpServlet {
-
+public class SrvOrden extends HttpServlet {
+    ArrayList<usuarioBean> proveedores = null;
+    ArrayList<pedidoBean> pedidos = null;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -33,7 +31,22 @@ public class SrvPedido extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SrvOrden</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet SrvOrden at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        } finally {
+            out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -51,9 +64,18 @@ public class SrvPedido extends HttpServlet {
         String pagina = "";
         if(request.getSession().getAttribute("usuario") != null) {
             pedidoDAO i_s = new pedidoDAO();
-            ArrayList<pedidoBean> pedidos = i_s.listado();
+            pedidos = i_s.listado();
             request.setAttribute("pedidos", pedidos);
-            pagina="/pedido/listaPedidos.jsp";
+            
+            usuarioDAO i_s2 = new usuarioDAO();
+            try {
+                proveedores = i_s2.obtenerProveedores();
+            } catch (Exception ex) {}
+
+            request.setAttribute("proveedores", proveedores);
+            
+            pagina="/ordenCompra/crearOrdenCompra.jsp";
+            
         } else {
             pagina="/login.jsp";
             request.setAttribute("mensaje","Necesitas iniciar sesión!");

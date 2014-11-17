@@ -13,8 +13,9 @@ public class usuarioBean {
     private int id_usuario;
     private String usuario;
     private String contrasena;
-    private String nombre;
     private int id_fk_role;
+    private String nombre;
+    
 
     public usuarioBean(int id_usuario, String usuario, String contrasena, String nombre, int id_fk_role) {
         this.id_usuario = id_usuario;

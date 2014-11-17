@@ -24,7 +24,7 @@
         </form>
         <br>
         <h2>LISTA DE COTIZACIONES </h2>
-        <table border="2px">
+        <table border="1px">
             <tbody>
                 <tr>
                     <th colspan="6">	
@@ -45,11 +45,11 @@
                 
                 <%  for(cotizacionBean   obj:cotizaciones){   %>
                 <tr>
-                   <td style="font-size:40px"><%=obj.getId_fk_pedido()%></td>
-                   <td style="font-size:40px"><%=obj.getId_fk_usuario()%></td>
-                   <td style="font-size:40px"><%=obj.getForma_pago()%></td>
-                   <td style="font-size:40px"><%=obj.getDescripcion()%></td>
-                   <td style="font-size:40px"><%=obj.getCosto()%></td>
+                   <td ><%=obj.getId_fk_pedido()%></td>
+                   <td ><%=obj.getId_fk_usuario()%></td>
+                   <td ><%=obj.getForma_pago()%></td>
+                   <td ><%=obj.getDescripcion()%></td>
+                   <td ><%=obj.getCosto()%></td>
                </tr>
                 <%   }%>
             </tbody>
