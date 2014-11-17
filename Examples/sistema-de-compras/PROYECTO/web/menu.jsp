@@ -15,7 +15,7 @@
                 document.form.submit();
             }
             function irVistaGenerarOrdenDeCompra() {
-                document.form.action = "<%=request.getContextPath()%>/";
+                document.form.action = "<%=request.getContextPath()%>/SrvOrden";
                 document.form.method = 'GET';
                 document.form.submit();
             }

@@ -30,7 +30,7 @@ public class cotizacionDAO {
             cnn = cn.getConnection();
 
             pt=cnn.prepareStatement("select id_cotizacion, id_fk_pedido, id_fk_usuario,"
-                    + " forma_pago, descripcion, costo"
+                    + " forma_pago, descripcion"
                     + " from cotizacion");
 
             rs=pt.executeQuery();
@@ -44,7 +44,6 @@ public class cotizacionDAO {
                 objCotizacion.setId_fk_usuario(rs.getInt(3));
                 objCotizacion.setForma_pago(rs.getString(4));
                 objCotizacion.setDescripcion(rs.getString(5));
-                objCotizacion.setCosto(rs.getFloat(6));
 
                 lista.add(objCotizacion);                            
             }
@@ -63,19 +62,22 @@ public class cotizacionDAO {
         try{
             Conexion cn = new Conexion();
             cnn = cn.getConnection();
-            pt=cnn.prepareStatement("insert into cotizacion(id_fk_pedido, idfk_usuario, forma_pago, descripcion, costo) " +
-                    "values(?, ?, ?, ?, ?)");
-            pt.setInt(2, objPedido.getId_fk_pedido());
-            pt.setInt(3, objPedido.getId_fk_usuario());
-            pt.setString(4, objPedido.getForma_pago());
-            pt.setString(5, objPedido.getDescripcion());
+            pt=cnn.prepareStatement("insert into cotizacion(id_fk_pedido, id_fk_usuario, forma_pago, descripcion, costo) values(?, ?, ?, ?, ?)");
+            pt.setInt(1, objPedido.getId_fk_pedido());
+            pt.setInt(2, objPedido.getId_fk_usuario());
+            pt.setString(3, objPedido.getForma_pago());
+            pt.setString(4, objPedido.getDescripcion());
+            pt.setFloat(5, objPedido.getCosto());
+            
             estado = pt.executeUpdate();
+            
             pt.close();
             cnn.close();
+            return estado;
         
         } catch(Exception e){
-            
+            estado = 0;
+            return estado;
         }
-        return estado;
     }
 }

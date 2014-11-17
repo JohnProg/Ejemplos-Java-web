@@ -6,23 +6,23 @@
 package compraProveedores.servlet;
 
 import compraProveedores.beans.cotizacionBean;
+import compraProveedores.beans.usuarioBean;
 import compraProveedores.dao.cotizacionDAO;
 import compraProveedores.dao.pedidoDAO;
+import compraProveedores.dao.usuarioDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- *
- * @author johnmachahuay
- */
 public class SrvCotizacion extends HttpServlet {
-
+    ArrayList<usuarioBean> proveedores = null;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,42 +34,7 @@ public class SrvCotizacion extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      String pagina = "";
-      int option = Integer.parseInt(request.getParameter("option"));
       
-      switch(option) {
-          case 1: {
-            // CREAR
-            int estado = 0;
-            pagina="/cotizacion/crearCotizacion.jsp";
-            int id_fk_pedido = Integer.parseInt(request.getParameter("id_fk_pedido"));
-            int id_fk_usuario = Integer.parseInt(request.getParameter("id_fk_usuario"));
-            String forma_pago = request.getParameter("forma_pago");
-            String descripcion = request.getParameter("descripcion");
-            float costo = Float.parseFloat(request.getParameter("costo"));
-            cotizacionBean objCotizacionBean=new cotizacionBean();
-                     objCotizacionBean.setId_fk_pedido(id_fk_pedido);
-                     objCotizacionBean.setId_fk_usuario(id_fk_usuario);
-                     objCotizacionBean.setForma_pago(forma_pago);
-                     objCotizacionBean.setDescripcion(descripcion);
-                     objCotizacionBean.setCosto(costo);
-                         
-            cotizacionDAO  objcotizacionDAO=new cotizacionDAO();
-            estado = objcotizacionDAO.InsertarCotizacion(objCotizacionBean);
-            
-            //VALIDAR NSERCION
-            if(estado == 1) request.setAttribute("status","ok");
-            else request.setAttribute("status","fail");
-          }
-          case 3: {
-              //ACTUALIZAR
-          }
-          case 4: {
-              //ELIMINAR
-          }
-      }
-            
-            getServletContext().getRequestDispatcher(pagina).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -85,11 +50,27 @@ public class SrvCotizacion extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String pagina = "";
-        if(request.getSession().getAttribute("user") != null) {
-            cotizacionDAO i_s = new cotizacionDAO();
-            ArrayList<cotizacionBean> cotizaciones = i_s.listado();
-            request.setAttribute("cotizaciones", cotizaciones);
-            pagina="/cotizacion/listaCotizacion.jsp";
+        
+        if(request.getSession().getAttribute("usuario") != null) {
+            
+            if(request.getParameter("pedido_id") != null){
+                int pedido_id = Integer.parseInt(request.getParameter("pedido_id"));
+                usuarioDAO i_s = new usuarioDAO();
+                
+                try {
+                    proveedores = i_s.obtenerProveedores();
+                } catch (Exception ex) {}
+                
+                request.setAttribute("proveedores", proveedores);
+                request.getSession().setAttribute("pedido_id", pedido_id);
+                pagina="/cotizacion/crearCotizacion.jsp";
+            } else {
+                cotizacionDAO i_s = new cotizacionDAO();
+                ArrayList<cotizacionBean> cotizaciones = i_s.listado();
+                request.setAttribute("cotizaciones", cotizaciones);
+                pagina="/cotizacion/listaCotizacion.jsp";
+            }
+            
         } else {
             pagina="/login.jsp";
             request.setAttribute("mensaje","Necesitas iniciar sesión!");
@@ -109,7 +90,52 @@ public class SrvCotizacion extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String pagina = "";
+      int option = Integer.parseInt(request.getParameter("option"));
+      int id_proveedor = Integer.parseInt(request.getParameter("proveedor"));
+      int id_pedido = Integer.parseInt(request.getParameter("pedido_id"));
+      
+      
+      switch(option) {
+          case 1: {
+            // CREAR
+            int estado = 0;
+            pagina="/cotizacion/crearCotizacion.jsp";
+            
+            //usuarioBean usuario = (usuarioBean) request.getSession().getAttribute("usuario");
+            
+            int id_fk_pedido = id_pedido;
+            int id_fk_usuario = id_proveedor;
+            String forma_pago = request.getParameter("forma_pago");
+            String descripcion = request.getParameter("descripcion");
+            float costo = 0;
+            cotizacionBean objCotizacionBean=new cotizacionBean();
+                     objCotizacionBean.setId_fk_pedido(id_fk_pedido);
+                     objCotizacionBean.setId_fk_usuario(id_fk_usuario);
+                     objCotizacionBean.setForma_pago(forma_pago);
+                     objCotizacionBean.setDescripcion(descripcion);
+                     objCotizacionBean.setCosto(costo);
+                         
+            cotizacionDAO  objcotizacionDAO=new cotizacionDAO();
+            estado = objcotizacionDAO.InsertarCotizacion(objCotizacionBean);
+            
+            //VALIDAR NSERCION
+            if(estado == 1) {
+                request.setAttribute("mensaje","Se envio correctamente");
+            }
+            else {
+                request.setAttribute("mensaje","Fallo al momento de crear");
+            }
+          }
+          case 3: {
+              //ACTUALIZAR
+          }
+          case 4: {
+              //ELIMINAR
+          }
+      }
+            
+            getServletContext().getRequestDispatcher(pagina).forward(request, response);
     }
 
     /**

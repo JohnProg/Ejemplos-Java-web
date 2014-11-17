@@ -12,10 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-/**
- *
- * @author johnmachahuay
- */
+
 public class pedidoDAO {
     ArrayList<pedidoBean> lista=null;
     Connection          cnn=null;
@@ -30,7 +27,7 @@ public class pedidoDAO {
             cnn = cn.getConnection();
 
             pt=cnn.prepareStatement("select id_pedido, estado,"
-                    + " descripcion, area"
+                    + " descripcion, area, fecha_titulo"
                     + " from pedido");
 
             rs=pt.executeQuery();
@@ -43,7 +40,8 @@ public class pedidoDAO {
                 objPedido.setEstado(rs.getBoolean(2));
                 objPedido.setDescripcion(rs.getString(3));
                 objPedido.setArea(rs.getString(4));
-
+                objPedido.setFecha_titulo(rs.getString(5));
+                
                 lista.add(objPedido);                            
             }
             rs.close();

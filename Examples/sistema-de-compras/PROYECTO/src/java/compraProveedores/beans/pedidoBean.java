@@ -13,17 +13,19 @@ public class pedidoBean {
     private int id_pedido;
     private Boolean estado;
     private String descripcion;
+    private String area;
+    private String fecha_titulo;
 
-    public pedidoBean(int id_pedido, Boolean estado, String descripcion, String area) {
+    public pedidoBean() {
+        
+    }
+
+    public pedidoBean(int id_pedido, Boolean estado, String descripcion, String area, String fecha_titulo) {
         this.id_pedido = id_pedido;
         this.estado = estado;
         this.descripcion = descripcion;
         this.area = area;
-    }
-    private String area;
-
-    public pedidoBean() {
-        
+        this.fecha_titulo = fecha_titulo;
     }
 
     /**
@@ -81,4 +83,19 @@ public class pedidoBean {
     public void setArea(String area) {
         this.area = area;
     }
+
+    /**
+     * @return the fecha_titulo
+     */
+    public String getFecha_titulo() {
+        return fecha_titulo;
+    }
+
+    /**
+     * @param fecha_titulo the fecha_titulo to set
+     */
+    public void setFecha_titulo(String fecha_titulo) {
+        this.fecha_titulo = fecha_titulo;
+    }
+    
 }

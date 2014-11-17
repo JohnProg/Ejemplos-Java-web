@@ -12,6 +12,10 @@
         <servlet-name>SrvCotizacion</servlet-name>
         <servlet-class>compraProveedores.servlet.SrvCotizacion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SrvOrden</servlet-name>
+        <servlet-class>compraProveedores.servlet.SrvOrden</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SrvUsario</servlet-name>
         <url-pattern>/SrvUsario</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>SrvCotizacion</servlet-name>
         <url-pattern>/SrvCotizacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SrvOrden</servlet-name>
+        <url-pattern>/SrvOrden</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

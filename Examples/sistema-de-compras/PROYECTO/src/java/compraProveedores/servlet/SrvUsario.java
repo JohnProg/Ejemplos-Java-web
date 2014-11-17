@@ -28,7 +28,7 @@ public class SrvUsario extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String pagina = "";
-        if(request.getSession().getAttribute("user") != null) {
+        if(request.getSession().getAttribute("usuario") != null) {
             pagina="/menu.jsp";
         } else {
             pagina="/login.jsp";
@@ -47,13 +47,13 @@ public class SrvUsario extends HttpServlet {
         
         usuarioDAO i_s = new usuarioDAO();
         try{
-            user = i_s.getUser(usuario, contrasena);
+            user = i_s.obtenerJefeCompra(usuario, contrasena);
         }catch(Exception e){}
         
         if(user != null) {
             pagina="/menu.jsp";
             request.setAttribute("mensaje","Bienvenido al sistema");
-            request.getSession().setAttribute("user", usuario);
+            request.getSession().setAttribute("usuario", usuario);
         } else {
             pagina="/login.jsp";
             request.setAttribute("mensaje","Ingresar correctamente sus datos!");
