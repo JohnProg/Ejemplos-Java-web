@@ -60,7 +60,18 @@ public class CreatePlanOperativoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String pagina = "";
+        if(request.getSession().getAttribute("user") != null) {
+            PlanOperativoDAO i_s = new PlanOperativoDAO();
+            ArrayList<PlanOperativoBean> planope = i_s.getPlanO();
+            request.setAttribute("PlanOperativo", planope);
+            pagina="/view/CreatePlanOperativo.jsp";
+        } else {
+            pagina="/iniciarSesion.jsp";
+            request.setAttribute("mensaje","Necesitas iniciar sesión!");
+        }
+        
+        getServletContext().getRequestDispatcher(pagina).forward(request, response);
     }
 
     @Override

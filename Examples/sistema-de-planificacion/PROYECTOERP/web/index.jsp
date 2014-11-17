@@ -56,7 +56,7 @@
     <header id="header" class="header">  
         <div class="container">       
             <h1 class="logo">
-                <a href=""><span class="text">Planning</span></a>
+                <a href=""><span class="text"> PLANNING</span></a>
             </h1><!--//logo-->
             <nav class="main-nav navbar-right" role="navigation">
                 <div class="navbar-header">
@@ -69,7 +69,7 @@
                 </div><!--//navbar-header-->
                 <form name='form' id="navbar-collapse" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active nav-item"><a href="/">Inicio</a></li>                      
+                        <li class="active nav-item"><a href="#">Inicio</a></li>                      
                         <li class="nav-item">
                             <a href="#" onclick="goToLoginView()">Iniciar Sesión</a>
                         </li>
@@ -96,10 +96,12 @@
     
     <section class="promo section section-on-bg">
         <div class="container text-center">                
-            <h2 class="title">Let's get our product online fast!</h2>
-            <p class="intro">Planning is a mobile-friendly HTML5 template designed to help you <br> promote your product effectively to your target users</p>
-            <p><a class="btn btn-cta btn-cta-primary" href="#">Try Planning Free</a></p>   
-            <button type="button" class="play-trigger btn-link " data-toggle="modal" data-target="#modal-video" data-backdrop="static" data-keyboard="false"><i class="fa fa-youtube-play"></i> Watch the video</button>
+            <h2 class="title">Sistema de Planificacion Estrategica</h2>
+            <hr style="width: 300px;">
+            <h2> ERP </h2>
+            <p class="intro">La Planificación estratégica es un proceso sistematico de desarrollo e implementación de planes para alcanzar propósitos u objetivos. La planificación estratégica se aplica sobre todo en los asuntos militares y en actividades de negocios.</p>
+            <p><a class="btn btn-cta btn-cta-primary" href="#">Obten el ERP</a></p>   
+            <button type="button" class="play-trigger btn-link " data-toggle="modal" data-target="#modal-video" data-backdrop="static" data-keyboard="false"><i class="fa fa-youtube-play"></i> Mira nuestro video</button>
         </div><!--//container-->
     </section><!--//promo-->
     

@@ -22,45 +22,6 @@
                 <h2 style="text-align:center;"> Plan Operativo</h2>
                 <hr>
                 <div class="col-sm-4 col-sm-offset-1" id="plan-operativo">
-                    <form role="form" name="form" method="post" id="miFormulario" >
-                        <br>
-                        <div class="form-group">
-                            <label> Plan : </label>
-                            <select class="form-control"  name="cboplan" required>
-                                <option> ---- Escoga un Plan ---- </option>
-                                <option> Plan operativo 1</option>
-                                <option> Plab operativo 2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label> Linea : </label>
-                            <select class="form-control" name="cbolinea" required>
-                                <option> ---- Escoga una Linea ---- </option>
-                                <option> Linea 1</option>
-                                <option> Linea 2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label> Objetivos: </label>
-                            <select class="form-control" name="cboob" required>
-                                <option> ---- Escoga un Objetivo ---- </option>
-                                <option> Objetivo 1</option>
-                                <option> Objetivo 2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label> Sub-Objetivos : </label>
-                            <select class="form-control" name="cbosub" required>
-                                <option> ---- Escoga un Sub-objetivo ---- </option>
-                                <option> Sub-Objetivo 1</option>
-                                <option> Sub-Objetivo 2</option>
-                            </select>
-                        </div>
-
-                    </form>
-                </div>
-
-                <div class="col-sm-4 col-sm-offset-1" id="plan-operativo">
                     <br>
                     <form role="form" name="form" method="post" id="miFormulario" >
                         <div class="form-group" style="width: 300px;">
@@ -74,6 +35,45 @@
                         </div>
                         
                         <button class="btn btn-lg btn-info" id="btnCrear"> Crear Plan Operativo </button>
+                    </form>
+                </div>
+
+                <div class="col-sm-4 col-sm-offset-1" id="plan-operativo">
+                    <br>
+                    <form role="form" name="form" method="post" id="miFormulario" >
+                        <div class="form-group">
+                            <label> Plan : </label>
+                            <select class="form-control"  name="cboplan" required="">
+                                <option value="" selected> ---- Escoga un Plan ---- </option>
+                                <option> Plan operativo 1</option>
+                                <option> Plab operativo 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Linea : </label>
+                            <select class="form-control" name="cbolinea" required="">
+                                <option value="" selected> ---- Escoga una Linea ---- </option>
+                                <option> Linea 1</option>
+                                <option> Linea 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Objetivos: </label>
+                            <select class="form-control" name="cboob" required="">
+                                <option value="" selected> ---- Escoga un Objetivo ---- </option>
+                                <option> Objetivo 1</option>
+                                <option> Objetivo 2</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label> Sub-Objetivos : </label>
+                            <select class="form-control" name="cbosub" required="">
+                                <option value="" selected> ---- Escoga un Sub-objetivo ---- </option>
+                                <option> Sub-Objetivo 1</option>
+                                <option> Sub-Objetivo 2</option>
+                            </select>
+                        </div>
+
                     </form>
                 </div>
             </section>
