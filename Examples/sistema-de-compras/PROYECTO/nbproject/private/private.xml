@@ -5,6 +5,7 @@
         <group>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/web/cotizacion/listaCotizacion.jsp</file>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/beans/pedidoBean.java</file>
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/dao/cotizacionDAO.java</file>
             <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/servlet/SrvCotizacion.java</file>
         </group>
     </open-files>
