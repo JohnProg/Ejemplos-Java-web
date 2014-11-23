@@ -3,14 +3,8 @@ package maristas.dao;
 
 import maristas.conexion.connectionBD;
 import maristas.beans.ProgramacionBean;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class ProgramacionDAO {
     
@@ -52,30 +46,6 @@ public class ProgramacionDAO {
            return lista;
        }
    }
-    
-    public JSONArray get_programacion() throws SQLException{
-        //Se obtiene el resultado de la consulta
-        lista = new ArrayList<ProgramacionBean>();
-        lista = get_queryset();
-
-        JSONArray json_list = new JSONArray();
-        
-        JSONObject json_obj=new JSONObject();
-        
-        for(ProgramacionBean obj:lista) {
-            Map mapa=new LinkedHashMap();
-            mapa.put("id",obj.getId());
-            mapa.put("id_actividad",obj.getId_actividad());
-            mapa.put("fecha_inicio",obj.getFecha_inicio());
-            mapa.put("fecha_final",obj.getFecha_final());
-            ;
-            
-            json_list.add(mapa);
-        }
-         System.out.print(json_list);
-        
-        return json_list;
-    }
     
     public int InsertarProgramacion(ProgramacionBean objPlan) {
         int estado = 0;

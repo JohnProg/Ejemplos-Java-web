@@ -4,14 +4,9 @@ package maristas.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import maristas.beans.LineaBean;
 import maristas.conexion.connectionBD;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 
 public class lineaDAO {
@@ -54,28 +49,6 @@ public class lineaDAO {
            return lista;
        }
    }
-    
-   public JSONArray get_lineas() throws SQLException{
-        //Se obtiene el resultado de la consulta
-        lista = new ArrayList<LineaBean>();
-        lista = get_queryset();
-
-        JSONArray json_list = new JSONArray();
-        
-        JSONObject json_obj=new JSONObject();
-        
-        for(LineaBean obj:lista) {
-            Map mapa=new LinkedHashMap();
-            mapa.put("id",obj.getId());
-            mapa.put("name",obj.getNombre());
-            mapa.put("plan_estrategico",obj.getId_plan());
-            mapa.put("descripcion",obj.getDescripcion());
-            json_list.add(mapa);
-        }
-         System.out.print(json_list);
-        
-        return json_list;
-    }
     
     public int InsertarPlan(LineaBean objLinea) {
         int estado = 0;

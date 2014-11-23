@@ -105,102 +105,11 @@
         </div><!--//container-->
     </section><!--//promo-->
     
-    <div class="sections-wrapper">   
-     
-        <!-- ******Why Section****** -->
-        <section id="why" class="section why">
-            <div class="container">
-                <h2 class="title text-center">How Can Planning Help You?</h2>
-                <p class="intro text-center">We take care of the UX and front-end design so you can save time building your site</p>
-                <div class="row item">
-                    <div class="content col-md-4 col-sm-12 col-xs-12">
-                        <h3 class="title">Save you time and effort</h3>
-                        <div class="desc">
-                            <p>Explain one of your product benefits here. Let users know how they can benefit using your product. It?s also a good idea to back it up with a testimonial or tweet from your users.</p>
-                            <p>The original PSD of the graphic is included in the package. You can easily customise the PSD to meet your needs.</p>
-                        </div>
-                        <div class="quote">
-                            <div class="quote-profile">
-                                <img class="img-responsive img-circle" src="<%=request.getContextPath()%>/static/img/profile-s-1.png" alt="">
-                            </div><!--//profile-->
-                            <div class="quote-content">
-                                <blockquote><p><a href="/" target="_blank">@johnp_js</a> Love it! Thank you for making my life easier and saving me time! I?ll definitely recommend it to my friends. :)</p></blockquote>
-                                <p class="source">@johnp_js, Lima</p>
-                            </div><!--//quote-content-->                                     
-                        </div><!--//quote-->                        
-                    </div><!--//content-->
-                    <figure class="figure col-md-7 col-sm-12 col-xs-12 col-md-offset-1 col-sm-offset-0 col-xs-offset-0">
-                        <img class="img-responsive" src="<%=request.getContextPath()%>/static/img/figure-1.png" alt="">
-                        <figcaption class="figure-caption">(Screenshot: Coral - App &amp; website startup kit) </figcaption>
-                    </figure>
-                </div><!--//item-->
-            </div><!--//container-->
-        </section><!--//why-->  
-        
-        <!-- ******Testimonials Section****** -->
-        <section class="section testimonials">
-            <div class="container">
-                <h2 class="title text-center">What are people saying about Planning?</h2>
-                <div id="testimonials-carousel" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#testimonials-carousel" data-slide-to="0" class=""></li>
-                        <li data-target="#testimonials-carousel" data-slide-to="1" class=""></li>
-                        <li data-target="#testimonials-carousel" data-slide-to="2" class="active"></li>
-                    </ol><!--//carousel-indicators-->
-                    <div class="carousel-inner">
-                        <div class="item">
-                            <figure class="profile"><img src="<%=request.getContextPath()%>/static/img/profile-m-1.png" alt=""></figure>
-                            <div class="content">
-                                <blockquote>
-                                <i class="fa fa-quote-left"></i>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                </blockquote>
-                                <p class="source">John Doe<br><span class="title">Developer, Lima</span></p>
-                            </div><!--//content-->                         
-                        </div><!--//item-->                        
-                        <div class="item">
-                            <figure class="profile"><img src="<%=request.getContextPath()%>/static/img/profile-m-2.png" alt=""></figure>
-                            <div class="content">
-                                <blockquote>
-                                <i class="fa fa-quote-left"></i>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                </blockquote>
-                                <p class="source">John Doe<br><span class="title">Developer, Lima</span></p>
-                            </div><!--//content-->                         
-                        </div><!--//item-->  
-                        <div class="item active">
-                            <figure class="profile"><img src="<%=request.getContextPath()%>/static/img/profile-m-3.png" alt=""></figure>
-                            <div class="content">
-                                <blockquote>
-                                <i class="fa fa-quote-left"></i>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                    quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                    consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                    proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                                </blockquote>
-                                <p class="source">John Doe<br><span class="title">Developer, Lima</span></p>
-                            </div><!--//content-->                         
-                        </div><!--//item-->                                         
-                    </div><!--//carousel-inner-->
-                    
-                </div><!--//carousel-->
-            </div><!--//container-->
-        </section><!--//testimonials-->          
+<!--    <div class="sections-wrapper">   
+             
         
         
-        <!-- ******CTA Section****** -->
+         ******CTA Section****** 
         <section class="section cta-section text-center home-cta-section">
             <div class="container">
                <h2 class="title">Ready to get our product?</h2>
@@ -211,20 +120,20 @@
                     </div>   
                     <button type="submit" class="btn btn-cta btn-cta-primary">Subscribe Now</button>                                 
                 </form>   
-            </div><!--//container-->
-        </section><!--//cta-section-->
+            </div>//container
+        </section>//cta-section
         
-    </div><!--//section-wrapper-->
-    
-    <!-- ******FOOTER****** --> 
+    </div>//section-wrapper-->
+<!--    
+     ******FOOTER******  
     <footer class="footer">
         <div class="bottom-bar">
             <div class="container">
                 <small class="copyright">Copyright @ 2014 <a href="/" target="_blank"></a></small>                
-            </div><!--//container-->
-        </div><!--//bottom-bar-->
-    </footer><!--//footer-->
-    
+            </div>//container
+        </div>//bottom-bar
+    </footer>//footer
+    -->
     <!-- Video Modal -->
     <div class="modal modal-video" id="modal-video" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
         <div class="modal-dialog">

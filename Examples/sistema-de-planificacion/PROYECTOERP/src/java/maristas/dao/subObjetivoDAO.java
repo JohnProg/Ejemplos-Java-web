@@ -4,14 +4,9 @@ package maristas.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import maristas.beans.SubObjetivoBean;
 import maristas.conexion.connectionBD;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 
 public class subObjetivoDAO {
@@ -53,27 +48,6 @@ public class subObjetivoDAO {
        }
    }
     
-   public JSONArray get_objetivos() throws SQLException{
-        //Se obtiene el resultado de la consulta
-        lista = new ArrayList<SubObjetivoBean>();
-        lista = get_queryset();
-
-        JSONArray json_list = new JSONArray();
-        
-        JSONObject json_obj=new JSONObject();
-        
-        for(SubObjetivoBean obj:lista) {
-            Map mapa=new LinkedHashMap();
-            mapa.put("id",obj.getId());
-            mapa.put("nombre",obj.getNombre());
-            mapa.put("linea",obj.getId_objetivo());
-            mapa.put("descripcion",obj.getDescripcion());
-            json_list.add(mapa);
-        }
-         System.out.print(json_list);
-        
-        return json_list;
-    }
     
     public int InsertarObjetivo(SubObjetivoBean objObjetivo) {
         int estado = 0;

@@ -3,14 +3,8 @@ package maristas.dao;
 
 import maristas.conexion.connectionBD;
 import maristas.beans.IndicadoresBean;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 public class indicadorDAO {
     
@@ -53,30 +47,5 @@ public class indicadorDAO {
            return lista;
        }
    }
-    
-    public JSONArray get_Indicadores() throws SQLException{
-        //Se obtiene el resultado de la consulta
-        lista = new ArrayList<IndicadoresBean>();
-        lista = get_queryset();
-
-        JSONArray json_list = new JSONArray();
-        
-        JSONObject json_obj=new JSONObject();
-        
-        for(IndicadoresBean obj:lista) {
-            Map mapa=new LinkedHashMap();
-            mapa.put("id",obj.getId());
-            mapa.put("id_actividad",obj.getId_actividad());
-            mapa.put("nombre",obj.getNombre());
-            mapa.put("tipo_logo",obj.getTipo_logo());
-            mapa.put("logro",obj.getLogo());
-            ;
-            
-            json_list.add(mapa);
-        }
-         System.out.print(json_list);
-        
-        return json_list;
-    }
     
 }

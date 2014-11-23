@@ -1,15 +1,8 @@
 package maristas.dao;
 
-import maristas.conexion.connectionBD;
 import maristas.beans.PlanEstrategicoBean;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import maristas.conexion.conecctionBDMysql;
 
 public class planDAO {

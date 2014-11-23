@@ -3,14 +3,8 @@ package maristas.dao;
 
 import maristas.conexion.connectionBD;
 import maristas.beans.ActividadBean;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 
 public class ActividadDAO {
@@ -58,33 +52,5 @@ public class ActividadDAO {
            return lista;
        }
    }
-    
-    public JSONArray get_Actividad() throws SQLException{
-        //Se obtiene el resultado de la consulta
-        lista = new ArrayList<ActividadBean>();
-        lista = get_queryset();
-
-        JSONArray json_list = new JSONArray();
-        
-        JSONObject json_obj=new JSONObject();
-        
-        for(ActividadBean obj:lista) {
-            Map mapa=new LinkedHashMap();
-            mapa.put("id",obj.getId());
-            mapa.put("id_plan_operativo",obj.getId_plan_operativo());
-            mapa.put("nombre",obj.getNombre());
-            mapa.put("gastos",obj.getGastos());
-            mapa.put("ingresos",obj.getIngresos());
-            mapa.put("id_sub_objetivo",obj.getId_sub_objetivo());
-            mapa.put("id_presupuesto",obj.getId_presupuesto());
-            
-            ;
-            
-            json_list.add(mapa);
-        }
-         System.out.print(json_list);
-        
-        return json_list;
-    }
     
 }
