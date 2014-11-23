@@ -9,7 +9,7 @@ public class conecctionBDMysql {
         private String DRIVER = "com.mysql.jdbc.Driver";  
         private String DB_URL = "jdbc:mysql://localhost:3306/maristas";
         private String USER = "root"; // mi usuario
-        private String PASS = "admin"; // mi contraseña
+        private String PASS = ""; // mi contraseña
          //private String selectMethod = "cursor";
          private String errString;
      

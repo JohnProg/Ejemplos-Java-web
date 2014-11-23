@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import maristas.conexion.conecctionBDMysql;
 
 public class PlanOperativoDAO {
     
@@ -23,7 +24,7 @@ public class PlanOperativoDAO {
        lista = new ArrayList<PlanOperativoBean>();
        
        try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
 
             pt=cnn.prepareStatement("select id, nombre,"
@@ -37,12 +38,12 @@ public class PlanOperativoDAO {
             while(rs.next()){
                 PlanOperativoBean objPlanOp=new PlanOperativoBean();
 
-                objPlanOp.setId(rs.getInt(2));
-                objPlanOp.setNombre(rs.getString(3));
-                objPlanOp.setDescripcion(rs.getString(4));
-                objPlanOp.setId_plan_estrategico(rs.getInt(5));
-                objPlanOp.setId_encargado(rs.getInt(6));
-                objPlanOp.setId_unidad_organica(rs.getInt(7));
+                objPlanOp.setId(rs.getInt(1));
+                objPlanOp.setNombre(rs.getString(2));
+                objPlanOp.setDescripcion(rs.getString(3));
+                objPlanOp.setId_plan_estrategico(rs.getInt(4));
+                objPlanOp.setId_encargado(rs.getInt(5));
+                objPlanOp.setId_unidad_organica(rs.getInt(6));
 
                 lista.add(objPlanOp);                            
             }
@@ -59,16 +60,15 @@ public class PlanOperativoDAO {
    public int InsertarPlanOp(PlanOperativoBean objPlanOp) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
-            pt=cnn.prepareStatement("insert into PlanOperativo(id,nombre,descripcion,id_plan_estrategico,id_encargado,id_unidad_org)" +
-                    "values('?,?,?,?,?,?,?)");
-            pt.setInt(2, objPlanOp.getId());
-            pt.setString(3, objPlanOp.getNombre());
-            pt.setString(4, objPlanOp.getDescripcion());
-            pt.setInt(5, objPlanOp.getId_plan_estrategico());
-            pt.setInt(6, objPlanOp.getId_encargado());
-            pt.setInt(7, objPlanOp.getId_unidad_organica());
+            pt=cnn.prepareStatement("insert into PlanOperativo(nombre,descripcion,id_plan_estrategico,id_encargado,id_unidad_org)" +
+                    "values(?,?,?,?,?)");
+            pt.setString(1, objPlanOp.getNombre());
+            pt.setString(2, objPlanOp.getDescripcion());
+            pt.setInt(3, objPlanOp.getId_plan_estrategico());
+            pt.setInt(4, objPlanOp.getId_encargado());
+            pt.setInt(5, objPlanOp.getId_unidad_organica());
             estado = pt.executeUpdate();
             pt.close();
             cnn.close();

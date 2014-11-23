@@ -4,10 +4,14 @@
     Author     : Autonoma
 --%>
 
+<%@page import="maristas.beans.UnidadOrganicaBean"%>
 <%@page import="maristas.beans.PlanOperativoBean"%>
 <%@page import="java.util.ArrayList"%>
 <% ArrayList<PlanOperativoBean> PlanOperativo = (ArrayList<PlanOperativoBean>)request.getAttribute("PlanOperativo");%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    ArrayList<UnidadOrganicaBean> areas = (ArrayList<UnidadOrganicaBean>)request.getAttribute("areas");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,16 +21,26 @@
         <title> Plan Operativo </title>
     </head>
     <body>
+         <script>
+             function cerrarSesion() {
+                document.form.action = "<%=request.getContextPath()%>/UsuarioServlet";
+                document.form.method = "GET";
+                document.form.accion.value="SALIR";
+                document.form.submit();
+            }
+        </script>
         <div class="container">
             <br>
-            <a class="btn btn-lg btn-danger" href="<%=request.getContextPath()%>/views/JefeArea.jsp"> Salir </a>
+            <a href="<%=request.getContextPath()%>/CreatePlanOperativoServlet" class="pull-right btn btn-info btn-lg">Regresar</a>
+            <a href="#" onclick="cerrarSesion()" class="pull-right btn btn-danger btn-lg" id="btnSalir">Salir</a>                
             <br><br><br>
             <section class="row col-sm-4 col-sm-offset-4" style="">
                 <div class="col-sm-4 col-sm-offset-1" id="plan-operativo">
                     <h2 style="width:200px; text-align:center;">Plan Operativo</h2>
                     <br><br>
 
-                    <form role="form" name="form" method="post" id="miFormulario" action="<%=request.getContextPath()%>/CreatePlanOperativoServlet">
+                    <form role="form" name="form" method="post" id="miFormulario" action="<%=request.getContextPath()%>/CreatePlanOperativoServlet?option=1">                         
+                        <input  type="hidden"  name="accion">
                         <div class="form-group" style="width: 300px;">
                             <label for="nombre">Nombre :</label>
                             <input id="nombre" type="text" name="nombre" class="form-control" placeholder="Nombre y Apellido"  required=""/>                  
@@ -34,10 +48,19 @@
 
                         <div class="form-group" style="width: 300px;">
                             <label for="cboarea">Email :</label>
-                            <select class="form-control" required="true" name="cboarea">
-                                <option value="" selected> --- Escoge un area ---</option>
-                                <option> Area 1 </option>
-                                <option> Area 2 </option>
+                            
+                            <select class="form-control" required="true" name="id_unidad_organica">
+                                 <option value="" selected> --- Escoge un area ---</option>
+                                    <%
+                                        if(areas != null) {
+                                            for(UnidadOrganicaBean   obj:areas){
+                                    %>
+                                    <option value="<%= obj.getId()%>">
+                                        <%= obj.getNombre() %>
+                                    </option>
+                                    <%      }
+                                        }
+                                    %>
                             </select>
                         </div>
                         

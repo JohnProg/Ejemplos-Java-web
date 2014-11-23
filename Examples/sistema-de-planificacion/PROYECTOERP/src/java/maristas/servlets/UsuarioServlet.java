@@ -104,7 +104,12 @@ public class UsuarioServlet extends HttpServlet {
         if(user != null) {
             HttpSession  miSesion = request.getSession();
             miSesion.setAttribute("DatosUsuario", user);
-            pagina = "/PlanServlet";
+            if(user.getId_rol() == 1){
+                pagina = "/PlanServlet";
+            } else {
+                pagina = "/CreatePlanOperativoServlet";
+            }
+            
         } else {
             pagina="/iniciarSesion.jsp";
             request.setAttribute("mensaje", "Ingresar correctamente sus datos!");

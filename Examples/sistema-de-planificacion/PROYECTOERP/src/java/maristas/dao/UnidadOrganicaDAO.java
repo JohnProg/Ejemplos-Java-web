@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import maristas.conexion.conecctionBDMysql;
 
 
 public class UnidadOrganicaDAO {
@@ -20,11 +21,11 @@ public class UnidadOrganicaDAO {
     PreparedStatement   pt=null;
     ResultSet           rs=null;
     
-    public ArrayList<UnidadOrganicaBean> get_queryset(){
+    public ArrayList<UnidadOrganicaBean> lista(){
        lista = new ArrayList<UnidadOrganicaBean>();
        
        try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
 
             pt=cnn.prepareStatement("select id,"
@@ -37,8 +38,8 @@ public class UnidadOrganicaDAO {
             while(rs.next()){
                 UnidadOrganicaBean objPlan=new UnidadOrganicaBean();
 
-                objPlan.setId(rs.getInt(2));
-                objPlan.setNombre(rs.getString(3));
+                objPlan.setId(rs.getInt(1));
+                objPlan.setNombre(rs.getString(2));
 
                 lista.add(objPlan);                            
             }
@@ -51,26 +52,5 @@ public class UnidadOrganicaDAO {
            return lista;
        }
    }
-    
-    public JSONArray get_UnidadOrganica() throws SQLException{
-        //Se obtiene el resultado de la consulta
-        lista = new ArrayList<UnidadOrganicaBean>();
-        lista = get_queryset();
-
-        JSONArray json_list = new JSONArray();
-        
-        JSONObject json_obj=new JSONObject();
-        
-        for(UnidadOrganicaBean obj:lista) {
-            Map mapa=new LinkedHashMap();
-            mapa.put("id",obj.getId());
-            mapa.put("nombre",obj.getNombre());
-            ;
-            
-            json_list.add(mapa);
-        }
-         System.out.print(json_list);
-        
-        return json_list;
-    }
+       
 }

@@ -14,6 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import maristas.beans.UnidadOrganicaBean;
+import maristas.dao.UnidadOrganicaDAO;
 
 /**
  *
@@ -24,10 +26,59 @@ public class CreatePlanOperativoServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 
-      String pagina = "";
-      int option = Integer.parseInt(request.getParameter("option"));
       
+    }
+       
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+       
+        String pagina = "";
+        int option = 0;
+        if(request.getParameter("option") != null) {
+            option = Integer.parseInt(request.getParameter("option"));
+        }
+        if(request.getSession().getAttribute("DatosUsuario") != null) {
+            // Mostrar vista crear
+            if(option == 1) {
+                pagina="/views/PlanOperativo/CreatePlanOperativo.jsp";
+                UnidadOrganicaDAO i_s2 = new UnidadOrganicaDAO();
+                ArrayList<UnidadOrganicaBean> Areas = i_s2.lista();
+                request.setAttribute("areas", Areas);
+            } else {
+                //Mostrar vista lista plans
+                pagina="/views/PlanOperativo/JefeArea.jsp";
+                PlanOperativoDAO i_s = new PlanOperativoDAO();
+                ArrayList<PlanOperativoBean> planope = i_s.getPlanO();
+                request.setAttribute("plans", planope);
+            }
+        } else {
+            pagina="/iniciarSesion.jsp";
+            request.setAttribute("mensaje","Necesitas iniciar sesión!");
+        }
+        
+        getServletContext().getRequestDispatcher(pagina).forward(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String pagina = "";
+      int option = 0;
+      if(request.getParameter("option") != null) {
+          option = Integer.parseInt(request.getParameter("option"));
+      }
       switch(option) {
+          case 0: {
+              //variables
+                    pagina="/views/PlanOperativo/JefeArea.jsp";
+                    PlanOperativoDAO i_s = new PlanOperativoDAO();
+                    ArrayList<PlanOperativoBean> planope = i_s.getPlanO();
+                    request.setAttribute("plans", planope);
+                    
+                    break;
+          }
           case 1: {
             // CREAR
             int estado = 0;
@@ -44,6 +95,7 @@ public class CreatePlanOperativoServlet extends HttpServlet {
             //VALIDAR INSERCION
             if(estado == 1) request.setAttribute("status","ok");
             else request.setAttribute("status","fail");
+            break;
           }
           case 3: {
               //ACTUALIZAR
@@ -54,30 +106,6 @@ public class CreatePlanOperativoServlet extends HttpServlet {
       }
             
             getServletContext().getRequestDispatcher(pagina).forward(request, response);
-    }
-       
-    
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String pagina = "";
-        if(request.getSession().getAttribute("user") != null) {
-            PlanOperativoDAO i_s = new PlanOperativoDAO();
-            ArrayList<PlanOperativoBean> planope = i_s.getPlanO();
-            request.setAttribute("PlanOperativo", planope);
-            pagina="/view/CreatePlanOperativo.jsp";
-        } else {
-            pagina="/iniciarSesion.jsp";
-            request.setAttribute("mensaje","Necesitas iniciar sesión!");
-        }
-        
-        getServletContext().getRequestDispatcher(pagina).forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
     }
 
 

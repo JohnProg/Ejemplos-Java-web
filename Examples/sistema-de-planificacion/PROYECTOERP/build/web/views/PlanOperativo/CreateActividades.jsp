@@ -14,6 +14,14 @@
         <title> Plan Operativo </title>
     </head>
     <body>
+                <script>
+             function cerrarSesion() {
+                document.form.action = "<%=request.getContextPath()%>/UsuarioServlet";
+                document.form.method = "GET";
+                document.form.accion.value="SALIR";
+                document.form.submit();
+            }
+        </script>
         <div class="container">
             <br>
             <button class="btn btn-lg btn-danger"> Salir </button>
