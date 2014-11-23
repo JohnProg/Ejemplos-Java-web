@@ -20,6 +20,15 @@
             <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/servlet/SrvOrden.java</file>
             <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/web/cotizacion/crearCotizacion.jsp</file>
             <file>file:/Users/johnmachahuay/Documents/Projects/java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/servlet/SrvCotizacion.java</file>
+<<<<<<< HEAD
+=======
+=======
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/web/cotizacion/listaCotizacion.jsp</file>
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/beans/pedidoBean.java</file>
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/dao/cotizacionDAO.java</file>
+            <file>file:/C:/Users/Aldair/Documents/GitHub/Ejemplos-Java-web/Examples/sistema-de-compras/PROYECTO/src/java/compraProveedores/servlet/SrvCotizacion.java</file>
+>>>>>>> d4a6a94fea0f6caafae9b4ac0d4b7331759ecb8c
+>>>>>>> 3f4070cb648b7bad5897dd5978bb758129a27273
         </group>
     </open-files>
 </project-private>
