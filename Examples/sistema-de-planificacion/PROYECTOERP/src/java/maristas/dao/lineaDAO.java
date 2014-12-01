@@ -6,16 +6,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import maristas.beans.LineaBean;
+import maristas.conexion.conecctionBDMysql;
 import maristas.conexion.connectionBD;
 
 
 public class lineaDAO {
+    
     ArrayList<LineaBean> lista=null;
     Connection          cnn=null;
     PreparedStatement   pt=null;
     ResultSet           rs=null;
    
-   public ArrayList<LineaBean> get_queryset(){
+   public ArrayList<LineaBean> GetLineas(){
        lista = new ArrayList<LineaBean>();
        
        try{
@@ -49,8 +51,37 @@ public class lineaDAO {
            return lista;
        }
    }
-    
-    public int InsertarPlan(LineaBean objLinea) {
+   
+   public LineaBean GetLinea(int id_linea){
+       LineaBean objObjetivo = new LineaBean();
+       
+       try{
+            conecctionBDMysql cn = new conecctionBDMysql();
+            //connectionBD cn = new connectionBD();
+            cnn = cn.getConnection();
+
+            pt=cnn.prepareStatement("select id, "
+                    + " id_plan_estrategico, nombre, "
+                    + " descripcion "
+                    + " from linea"
+                    + " where id=?");
+            pt.setInt(1, id_linea);
+            rs=pt.executeQuery();
+                objObjetivo.setId(rs.getInt(1));
+                objObjetivo.setId_plan(rs.getInt(2));
+                objObjetivo.setNombre(rs.getString(3));
+                objObjetivo.setDescripcion(rs.getString(4));
+            rs.close();
+            pt.close();
+            cnn.close();
+            return objObjetivo;
+       } 
+       catch(Exception e){
+           return objObjetivo;
+       }
+   }
+   
+   public int InsertarPlan(LineaBean objLinea) {
         int estado = 0;
         try{
             connectionBD cn = new connectionBD();
@@ -69,7 +100,8 @@ public class lineaDAO {
         }
         return estado;
     }
-    public int ActualizarPlan(LineaBean objPlan) {
+    
+   public int ActualizarPlan(LineaBean objPlan) {
         int estado = 0;
         try{
             connectionBD cn = new connectionBD();
@@ -92,7 +124,8 @@ public class lineaDAO {
         }
         return estado;
     }
-    public int EliminarLinea(LineaBean objLinea) {
+    
+   public int EliminarLinea(LineaBean objLinea) {
         int estado = 0;
         try{
             connectionBD cn = new connectionBD();
@@ -106,4 +139,5 @@ public class lineaDAO {
         }
         return estado;
     }
+   
 }

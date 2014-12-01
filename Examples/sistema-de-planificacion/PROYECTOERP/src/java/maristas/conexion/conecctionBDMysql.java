@@ -4,14 +4,14 @@ package maristas.conexion;
 //STEP 1. Import required packages
 import java.sql.*;
 
-public class conecctionBDMysql {
+public class conecctionBDMysql{
    // JDBC driver name and database URL
         private String DRIVER = "com.mysql.jdbc.Driver";  
         private String DB_URL = "jdbc:mysql://localhost:3306/maristas";
         private String USER = "root"; // mi usuario
-        private String PASS = "admin"; // mi contraseña
-         //private String selectMethod = "cursor";
-         private String errString;
+        private String PASS = ""; // mi contraseña
+        //private String selectMethod = "cursor";
+        private String errString;
      
     //Creando un metodo de tipo Connection
      public Connection getConnection(){

@@ -31,11 +31,8 @@ public class connectionBD {
     public Connection getConnection() {
         Connection cn=null;
         try {
-            servidor = "localhost";                     //Servidor
-            user = "sa";                              //Nombre del Usuario de BD
-            password = "321";                           //Contraseña de acceso para el Usuario de BD
-            puerto = "1433";                            //Puerto para conectarse a SQL SERVER 2008 
-            BaseDatos = "maristas";                //Nombre de la base de datos
+            set_atributes("localhost", "sa", "321", "1433", "maristas");
+            
             driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
 
             Class.forName(driver);
@@ -63,6 +60,14 @@ public class connectionBD {
         if (conn != null) {
             JOptionPane.showMessageDialog(null, "No se pudo cerrar la base de datos", "Advertencia", JOptionPane.WARNING_MESSAGE,new javax.swing.ImageIcon("src/falabella/recursos/ico_adv.png"));
         }
+    }
+    
+    public void set_atributes(String servidor, String user, String password, String puerto, String BaseDatos){
+        this.servidor = servidor;                           //Servidor
+        this.user = user;                                   //Nombre del Usuario de BD
+        this.password = password;                           //Contraseña de acceso para el Usuario de BD
+        this.puerto = puerto;                               //Puerto para conectarse a SQL SERVER 2008 
+        this.BaseDatos = BaseDatos;                         //Nombre de la base de datos
     }
     
 }
