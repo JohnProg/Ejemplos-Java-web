@@ -12,7 +12,7 @@ public class conecctionBDMysql {
         private String PASS = "admin"; // mi contraseña
          //private String selectMethod = "cursor";
          private String errString;
-     
+
     //Creando un metodo de tipo Connection
      public Connection getConnection(){
         Connection con = null;

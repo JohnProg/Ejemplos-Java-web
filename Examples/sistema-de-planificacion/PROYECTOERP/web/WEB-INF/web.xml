@@ -16,6 +16,14 @@
         <servlet-name>NewServlet</servlet-name>
         <servlet-class>maristas.servlets.NewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PlanPresupuestalServlet</servlet-name>
+        <servlet-class>maristas.servlets.PlanPresupuestalServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>cerrarSesion</servlet-name>
+        <servlet-class>maristas.servlets.cerrarSesion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>PlanServlet</servlet-name>
         <url-pattern>/PlanServlet</url-pattern>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/NewServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PlanPresupuestalServlet</servlet-name>
+        <url-pattern>/PlanPresupuestalServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cerrarSesion</servlet-name>
+        <url-pattern>/cerrarSesion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

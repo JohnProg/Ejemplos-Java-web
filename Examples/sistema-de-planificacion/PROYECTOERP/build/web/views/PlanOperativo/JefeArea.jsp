@@ -30,7 +30,7 @@
                 document.form.submit();
             }
              function cerrarSesion() {
-                document.form.action = "<%=request.getContextPath()%>/UsuarioServlet";
+                document.form.action = "<%=request.getContextPath()%>/cerrarSesion";
                 document.form.method = "GET";
                 document.form.accion.value="SALIR";
                 document.form.submit();

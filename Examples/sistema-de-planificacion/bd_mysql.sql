@@ -2,13 +2,7 @@ use mysql;
 
 DROP DATABASE IF EXISTS maristas;
 CREATE DATABASE maristas;
-#GO
 use maristas;
-#GO
-
-#-----------------------------------
-#--LOGIN
-#------------------------------------
 create table rol(
 	id int primary key AUTO_INCREMENT UNIQUE,
 	nombre varchar(30)
@@ -21,15 +15,12 @@ create table usuario(
 	id_rol int not null,
 	foreign key(id_rol) references rol(id)
 );
-#-----------------------------------
-#--PLAN ESTRATEGICO
-#------------------------------------
 
 create table PlanEstrategico(
 	id int primary key AUTO_INCREMENT UNIQUE,
 	nombre varchar(100),
-	fecha_inicio datetime not null DEFAULT NOW(),
-	fecha_termino datetime not null DEFAULT NOW(),
+	fecha_inicio datetime,
+	fecha_termino datetime,
 	anio_inicio char(4),
 	anio_termino char(4),
 	aprobado_por int not null,
@@ -56,29 +47,13 @@ create table Objetivo(
 );
 
 
-create table SubObjetivo(
-	id int not null primary key AUTO_INCREMENT UNIQUE,
-	objetivo int not null,
-	nombre varchar(50) not null,
-	descripcion varchar(150) not null,
-	foreign key(objetivo) references objetivo(id)
-);
-
-#-----------------------------------
-#--PLAN PRESUPUESTAL
-#------------------------------------
-
 create table PlanPresupuestal(
 	id int not null primary key AUTO_INCREMENT UNIQUE,
 	nombre varchar(30) not null,
 	monto float not null,
-	fecha_inicio datetime not null DEFAULT NOW(),
-	fecha_final datetime not null DEFAULT NOW()
+	fecha_inicio date not null,
+	fecha_final date not null
 );
-
-#-----------------------------------
-#--PLAN OPERATIVO
-#------------------------------------
 
 create table UnidadOrganizativa(
 	id int not null primary key AUTO_INCREMENT UNIQUE,
@@ -107,7 +82,6 @@ create table actividad(
 	id_sub_objetivo int not null,
 	id_presupuesto int not null,
 	foreign key(id_plan_operativo) references PlanOperativo(id),
-	foreign key(id_sub_objetivo) references SubObjetivo(id),
 	foreign key(id_presupuesto) references PlanPresupuestal(id)
 );
 
@@ -123,26 +97,22 @@ create table indicador(
 create table programacion(
 	id int not null primary key AUTO_INCREMENT UNIQUE,
 	id_actividad int not null,
-	fecha_inicio datetime not null DEFAULT NOW(),
-	fecha_final datetime not null DEFAULT NOW(),
+	fecha_inicio datetime,
+	fecha_final datetime,
 	foreign key(id_actividad) references actividad(id)
 );
 
-#tabla rol
 insert into rol(nombre) values('director');
 insert into rol(nombre) values('jefe_area');
 
-#tabla usuario
 insert into usuario(username, contra, id_rol) values('usuario1', '123', 1);
 insert into usuario(username, contra, id_rol) values('usuario2', '123', 1);
 insert into usuario(username, contra, id_rol) values('usuario3', '123', 2);
-insert into usuario(username, contra, id_rol) values('usuario4', '123', 2);
+insert into usuario(username, contra, id_rol) values('usuario5', '123', 3);
 
-#tabla UnidadOrganizativa
 insert into rol(nombre) values('Adminitracion');
 insert into rol(nombre) values('Ventas');
 
-#tabla UnidadOrganizativa
 insert into UnidadOrganizativa(nombre) values('Adminitracion');
 insert into UnidadOrganizativa(nombre) values('Ventas');
 insert into UnidadOrganizativa(nombre) values('Marketing');
@@ -151,8 +121,6 @@ insert into UnidadOrganizativa(nombre) values('Produccion');
 insert into UnidadOrganizativa(nombre) values('Almacen');
 insert into UnidadOrganizativa(nombre) values('Recursos Humanos');
 
-
-# tabla PlanEstrategico
 insert into PlanEstrategico(nombre, fecha_inicio, fecha_termino, anio_inicio, anio_termino, aprobado_por, descripcion) 
 values('Plan integral', '2014-08-12', '2014-09-14', '2014', '2014', 1, 'Plan principal de toda la escuela');
 insert into PlanEstrategico(nombre, anio_inicio, anio_termino, aprobado_por, descripcion)
@@ -166,7 +134,6 @@ values('Plan Secundario4', '2016', '2017', 1, 'Plan para la organizacion de la e
 insert into PlanEstrategico(nombre, anio_inicio, anio_termino, aprobado_por, descripcion)
 values('Plan Secundario5', '2017', '2018', 2, 'Plan para la educacion de la escuela');
 
-# tabla PlanOperativo
 insert into PlanOperativo(nombre, descripcion, id_plan_estrategico, id_encargado, id_unidad_org)
 values('Plan Secundario', 'Plan para la educacion de la escuela', 1, 1, 2);
 insert into PlanOperativo(nombre, descripcion, id_plan_estrategico, id_encargado, id_unidad_org)
@@ -179,5 +146,3 @@ values('Plan Secundario3', 'Plan para la politica de la escuela', 2, 2, 2);
 insert into PlanOperativo(nombre, descripcion, id_plan_estrategico, id_encargado, id_unidad_org)
 values('Plan Secundario3', null, 1, 1, 4);
 
-
-#select id, nombre, fecha_inicio, fecha_termino, anio_inicio, anio_termino, aprobado_por, descripcion from PlanEstrategico;

@@ -2,6 +2,7 @@
 <%@page import="maristas.dao.planDAO"%>
 <%@page import="maristas.beans.PlanEstrategicoBean"%>
 <%@page import="java.util.ArrayList"%>
+<%@include file="../finalizarSesion.jsp" %>
 <%
     PlanEstrategicoBean  objEmpleBean = null;
     UsuarioBean  userBean = null;
@@ -37,7 +38,7 @@
                 document.form.submit();
             }
             function cerrarSesion() {
-                document.form.action = "<%=request.getContextPath()%>/UsuarioServlet";
+                document.form.action = "<%=request.getContextPath()%>/cerrarSesion";
                 document.form.method = "GET";
                 document.form.accion.value="SALIR";
                 document.form.submit();

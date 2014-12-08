@@ -14,13 +14,56 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import maristas.beans.UsuarioBean;
 import maristas.dao.usuarioDAO;
+import maristas.factoria.DAOFactory;
+import maristas.interfaces.UsuarioDAO;
 
 /**
  *
  * @author johnmachahuay
  */
 public class UsuarioServlet extends HttpServlet {
-
+    UsuarioBean objUsuBean = null, objUsuBean1 = null;
+    DAOFactory objDAOFactory = null;
+    UsuarioDAO objUsuDAO = null;
+    
+    public UsuarioServlet() {
+        super();
+    }
+    
+    @Override
+    protected void service(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String pagina = "";
+        String username = request.getParameter("username");
+        String contrasena = request.getParameter("contra");
+        
+        objUsuBean = new UsuarioBean();
+        objUsuBean.setUsername(username);
+        objUsuBean.setContra(contrasena);
+        
+        
+        objDAOFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
+        objUsuDAO = objDAOFactory.getUsuarioDAO();
+        try {
+            objUsuBean1 = objUsuDAO.validarAcceso(objUsuBean);
+            if(objUsuBean1 != null) {
+                HttpSession  miSesion = request.getSession();
+                miSesion.setAttribute("SESSION", objUsuBean1);
+                if(objUsuBean1.getId_rol() == 1){
+                    pagina="/views/planEstrategico/listPlan.jsp";
+                } else if(objUsuBean1.getId_rol() == 2){
+                    pagina="/views/PlanOperativo/JefeArea.jsp";
+                } else {
+                    pagina="/views/PlanPresupuestal/listPlan.jsp";
+                }
+            } else {
+                request.setAttribute("mensaje", "Ingresar correctamente sus datos!");
+                pagina = "/iniciarSesion.jsp";
+            }
+        }catch(Exception e){ }
+        getServletContext().getRequestDispatcher(pagina).forward(request, response);
+    }
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -62,23 +105,21 @@ public class UsuarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String pagina = "";
+        /*String pagina = "";
         String action = request.getParameter("accion");
         
         if(request.getSession().getAttribute("DatosUsuario") != null) {
             if("SALIR".equals(action)) {
                 HttpSession  miSesion = request.getSession();
-                miSesion.setAttribute("DatosUsuario", null);
+                miSesion.invalidate();
                 pagina="/iniciarSesion.jsp";
-            } else {
-                pagina = "/PlanServlet";
             }
             
         } else {
             pagina="/iniciarSesion.jsp";
 
         }
-        getServletContext().getRequestDispatcher(pagina).forward(request, response);
+        getServletContext().getRequestDispatcher(pagina).forward(request, response);*/
     }
 
     /**
@@ -106,8 +147,10 @@ public class UsuarioServlet extends HttpServlet {
             miSesion.setAttribute("DatosUsuario", user);
             if(user.getId_rol() == 1){
                 pagina = "/PlanServlet";
-            } else {
+            } else if(user.getId_rol() == 2){
                 pagina = "/CreatePlanOperativoServlet";
+            } else {
+                pagina = "/PlanPresupuestalServlet";
             }
             
         } else {

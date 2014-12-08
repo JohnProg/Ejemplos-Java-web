@@ -5,23 +5,20 @@ public class PresupuestoBean {
     private int id;
     private String nombre;
     private float monto;
-    private String moneda;
     private String fecha_inicio;
     private String fecha_final;
 
-    public PresupuestoBean() {
-    }
-
-    public PresupuestoBean(int id, String nombre, float monto, String moneda, String fecha_inicio, String fecha_final) {
+    public PresupuestoBean(int id, String nombre, float monto, String fecha_inicio, String fecha_final) {
         this.id = id;
         this.nombre = nombre;
         this.monto = monto;
-        this.moneda = moneda;
         this.fecha_inicio = fecha_inicio;
         this.fecha_final = fecha_final;
     }
 
-    
+    public PresupuestoBean() {
+    }
+
     /**
      * @return the id
      */
@@ -65,20 +62,6 @@ public class PresupuestoBean {
     }
 
     /**
-     * @return the moneda
-     */
-    public String getMoneda() {
-        return moneda;
-    }
-
-    /**
-     * @param moneda the moneda to set
-     */
-    public void setMoneda(String moneda) {
-        this.moneda = moneda;
-    }
-
-    /**
      * @return the fecha_inicio
      */
     public String getFecha_inicio() {
@@ -105,7 +88,6 @@ public class PresupuestoBean {
     public void setFecha_final(String fecha_final) {
         this.fecha_final = fecha_final;
     }
-    
-    
-    
+
+   
 }
