@@ -20,13 +20,16 @@
                 </header>		
                 <br>
                 <section class="row">
+                        
                         <% if(request.getAttribute("status") == "ok"){ %>
-                            <div class="alert alert-success">
+                            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                 <%=request.getAttribute("mensaje") %>
                             </div>
                         <%}%>
                         <% if(request.getAttribute("status") == "fail"){ %>
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                 <%=request.getAttribute("mensaje") %>
                             </div>
                         <%}%>
@@ -38,7 +41,7 @@
                                                             <label class="label-control" >Nombre: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                            <input type="text" name="nombre" class="form-control" autofocus="true" id="txtName" placeholder=" Ingresa el nombre">
+                                                            <input type="text" name="nombre" required class="form-control" autofocus="true" id="txtName" placeholder=" Ingresa el nombre">
                                                     </div>			
                                             </div>									
                                             <br>
@@ -47,7 +50,7 @@
                                                             <label class="label-control" >Fecha de inicio: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="date" name="fec_inicio"class="form-control" id="txtVigency" placeholder=" ">
+                                                        <input type="date" name="fec_inicio" required class="form-control" id="txtVigency" placeholder=" ">
                                                     </div>			
                                             </div>	
                                             <br>
@@ -56,7 +59,7 @@
                                                             <label class="label-control" >Fecha de término: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="date" name="fecha_final"class="form-control" id="txtFinish" placeholder=" ">
+                                                        <input type="date" name="fecha_final" required class="form-control" id="txtFinish" placeholder=" ">
                                                     </div>			
                                             </div>	
                                             <br>
@@ -65,7 +68,7 @@
                                                             <label class="label-control" >Monto: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="text" name="monto"class="form-control" id="txtYearStart" placeholder=" ">
+                                                        <input type="number" name="monto" required class="form-control" id="txtYearStart" placeholder=" ">
                                                     </div>			
                                             </div>	
                                             
@@ -76,12 +79,15 @@
                                                             <input type="submit" value="Crear" id="btnAdd" class="btn btn-block btn-lg btn-success">
                                                     </div>
                                                     <div class="col-sm-2">
-                                                            <a href="<%=request.getContextPath()%>/PlanPresupuestalServlet" class="btn btn-block btn-lg btn-danger">Cancelar</a>
+                                                            <a href="<%=request.getContextPath()%>/PlanPresupuestalServlet?accion=1" class="btn btn-block btn-lg btn-danger">Cancelar</a>
                                                     </div>
                                             </div>
                                     </fieldset>
                             </form>
                     </section>
             </div>
+                                                    <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-1.11.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/bootstrap.min.js"></script> 
     </body>
 </html>

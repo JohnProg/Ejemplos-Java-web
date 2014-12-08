@@ -51,6 +51,39 @@ public class presupuestoDAO {
            return lista;
        }
    }
+    public PresupuestoBean obtenerPlanPr(int id){
+       PresupuestoBean objPlanP = new PresupuestoBean();
+       
+       try{
+            conecctionBDMysql cn = new conecctionBDMysql();
+            cnn = cn.getConnection();
+
+            pt=cnn.prepareStatement("select id, nombre,"
+                    + " monto, fecha_inicio,"
+                    + " fecha_final"
+                    + " from PlanPresupuestal where id = ?");
+            pt.setInt(1, id);
+            rs=pt.executeQuery();
+
+
+            if(rs.next()){
+                
+                objPlanP.setId(rs.getInt(1));
+                objPlanP.setNombre(rs.getString(2));
+                objPlanP.setMonto(rs.getFloat(3));
+                objPlanP.setFecha_inicio(rs.getString(4));
+                objPlanP.setFecha_final(rs.getString(5));
+                           
+            }
+            rs.close();
+            pt.close();
+            cnn.close();
+            return objPlanP;
+       } 
+       catch(Exception e){
+           return objPlanP;
+       }
+   }
    
    public int InsertarPlanPr(PresupuestoBean objPlanP) {
         int estado = 0;
@@ -75,13 +108,13 @@ public class presupuestoDAO {
    public int ActualizaPlanPr(PresupuestoBean objPlanP) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("update PlanPresupuestal set "
                     + " nombre = ?,"
                     + " monto=?,"
                     + " fecha_inicio=?,"
-                    + " fecha_final=?,"
+                    + " fecha_final=? "
                     + " where id = ?");
             pt.setString(1, objPlanP.getNombre());
             pt.setFloat(2, objPlanP.getMonto());
@@ -92,24 +125,24 @@ public class presupuestoDAO {
             estado = pt.executeUpdate();
             pt.close();
             cnn.close();
-        
+            return estado;
         } catch(Exception e){
-            
+            return estado;
         }
-        return estado;
     }
-    public int EliminarPlanPr(PresupuestoBean objPlanP) {
+    public int EliminarPlanPr(int id) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
-            pt=cnn.prepareStatement("delete PlanPresupuestal where id=?");
-            pt.setInt(1, objPlanP.getId());
+            pt=cnn.prepareStatement("delete from PlanPresupuestal where id=?");
+            pt.setInt(1, id);
             estado = pt.executeUpdate();
             pt.close();
+            return estado;
         } catch(Exception e){
-            
+            return estado;
         }
-        return estado;
+        
     }
 }

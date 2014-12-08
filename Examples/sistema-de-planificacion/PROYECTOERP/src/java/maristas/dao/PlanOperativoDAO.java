@@ -55,19 +55,53 @@ public class PlanOperativoDAO {
         try{
             conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
-            pt=cnn.prepareStatement("insert into PlanOperativo(nombre,descripcion,id_plan_estrategico,id_encargado,id_unidad_org)" +
-                    "values(?,?,?,?,?)");
-            pt.setString(1, objPlanOp.getNombre());
-            pt.setString(2, objPlanOp.getDescripcion());
-            pt.setInt(3, objPlanOp.getId_plan_estrategico());
-            pt.setInt(4, objPlanOp.getId_encargado());
-            pt.setInt(5, objPlanOp.getId_unidad_organica());
+            pt=cnn.prepareStatement("insert into planoperativo(nombre, id_unidad_org) values(?,?)");
+            pt.setString(1, objPlanOp.getNombre());        
+            pt.setInt(2, objPlanOp.getId_unidad_organica());
             estado = pt.executeUpdate();
             pt.close();
             cnn.close();
-        
-        } catch(Exception e){           
+            return estado;
+        } catch(Exception e){  
+            return estado;
         }
-        return estado;
+        
+    }
+   
+   public int ActualizarPlanOperativo(PlanOperativoBean objPlanOp) {
+        int estado = 0;
+        try{
+            conecctionBDMysql cn = new conecctionBDMysql();
+            cnn = cn.getConnection();     
+            pt=cnn.prepareStatement("update planoperativo set "
+                    + " nombre = ?,"
+                    + " id_unidad_org = ?,"
+                    + " where id = ?");
+            pt.setString(1, objPlanOp.getNombre());
+            pt.setInt(2, objPlanOp.getId_unidad_organica());
+            
+            estado = pt.executeUpdate();
+            pt.close();
+            cnn.close();
+            return estado;
+        } catch(Exception e){
+            return estado;
+        }
+    }
+
+    public int EliminarPlanOperativo(int id) {
+        int estado = 0;
+        try{
+            conecctionBDMysql cn = new conecctionBDMysql();
+            cnn = cn.getConnection();    
+            pt=cnn.prepareStatement("delete from planoperativo where id=?");
+            pt.setInt(1,id);
+            estado = pt.executeUpdate();
+            pt.close();
+            return estado;
+        } catch(Exception e){
+            return estado;
+        }
+        
     }
 }

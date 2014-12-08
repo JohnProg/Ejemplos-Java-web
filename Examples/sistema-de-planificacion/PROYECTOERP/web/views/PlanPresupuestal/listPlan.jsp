@@ -18,16 +18,10 @@
     </head>
     <body>
         <script>
-            function crear() {
+            function irVistaActualizar(plan_id) {
                 document.form.action = "<%=request.getContextPath()%>/PlanPresupuestalServlet";
                 document.form.method = "GET";
-                document.form.accion.value="CREATE";
-                document.form.submit();
-            }
-            function actualizar(plan_id) {
-                document.form.action = "<%=request.getContextPath()%>/PlanPresupuestalServlet";
-                document.form.method = "GET";
-                document.form.accion.value="UPDATE";
+                document.form.accion.value=3;
                 document.form.plan_id.value= plan_id;
                 document.form.submit();
             }
@@ -48,10 +42,35 @@
                 document.form.submit();
             }
         </script>
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Maristas</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">
+                    <%  userBean = (UsuarioBean)session.getAttribute("SESSION"); 
+                        if(userBean != null) {
+                            out.println(userBean.getUsername());
+                        }
+                    %>
+                    </a>
+                </li>
+               <li class="dropdown"><a onclick="cerrarSesion()"  href="#">Salir</a></li>
+              </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
         <div class="container">
             <br>
             <header>
-                <a href="#" onclick="cerrarSesion()" class="pull-right btn btn-danger btn-lg" id="btnSalir">Salir</a>
                     <br>
                     <br>
                     <h1>Planes presupuestal: <a href="<%=request.getContextPath()%>/views/PlanPresupuestal/createPlan.jsp" class="pull-right btn btn-primary btn-lg">+ Crear</a></h1>
@@ -83,7 +102,7 @@
                                         <table class="table table-stripped table-responsive">
                                                 <thead>
                                                         <tr>
-                                                                <th>#</th>
+                                                                <th>Código</th>
                                                                 <th>Nombre</th>
                                                                 <th>Monto</th>
                                                                 <th>Fecha de inicio</th>
@@ -97,13 +116,12 @@
                                                         if(plans != null) {
                                                             for(PresupuestoBean   obj:plans) {   %>
                                                             <tr>
-                                                                <td>1</td>
                                                                 <td><%=obj.getId()%></td>
                                                                <td><%=obj.getNombre()%></td>
                                                                <td><%=obj.getMonto()%></td>
                                                                <td><%=obj.getFecha_inicio()%></td>
                                                                <td><%=obj.getFecha_final()%></td>
-                                                               <td><a href="#" onclick="actualizar(<%=obj.getId()%>)">Actualizar</a>
+                                                               <td><a href="#" onclick="irVistaActualizar(<%=obj.getId()%>)">Actualizar</a>
                                                                    <a href="#" onclick="eliminar(<%=obj.getId()%>)">Eliminar</a></td>
                                                            </tr>
                                                           <%   }
@@ -114,5 +132,8 @@
                         </form>
                 </section>
         </div>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-1.11.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/app.js"></script>
     </body>
 </html>

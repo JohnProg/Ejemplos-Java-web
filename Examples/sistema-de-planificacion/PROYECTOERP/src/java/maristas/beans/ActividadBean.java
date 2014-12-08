@@ -11,13 +11,14 @@ public class ActividadBean {
     private double ingresos;
     private int id_sub_objetivo;
     private int id_presupuesto;
+    private String descripcion;
     
     public ActividadBean(){
         
     }
     
     public ActividadBean(int id, int id_plan_operativo, String nombre, 
-    double gastos, double ingresos, int id_sub_objetivo, int id_presupuesto ){
+    double gastos, double ingresos, int id_sub_objetivo, int id_presupuesto, String descripcion ){
         
         this.id = id;
         this.id_plan_operativo = id_plan_operativo;
@@ -26,7 +27,7 @@ public class ActividadBean {
         this.ingresos = ingresos;
         this.id_sub_objetivo = id_sub_objetivo;
         this.id_presupuesto = id_presupuesto;
-        
+        this.descripcion = descripcion;
     }
 
     /**
@@ -127,6 +128,14 @@ public class ActividadBean {
         this.id_presupuesto = id_presupuesto;
     }
     
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
     
     
 }

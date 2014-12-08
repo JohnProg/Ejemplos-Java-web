@@ -23,8 +23,9 @@
                 <br>
                 <section class="row col-sm-offset-0">
                     <% if(request.getAttribute("mensaje") != null) { %>
-                        <div class="alert alert-danger">
-                            ${mensaje}<a href="#" aria-hidden="true" class="close"><i class="fa fa-remove">×</i></a>
+                        <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                            ${mensaje}
                         </div>
                     <% }%>
                         <form class="col-sm-12" action="UsuarioServlet" method="post" name="form">
@@ -57,7 +58,9 @@
                 </section>
             </div>	
 	</div>
-            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-1.11.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/bootstrap.min.js"></script> 
             <script src="<%=request.getContextPath()%>/static/js/ValidacionAldo.js"></script> 
     </body>
 </html>

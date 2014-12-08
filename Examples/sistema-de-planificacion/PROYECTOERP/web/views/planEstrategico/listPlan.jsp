@@ -2,7 +2,6 @@
 <%@page import="maristas.dao.planDAO"%>
 <%@page import="maristas.beans.PlanEstrategicoBean"%>
 <%@page import="java.util.ArrayList"%>
-<%@include file="../finalizarSesion.jsp" %>
 <%
     PlanEstrategicoBean  objEmpleBean = null;
     UsuarioBean  userBean = null;
@@ -19,22 +18,32 @@
     </head>
     <body>
         <script>
-            function crear() {
-                document.form.action = "<%=request.getContextPath()%>/PlanServlet";
+            function lineas(plan_id){
+                document.form.action = "<%=request.getContextPath()%>/LineaServlet";
                 document.form.method = "GET";
-                document.form.accion.value="CREATE";
+                document.form.option.value="1";
+                document.form.id_plan.value=plan_id;
+                document.form.submit();
+            }
+            function crear(plan_id) {
+                document.form.action = "<%=request.getContextPath()%>/PlanEstrategicoServlet";
+                document.form.method = "GET";
+                document.form.option.value="1";
+                document.form.id_plan.value=plan_id;
                 document.form.submit();
             }
             function actualizar() {
-                document.form.action = "<%=request.getContextPath()%>/updatePlanServlet";
+                document.form.action = "<%=request.getContextPath()%>/PlanEstrategicoServlet";
                 document.form.method = "GET";
-                document.form.accion.value="UPDATE";
+                document.form.accion.value="2";
                 document.form.submit();
             }
             function eliminar() {
-                document.form.action = "<%=request.getContextPath()%>/deletePlanServlet";
-                document.form.method = "GET";
-                document.form.accion.value="DELETE";
+                debugger
+                document.form.action = "<%=request.getContextPath()%>/PlanEstrategicoServlet";
+                document.form.method = "POST";
+                document.form.option.value="3";
+                debugger
                 document.form.submit();
             }
             function cerrarSesion() {
@@ -43,25 +52,48 @@
                 document.form.accion.value="SALIR";
                 document.form.submit();
             }
+            
         </script>
+        <nav class="navbar navbar-default" role="navigation">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <a class="navbar-brand" href="#">Maristas</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+              <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#">
+                    <%  userBean = (UsuarioBean)session.getAttribute("SESSION"); 
+                        if(userBean != null) {
+                            out.println(userBean.getUsername());
+                        }
+                    %>
+                    </a>
+                </li>
+               <li class="dropdown"><a href="#" onclick="cerrarSesion()">Salir</a></li>
+              </li>
+              </ul>
+            </div><!-- /.navbar-collapse -->
+          </div><!-- /.container-fluid -->
+        </nav>
         <div class="container">
             <br>
             <header>
-                <a href="#" onclick="cerrarSesion()" class="pull-right btn btn-danger btn-lg" id="btnSalir">Salir</a>
+                <a onclick="crear()" class="pull-right btn btn-primary btn-lg">+ Crear</a>
                     <br>
                     <br>
-                    <h1>Planes estratégicos: <a href="<%=request.getContextPath()%>/views/planEstrategico/createPlan.jsp" class="pull-right btn btn-primary btn-lg">+ Crear</a></h1>
+                    <h1>Planes estratégicos: </h1>
                     <hr>
             </header>	
-            <%  userBean = (UsuarioBean)session.getAttribute("DatosUsuario"); 
-                if(userBean != null) {
-                    out.println(userBean.getUsername());
-                }
-            %>
             <br>
             <section class="row">            
                     <form class="col-sm-12" name="form">
-                        <input  type="hidden"  name="accion">
+                        <input  type="hidden"  name="option">
+                        <input  type="hidden"  name="id_plan">
                                 <fieldset class="form-group">
                                         <div class="row">
                                                 <div class="col-sm-1">
@@ -95,7 +127,7 @@
                                                         if(plans != null) {
                                                             for(PlanEstrategicoBean   obj:plans) {   %>
                                                             <tr>
-                                                                <td>1</td>
+                                                               <td><%=obj.getId()%></td>
                                                                <td><%=obj.getNombre()%></td>
                                                                <td><%=obj.getFec_vigencia()%></td>
                                                                <td><%=obj.getFec_termino()%></td>
@@ -103,9 +135,10 @@
                                                                <td><%=obj.getAnio_termino()%></td>
                                                                <td><%=obj.getAprobado_por()%></td>
                                                                <td><%=obj.getDescripcion()%></td>
-                                                               <td><a onclick="actualizar()">Actualizar</a>
-                                                                   <a onclick="eliminar()">Eliminar</a>
-                                                                   <a href="/lineas/">Lineas</a></td>
+                                                               <td>
+                                                                   <a href="#" onclick="lineas(<%=obj.getId()%>)"><span class="label label-success">Lineas</span></a> |
+                                                                   <a href="#" onclick="actualizar()"><span class="label label-primary">Actualizar</span></a> |
+                                                                   <a href="#" onclick="eliminar()"><span class="label label-warning">Eliminar</span></a>
                                                            </tr>
                                                           <%   }
                                                           }%>
@@ -115,5 +148,8 @@
                         </form>
                 </section>
         </div>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-1.11.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/app.js"></script>
     </body>
 </html>

@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import maristas.beans.ObjetivoBean;
+import maristas.beans.PlanEstrategicoBean;
+import maristas.conexion.conecctionBDMysql;
 import maristas.conexion.connectionBD;
 
 
@@ -16,7 +18,7 @@ public class objetivoDAO {
     PreparedStatement   pt=null;
     ResultSet           rs=null;
    
-   public ArrayList<ObjetivoBean> get_queryset(){
+   public ArrayList<ObjetivoBean> GetObjetivos(){
        lista = new ArrayList<ObjetivoBean>();
        
        try{
@@ -46,8 +48,36 @@ public class objetivoDAO {
            return lista;
        }
    }
-    
-    public int InsertarObjetivo(ObjetivoBean objObjetivo) {
+
+   public ObjetivoBean GetObjetivo(int id_plan){
+       ObjetivoBean objObjetivo = new ObjetivoBean();
+       
+       try{
+            conecctionBDMysql cn = new conecctionBDMysql();
+            //connectionBD cn = new connectionBD();
+            cnn = cn.getConnection();
+
+            pt=cnn.prepareStatement("select id, "
+                    + " linea, nombre, "
+                    + " descripcion "
+                    + " from objetivo"
+                    + " where id=?");
+            pt.setInt(1, id_plan);
+            rs=pt.executeQuery();
+                objObjetivo.setId_linea(rs.getInt(2));
+                objObjetivo.setNombre(rs.getString(3));
+                objObjetivo.setDescripcion(rs.getString(4));
+            rs.close();
+            pt.close();
+            cnn.close();
+            return objObjetivo;
+       } 
+       catch(Exception e){
+           return objObjetivo;
+       }
+   }
+   
+   public int InsertarObjetivo(ObjetivoBean objObjetivo) {
         int estado = 0;
         try{
             connectionBD cn = new connectionBD();
@@ -65,7 +95,8 @@ public class objetivoDAO {
         }
         return estado;
     }
-    public int ActualizarObjetivo(ObjetivoBean objPlan) {
+    
+   public int ActualizarObjetivo(ObjetivoBean objPlan) {
         int estado = 0;
         try{
             connectionBD cn = new connectionBD();
@@ -88,7 +119,8 @@ public class objetivoDAO {
         }
         return estado;
     }
-    public int EliminarObjetivo(ObjetivoBean objPlan) {
+    
+   public int EliminarObjetivo(ObjetivoBean objPlan) {
         int estado = 0;
         try{
             connectionBD cn = new connectionBD();
@@ -102,5 +134,34 @@ public class objetivoDAO {
         }
         return estado;
     }
+   public ArrayList<ObjetivoBean> GetObjetivesByLineId(int id_linea){
+       lista = new ArrayList<ObjetivoBean>();
+       
+       try{
+            conecctionBDMysql cn = new conecctionBDMysql();
+            cnn = cn.getConnection();
+
+            pt=cnn.prepareStatement("select id, linea, nombre, descripcion from Objetivo where linea = ?");
+            
+            pt.setInt(1, id_linea);
+            rs=pt.executeQuery();
+            while(rs.next()){
+                ObjetivoBean objObjetivo=new ObjetivoBean();
+                objObjetivo.setId(rs.getInt(1));
+                objObjetivo.setId_linea(rs.getInt(2));
+                objObjetivo.setNombre(rs.getString(3));
+                objObjetivo.setDescripcion(rs.getString(4));
+
+                lista.add(objObjetivo);                            
+            }
+            rs.close();
+            pt.close();
+            cnn.close();
+            return lista;
+       } 
+       catch(Exception e){
+           return lista;
+       }
+   }
     
 }

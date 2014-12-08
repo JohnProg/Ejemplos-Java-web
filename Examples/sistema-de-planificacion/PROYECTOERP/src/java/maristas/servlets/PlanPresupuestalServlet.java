@@ -72,17 +72,40 @@ public class PlanPresupuestalServlet extends HttpServlet {
                 presupuestoDAO p_pre = new presupuestoDAO();
                 ArrayList<PresupuestoBean> plans = p_pre.ListaPlanPr();
                 request.setAttribute("plans", plans);
+                getServletContext().getRequestDispatcher(pagina).forward(request, response);
                 break;
             }
             //DELETE
             case 2: {
+                pagina="/PROYECTOERP/PlanPresupuestalServlet?accion=1";
+                int id = Integer.parseInt(request.getParameter("plan_id"));
+
+                presupuestoDAO  objPlanDAO=new presupuestoDAO();
+                int estado = objPlanDAO.EliminarPlanPr(id);
+                //verificar estado de la eliminacion
+                if(estado == 1) {
+                    request.setAttribute("status", "ok"); 
+                    request.setAttribute("mensaje","Se elimino correctamente.");
+                }
+                else {
+                    request.setAttribute("status", "fail"); 
+                    request.setAttribute("mensaje","Hubo un error al momento de eliminar.");
+                }
+                response.sendRedirect(pagina);
+                break;
+            }
+            //GET ITEM TO EDIT
+            case 3: {
+                pagina="/views/PlanPresupuestal/updatePlan.jsp";
+                int id = Integer.parseInt(request.getParameter("plan_id"));
                 presupuestoDAO p_pre = new presupuestoDAO();
-                ArrayList<PresupuestoBean> plans = p_pre.ListaPlanPr();
-                request.setAttribute("plans", plans);
+                PresupuestoBean plan = p_pre.obtenerPlanPr(id);
+                request.setAttribute("plan", plan);
+                getServletContext().getRequestDispatcher(pagina).forward(request, response);
                 break;
             }
         }        
-        getServletContext().getRequestDispatcher(pagina).forward(request, response);
+        
     }
 
     /**
@@ -104,8 +127,9 @@ public class PlanPresupuestalServlet extends HttpServlet {
             else op = 5;
         
         switch (op) {
+            //CREATE
             case 1: { 
-                    pagina = "/views/PlanPresupuestal/createPlan.jsp";
+                    pagina="/PROYECTOERP/PlanPresupuestalServlet?accion=1";
                     String nombre=request.getParameter("nombre");
                     float monto= Float.parseFloat(request.getParameter("monto"));
                     String fec_inicio=request.getParameter("fec_inicio");
@@ -128,11 +152,13 @@ public class PlanPresupuestalServlet extends HttpServlet {
                       request.setAttribute("status", "fail"); 
                       request.setAttribute("mensaje","Hubo un error al momento de creacion.");
                     }
+                    response.sendRedirect(pagina);
                     break;
             }
+            //UPDATE
             case 2: { 
 
-                    pagina = "/views/PlanPresupuestal/updatePlan.jsp";
+                    pagina="/PROYECTOERP/PlanPresupuestalServlet?accion=1";
                     int id = Integer.parseInt(request.getParameter("id"));
                     String nombre=request.getParameter("nombre");
                     float monto= Float.parseFloat(request.getParameter("monto"));
@@ -156,26 +182,9 @@ public class PlanPresupuestalServlet extends HttpServlet {
                       request.setAttribute("status", "fail"); 
                       request.setAttribute("mensaje","Hubo un error al momento de actualizar.");
                     }
+                    response.sendRedirect(pagina);
                     break;
-            }
-            case 3: { 
-                    pagina = "/views/PlanPresupuestal/listPlan.jsp";
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    PresupuestoBean objPlanBean=new PresupuestoBean();
-                    objPlanBean.setId(id);
                     
-                    presupuestoDAO  objPlanDAO=new presupuestoDAO();
-                    estado = objPlanDAO.EliminarPlanPr(objPlanBean);
-                    //verificar estado de la eliminacion
-                    if(estado == 1) {
-                        request.setAttribute("status", "ok"); 
-                        request.setAttribute("mensaje","Se elimino correctamente.");
-                    }
-                    else {
-                        request.setAttribute("status", "fail"); 
-                        request.setAttribute("mensaje","Hubo un error al momento de eliminar.");
-                    }
-                    break;
             }
             case 5: {
                     //variables
@@ -184,10 +193,11 @@ public class PlanPresupuestalServlet extends HttpServlet {
                     presupuestoDAO i_s = new presupuestoDAO();
                     ArrayList<PresupuestoBean> plans = i_s.ListaPlanPr();
                     request.setAttribute("plans", plans);  
+                    getServletContext().getRequestDispatcher(pagina).forward(request, response);
             }
         }
         
-        getServletContext().getRequestDispatcher(pagina).forward(request, response);
+        
     }
 
     /**

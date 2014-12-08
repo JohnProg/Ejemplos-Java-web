@@ -13,12 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import maristas.beans.PlanEstrategicoBean;
 import maristas.dao.planDAO;
 
-public class PlanServlet extends HttpServlet {
+public class PlanEstrategicoServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        
         
     }
 
@@ -27,15 +25,22 @@ public class PlanServlet extends HttpServlet {
             throws ServletException, IOException {
         //variables
         String pagina="/views/planEstrategico/listPlan.jsp";
-        
-        if(request.getSession().getAttribute("DatosUsuario") != null) {
-            planDAO i_s = new planDAO();
-            ArrayList<PlanEstrategicoBean> plans = i_s.GetPlans();
-            request.setAttribute("plans", plans);  
-        } else {
-            pagina="/iniciarSesion.jsp";
-
+        int option = 0;
+        if(request.getParameter("option") != null) {
+            option = Integer.parseInt(request.getParameter("option"));
         }
+        
+        // Mostrar vista crear
+        if(option == 1) {
+            pagina="/views/planEstrategico/createPlan.jsp";
+        } else {
+            //Mostrar vista lista plans
+            pagina="/views/planEstrategico/listPlan.jsp";
+            planDAO i_s = new planDAO();
+            ArrayList<PlanEstrategicoBean> planope = i_s.GetPlans();
+            request.setAttribute("plans", planope);
+        }
+        
         getServletContext().getRequestDispatcher(pagina).forward(request, response);
     }
 
@@ -82,12 +87,6 @@ public class PlanServlet extends HttpServlet {
                     break;
             }
             case 2: { 
-                
-                    //get parametes
-//                    int id_plan = Integer.parseInt(request.getParameter("id_plan"));
-//
-//                    planDAO i_s = new planDAO();
-//                    PlanEstrategicoBean objPlanBean = i_s.GetPlan(id_plan);
 
                     pagina = "/views/planEstrategico/updatePlan.jsp";
                     int id = Integer.parseInt(request.getParameter("id"));
@@ -150,6 +149,7 @@ public class PlanServlet extends HttpServlet {
         }
         
         getServletContext().getRequestDispatcher(pagina).forward(request, response);
+    
     }
 
     @Override

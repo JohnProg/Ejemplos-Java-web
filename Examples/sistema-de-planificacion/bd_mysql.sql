@@ -19,8 +19,8 @@ create table usuario(
 create table PlanEstrategico(
 	id int primary key AUTO_INCREMENT UNIQUE,
 	nombre varchar(100),
-	fecha_inicio datetime,
-	fecha_termino datetime,
+	fecha_inicio date,
+	fecha_termino date,
 	anio_inicio char(4),
 	anio_termino char(4),
 	aprobado_por int not null,
@@ -47,12 +47,19 @@ create table Objetivo(
 );
 
 
+create table SubObjetivo(
+	id int not null primary key AUTO_INCREMENT UNIQUE,
+	objetivo int not null,
+	nombre varchar(50) not null,
+	descripcion varchar(150) not null,
+	foreign key(objetivo) references objetivo(id)
+);
 create table PlanPresupuestal(
 	id int not null primary key AUTO_INCREMENT UNIQUE,
 	nombre varchar(30) not null,
 	monto float not null,
-	fecha_inicio date not null,
-	fecha_final date not null
+	fecha_inicio date,
+	fecha_final date
 );
 
 create table UnidadOrganizativa(
@@ -82,6 +89,7 @@ create table actividad(
 	id_sub_objetivo int not null,
 	id_presupuesto int not null,
 	foreign key(id_plan_operativo) references PlanOperativo(id),
+	foreign key(id_sub_objetivo) references SubObjetivo(id),
 	foreign key(id_presupuesto) references PlanPresupuestal(id)
 );
 
@@ -97,18 +105,18 @@ create table indicador(
 create table programacion(
 	id int not null primary key AUTO_INCREMENT UNIQUE,
 	id_actividad int not null,
-	fecha_inicio datetime,
-	fecha_final datetime,
+	fecha_inicio date,
+	fecha_final date,
 	foreign key(id_actividad) references actividad(id)
 );
 
 insert into rol(nombre) values('director');
 insert into rol(nombre) values('jefe_area');
+insert into rol(nombre) values('presupuesto');
 
 insert into usuario(username, contra, id_rol) values('usuario1', '123', 1);
-insert into usuario(username, contra, id_rol) values('usuario2', '123', 1);
-insert into usuario(username, contra, id_rol) values('usuario3', '123', 2);
-insert into usuario(username, contra, id_rol) values('usuario5', '123', 3);
+insert into usuario(username, contra, id_rol) values('usuario2', '123', 2);
+insert into usuario(username, contra, id_rol) values('usuario3', '123', 3);
 
 insert into rol(nombre) values('Adminitracion');
 insert into rol(nombre) values('Ventas');
@@ -146,3 +154,22 @@ values('Plan Secundario3', 'Plan para la politica de la escuela', 2, 2, 2);
 insert into PlanOperativo(nombre, descripcion, id_plan_estrategico, id_encargado, id_unidad_org)
 values('Plan Secundario3', null, 1, 1, 4);
 
+insert into Linea(id_plan_estrategico, nombre, descripcion) values(1, "Linea 1", "Soy una linea");
+insert into Linea(id_plan_estrategico, nombre, descripcion) values(1, "Linea 2", "Soy una linea");
+insert into Linea(id_plan_estrategico, nombre, descripcion) values(1, "Linea 3", "Soy una linea");
+insert into Linea(id_plan_estrategico, nombre, descripcion) values(2, "Linea 4", "Soy una linea");
+insert into Linea(id_plan_estrategico, nombre, descripcion) values(2, "Linea 5", "Soy una linea");
+
+insert into Objetivo(linea, nombre, descripcion) values(1, "Objetivo1", "Este es un objetivo");
+insert into Objetivo(linea, nombre, descripcion) values(1, "Objetivo2", "Este es un objetivo");
+insert into Objetivo(linea, nombre, descripcion) values(2, "Objetivo3", "Este es un objetivo");
+insert into Objetivo(linea, nombre, descripcion) values(2, "Objetivo4", "Este es un objetivo");
+insert into Objetivo(linea, nombre, descripcion) values(2, "Objetivo5", "Este es un objetivo");
+
+insert into SubObjetivo(objetivo, nombre, descripcion) values(2, "SubObjetivo1", "Este es un SubObjetivo");
+insert into SubObjetivo(objetivo, nombre, descripcion) values(2, "SubObjetivo2", "Este es un SubObjetivo");
+insert into SubObjetivo(objetivo, nombre, descripcion) values(1, "SubObjetivo3", "Este es un SubObjetivo");
+insert into SubObjetivo(objetivo, nombre, descripcion) values(1, "SubObjetivo4", "Este es un SubObjetivo");
+insert into SubObjetivo(objetivo, nombre, descripcion) values(1, "SubObjetivo5", "Este es un SubObjetivo");
+
+select id, linea, nombre, descripcion from Objetivo where linea = 1

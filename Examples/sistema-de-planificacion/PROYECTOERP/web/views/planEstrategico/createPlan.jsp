@@ -12,7 +12,7 @@
         <div class="container">
                 <br>
                 <header>
-                    <a href="<%=request.getContextPath()%>/PlanServlet" class="pull-right btn btn-info btn-lg">Regresar</a>
+                    <a href="<%=request.getContextPath()%>/PlanEstrategicoServlet" class="pull-right btn btn-info btn-lg">Regresar</a>
                         <br>
                         <br>
                         <h1>Crear plan estratégico:</h1>
@@ -30,7 +30,7 @@
                                 <%=request.getAttribute("mensaje") %>
                             </div>
                         <%}%>
-                        <form class="col-sm-12" method="post" action="<%=request.getContextPath()%>/PlanServlet">
+                        <form class="col-sm-12" method="post" action="<%=request.getContextPath()%>/PlanEstrategicoServlet">
                             <input type="hidden" name="accion" value="1">    
                                 <fieldset class="form-group">
                                             <div class="row">
@@ -101,7 +101,7 @@
                                                             <input type="submit" value="Crear" id="btnAdd" class="btn btn-block btn-lg btn-success">
                                                     </div>
                                                     <div class="col-sm-2">
-                                                            <a href="<%=request.getContextPath()%>/PlanServlet" class="btn btn-block btn-lg btn-danger">Cancelar</a>
+                                                            <a href="<%=request.getContextPath()%>/PlanEstrategicoServlet" class="btn btn-block btn-lg btn-danger">Cancelar</a>
                                                     </div>
                                             </div>
                                     </fieldset>

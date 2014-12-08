@@ -1,4 +1,8 @@
+<%@page import="maristas.beans.PresupuestoBean"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    PresupuestoBean objPre = (PresupuestoBean)request.getAttribute("plan");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -39,14 +43,15 @@
                     </div>
                 <%}%>
                 <form class="col-sm-12" method="post" action="<%=request.getContextPath()%>/PlanPresupuestalServlet">
-                            <input type="hidden" name="accion" value="1">    
+                            <input type="hidden" name="accion" value="2">
+                            <input type="hidden" name="id" value="<%= objPre.getId()%>">
                                 <fieldset class="form-group">
                                             <div class="row">
                                                     <div class="col-sm-2">
                                                             <label class="label-control" >Nombre: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                            <input type="text" name="nombre" class="form-control" autofocus="true" id="txtName" placeholder=" Ingresa el nombre">
+                                                        <input type="text" name="nombre" class="form-control" value="<%= objPre.getNombre() %>" autofocus="true" id="txtName" placeholder=" Ingresa el nombre">
                                                     </div>			
                                             </div>									
                                             <br>
@@ -55,7 +60,7 @@
                                                             <label class="label-control" >Fecha de inicio: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="date" name="fec_inicio"class="form-control" id="txtVigency" placeholder=" ">
+                                                        <input type="date" value="<%= objPre.getFecha_inicio() %>" name="fec_inicio" class="form-control" id="txtVigency" placeholder=" ">
                                                     </div>			
                                             </div>	
                                             <br>
@@ -64,7 +69,7 @@
                                                             <label class="label-control" >Fecha de término: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="date" name="fecha_final"class="form-control" id="txtFinish" placeholder=" ">
+                                                        <input type="date" name="fecha_final" value="<%= objPre.getFecha_final() %>" class="form-control" id="txtFinish" placeholder=" ">
                                                     </div>			
                                             </div>	
                                             <br>
@@ -73,7 +78,7 @@
                                                             <label class="label-control" >Monto: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="text" name="monto"class="form-control" id="txtYearStart" placeholder=" ">
+                                                        <input type="text" name="monto" value="<%= objPre.getMonto()%>" class="form-control" id="txtYearStart" placeholder=" ">
                                                     </div>			
                                             </div>	
                                             
@@ -81,10 +86,10 @@
                                             
                                             <div class="row">
                                                     <div class="col-sm-offset-2 col-sm-2">
-                                                            <input type="submit" value="Crear" id="btnAdd" class="btn btn-block btn-lg btn-success">
+                                                            <input type="submit" value="Actualizar" id="btnAdd" class="btn btn-block btn-lg btn-success">
                                                     </div>
                                                     <div class="col-sm-2">
-                                                            <a href="<%=request.getContextPath()%>/PlanPresupuestalServlet" class="btn btn-block btn-lg btn-danger">Cancelar</a>
+                                                            <a href="<%=request.getContextPath()%>/PlanPresupuestalServlet?accion=1" class="btn btn-block btn-lg btn-danger">Cancelar</a>
                                                     </div>
                                             </div>
                                     </fieldset>

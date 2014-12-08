@@ -29,7 +29,8 @@ public class planDAO {
 
             while(rs.next()){
                 PlanEstrategicoBean objPlan=new PlanEstrategicoBean();
-
+                
+                objPlan.setId(rs.getInt(1));
                 objPlan.setNombre(rs.getString(2));
                 objPlan.setFec_vigencia(rs.getString(3));
                 objPlan.setFec_termino(rs.getString(4));
@@ -49,6 +50,7 @@ public class planDAO {
            return lista;
        }
    }
+   
    public PlanEstrategicoBean GetPlan(int id_plan){
        PlanEstrategicoBean objPlan = new PlanEstrategicoBean();
        
@@ -82,7 +84,6 @@ public class planDAO {
        }
    }
    
-
     public int InsertarPlan(PlanEstrategicoBean objPlan) {
         int estado = 0;
         try{
@@ -107,6 +108,7 @@ public class planDAO {
         }
         return estado;
     }
+    
     public int ActualizarPlan(PlanEstrategicoBean objPlan) {
         int estado = 0;
         try{
@@ -139,6 +141,7 @@ public class planDAO {
         }
         return estado;
     }
+    
     public int EliminarPlan(PlanEstrategicoBean objPlan) {
         int estado = 0;
         try{

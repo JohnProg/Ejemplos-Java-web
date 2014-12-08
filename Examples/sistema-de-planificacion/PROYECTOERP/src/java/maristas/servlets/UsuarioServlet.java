@@ -50,11 +50,11 @@ public class UsuarioServlet extends HttpServlet {
                 HttpSession  miSesion = request.getSession();
                 miSesion.setAttribute("SESSION", objUsuBean1);
                 if(objUsuBean1.getId_rol() == 1){
-                    pagina="/views/planEstrategico/listPlan.jsp";
+                    pagina = "/PlanEstrategicoServlet";
                 } else if(objUsuBean1.getId_rol() == 2){
-                    pagina="/views/PlanOperativo/JefeArea.jsp";
+                    pagina = "/PlanOperativoServlet";
                 } else {
-                    pagina="/views/PlanPresupuestal/listPlan.jsp";
+                    pagina="/PlanPresupuestalServlet";
                 }
             } else {
                 request.setAttribute("mensaje", "Ingresar correctamente sus datos!");
@@ -132,7 +132,7 @@ public class UsuarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UsuarioBean user = null;
+        /*UsuarioBean user = null;
         String pagina = "";
         String username = request.getParameter("username");
         String contrasena = request.getParameter("contra");
@@ -157,7 +157,7 @@ public class UsuarioServlet extends HttpServlet {
             pagina="/iniciarSesion.jsp";
             request.setAttribute("mensaje", "Ingresar correctamente sus datos!");
         }
-        getServletContext().getRequestDispatcher(pagina).forward(request, response);
+        getServletContext().getRequestDispatcher(pagina).forward(request, response);*/
     }
     
     

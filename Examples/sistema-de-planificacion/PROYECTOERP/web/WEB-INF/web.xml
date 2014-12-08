@@ -1,20 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     <servlet>
-        <servlet-name>PlanServlet</servlet-name>
-        <servlet-class>maristas.servlets.PlanServlet</servlet-class>
+        <servlet-name>PlanEstrategicoServlet</servlet-name>
+        <servlet-class>maristas.servlets.PlanEstrategicoServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CreatePlanOperativoServlet</servlet-name>
-        <servlet-class>maristas.servlets.CreatePlanOperativoServlet</servlet-class>
+        <servlet-name>LineaServlet</servlet-name>
+        <servlet-class>maristas.servlets.LineaServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ObjetivoServlet</servlet-name>
+        <servlet-class>maristas.servlets.ObjetivoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubObjetivoServlet</servlet-name>
+        <servlet-class>maristas.servlets.SubObjetivoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PlanOperativoServlet</servlet-name>
+        <servlet-class>maristas.servlets.PlanOperativoServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ActividadesServlet</servlet-name>
+        <servlet-class>maristas.servlets.ActividadesServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>UsuarioServlet</servlet-name>
         <servlet-class>maristas.servlets.UsuarioServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>NewServlet</servlet-name>
-        <servlet-class>maristas.servlets.NewServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>PlanPresupuestalServlet</servlet-name>
@@ -24,29 +36,52 @@
         <servlet-name>cerrarSesion</servlet-name>
         <servlet-class>maristas.servlets.cerrarSesion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PlanOperativoServletAjax</servlet-name>
+        <servlet-class>maristas.servlets.PlanOperativoServletAjax</servlet-class>
+    </servlet>
+    
+    
+    
     <servlet-mapping>
-        <servlet-name>PlanServlet</servlet-name>
-        <url-pattern>/PlanServlet</url-pattern>
+        <servlet-name>PlanEstrategicoServlet</servlet-name>
+        <url-pattern>/PlanEstrategicoServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>CreatePlanOperativoServlet</servlet-name>
-        <url-pattern>/CreatePlanOperativoServlet</url-pattern>
+        <servlet-name>PlanOperativoServlet</servlet-name>
+        <url-pattern>/PlanOperativoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ActividadesServlet</servlet-name>
+        <url-pattern>/ActividadesServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UsuarioServlet</servlet-name>
         <url-pattern>/UsuarioServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>NewServlet</servlet-name>
-        <url-pattern>/NewServlet</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>PlanPresupuestalServlet</servlet-name>
         <url-pattern>/PlanPresupuestalServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>LineaServlet</servlet-name>
+        <url-pattern>/LineaServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ObjetivoServlet</servlet-name>
+        <url-pattern>/ObjetivoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubObjetivoServlet</servlet-name>
+        <url-pattern>/SubObjetivoServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>cerrarSesion</servlet-name>
         <url-pattern>/cerrarSesion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PlanOperativoServletAjax</servlet-name>
+        <url-pattern>/PlanOperativoServletAjax</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

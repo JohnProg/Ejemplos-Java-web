@@ -6,30 +6,35 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import maristas.beans.LineaBean;
-import maristas.conexion.connectionBD;
+import maristas.conexion.conecctionBDMysql;
 
 
 public class lineaDAO {
+    
     ArrayList<LineaBean> lista=null;
     Connection          cnn=null;
     PreparedStatement   pt=null;
     ResultSet           rs=null;
    
-   public ArrayList<LineaBean> get_queryset(){
+   public ArrayList<LineaBean> GetLineas(int id_plan){
        lista = new ArrayList<LineaBean>();
        
        try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
-
-            pt=cnn.prepareStatement("select l.id,"
+            String sql = "select l.id,"
                     + " l.id_plan_estrategico,"
                     + " p.nombre as nombre_plan,"
                     + " l.nombre as nombre_linea,"
                     + " l.descripcion"
                     + " from Linea l"
                     + " inner join PlanEstrategico"
-                    + " p on p.id = l.id_plan_estrategico");
+                    + " p on p.id = l.id_plan_estrategico";
+            
+            if(id_plan > 0){
+                sql = sql + " where  id_plan_estrategico="+id_plan;
+            }
+            pt=cnn.prepareStatement(sql);
 
             rs=pt.executeQuery();
 
@@ -49,11 +54,72 @@ public class lineaDAO {
            return lista;
        }
    }
-    
-    public int InsertarPlan(LineaBean objLinea) {
+   
+   public LineaBean GetLinea(int id_linea){
+       LineaBean objObjetivo = new LineaBean();
+       
+       try{
+            conecctionBDMysql cn = new conecctionBDMysql();
+            //connectionBD cn = new connectionBD();
+            cnn = cn.getConnection();
+
+            pt=cnn.prepareStatement("select id, "
+                    + " id_plan_estrategico, nombre, "
+                    + " descripcion "
+                    + " from linea"
+                    + " where id=?");
+            pt.setInt(1, id_linea);
+            rs=pt.executeQuery();
+                objObjetivo.setId(rs.getInt(1));
+                objObjetivo.setId_plan(rs.getInt(2));
+                objObjetivo.setNombre(rs.getString(3));
+                objObjetivo.setDescripcion(rs.getString(4));
+            rs.close();
+            pt.close();
+            cnn.close();
+            return objObjetivo;
+       } 
+       catch(Exception e){
+           return objObjetivo;
+       }
+   }
+   
+   public ArrayList<LineaBean> GetLinesByPlanId(int id_plan){
+       lista = new ArrayList<LineaBean>();
+       
+       try{
+            conecctionBDMysql cn = new conecctionBDMysql();
+            //connectionBD cn = new connectionBD();
+            cnn = cn.getConnection();
+
+            pt=cnn.prepareStatement("select id, "
+                    + " id_plan_estrategico, nombre, "
+                    + " descripcion "
+                    + " from linea"
+                    + " where id_plan_estrategico=?");
+            pt.setInt(1, id_plan);
+            rs=pt.executeQuery();
+            while(rs.next()){
+                LineaBean objLinea=new LineaBean();
+                objLinea.setId(rs.getInt(1));
+                objLinea.setNombre(rs.getString(3));
+                objLinea.setDescripcion(rs.getString(4));
+                lista.add(objLinea);                            
+            }
+            rs.close();
+            pt.close();
+            cnn.close();
+            return lista;
+       } 
+       catch(Exception e){
+           return lista;
+       }
+   }
+   
+   public int InsertarPlan(LineaBean objLinea) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("insert into Linea(id_plan_estrategico, nombre, descripcion) values(?, ?, ?)");
             pt.setInt(1, objLinea.getId_plan());
@@ -69,10 +135,11 @@ public class lineaDAO {
         }
         return estado;
     }
-    public int ActualizarPlan(LineaBean objPlan) {
+    
+   public int ActualizarPlan(LineaBean objPlan) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("update Linea set "
                     + " nombre = ?,"
@@ -92,10 +159,11 @@ public class lineaDAO {
         }
         return estado;
     }
-    public int EliminarLinea(LineaBean objLinea) {
+    
+   public int EliminarLinea(LineaBean objLinea) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("delete Linea where id=?");
             pt.setInt(1, objLinea.getId());
@@ -106,4 +174,5 @@ public class lineaDAO {
         }
         return estado;
     }
+   
 }

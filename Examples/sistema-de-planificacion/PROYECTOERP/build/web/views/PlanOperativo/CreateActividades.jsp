@@ -4,7 +4,14 @@
     Author     : Autonoma
 --%>
 
+<%@page import="maristas.beans.ActividadBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="maristas.beans.UsuarioBean"%>
+<% ArrayList<ActividadBean> Actividad = (ArrayList<ActividadBean>)request.getAttribute("Actividades");%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+    UsuarioBean  userBean = null;
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -13,80 +20,101 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/font-awesome.min.css">
         <title> Plan Operativo </title>
     </head>
-    <body>
-                <script>
-             function cerrarSesion() {
-                document.form.action = "<%=request.getContextPath()%>/UsuarioServlet";
-                document.form.method = "GET";
-                document.form.accion.value="SALIR";
-                document.form.submit();
+     <script>
+            function cargarPlanes(ruta) {
+                
+                var  pag = ruta+"?accion=1";
+                 $.get(pag, function(data) {
+                    var html = "<option  value=0>---------</option> ";
+                    for(var i in data){
+                        var item = data[i];
+                        html += "<option value="+item.id+">"+ item.nombre + "</option>"; 
+                    }
+                    $("#cboplanope").html(html);    
+                });
             }
         </script>
+    <body onload="cargarPlanes('<%=request.getContextPath()%>/PlanOperativoServletAjax');">
+        
         <div class="container">
             <br>
-            <button class="btn btn-lg btn-danger"> Salir </button>
+            <a href="<%=request.getContextPath()%>/PlanOperativoServlet?accion=&option=2" class="pull-right btn btn-info btn-lg">Regresar</a>
             <br>
+            <%  userBean = (UsuarioBean)session.getAttribute("DatosUsuario"); 
+                if(userBean != null) {
+                    out.println(userBean.getUsername());
+                }
+            %>
             <section class="row col-sm-12 col-sm-offset-0">
-                <h2 style="text-align:center;"> Plan Operativo</h2>
+                <h2 style="text-align:center;"> Actividades</h2>
                 <hr>
-                <div class="col-sm-4 col-sm-offset-1" id="plan-operativo">
+                <div class="col-sm-12 col-sm-offset-0">
                     <br>
-                    <form role="form" name="form" method="post" id="miFormulario" >
-                        <div class="form-group" style="width: 300px;">
-                            <label for="nombre">Nombre :</label>
-                            <input id="nombre" type="text" name="nombre" class="form-control" placeholder="Nombre"  required=""/>                  
-                        </div>
+                        <form role="form" name="form" method="post" id="miFormulario" action="<%=request.getContextPath()%>/ActividadesServlet?option=1" >
+                            <input  type="hidden"  name="accion">
+                            
+                            <div class="col-sm-4 col-sm-offset-2" id="plan-operativo">
+                                <div class="form-group" >
+                                    <label for="nombre">Nombre :</label>
+                                    <input id="nombre" type="text" name="nombre" class="form-control" placeholder="Nombre"  required=""/>                  
+                                </div>
 
-                        <div class="form-group">
-                            <label for="mensaje">Descripcion :</label>
-                            <textarea id="mensaje" name="mensaje" class="form-control" placeholder="Descripcion" required=""></textarea>
-                        </div>
+                                <div class="form-group">
+                                    <label for="mensaje">Costos :</label>
+                                    <input id="nombre" type="number" name="costo" class="form-control" placeholder="Costos"  required=""/>                  
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="mensaje">Ingresos :</label>
+                                    <input id="nombre" type="number" name="ingreso" class="form-control" placeholder="Ingresos"  required=""/>                  
+                                </div>
+
+                                <button class="btn btn-lg btn-info" id="btnCrear"> Crear Plan Operativo </button>
+                            </div> 
+                            
+                            <div class="col-sm-4 col-sm-offset-1" id="plan-operativo">
+                                <div class="form-group">
+                                <label> Plan : </label>
+                                <select class="form-control"  id="cboplanope" name="cboplanope" required="" data-ruta="<%=request.getContextPath()%>/PlanOperativoServletAjax">
+                                                        
+                                   <option  value="0" selected>---------</option>                            
+                                
+                                 
+                           <option  value="" selected>
+                               
+                           </option>               
                         
-                        <button class="btn btn-lg btn-info" id="btnCrear"> Crear Plan Operativo </button>
-                    </form>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label> Linea : </label>
+                                <select class="form-control" id="cbolinea" name="cbolinea" required="" data-ruta="<%=request.getContextPath()%>/PlanOperativoServletAjax">
+                                    <option value="" selected> ---- Escoga una Linea ---- </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label> Objetivos: </label>
+                                <select class="form-control" id="cboob" name="cboob" required="" data-ruta="<%=request.getContextPath()%>/PlanOperativoServletAjax">
+                                    <option value="" selected> ---- Escoga un Objetivo ---- </option>
+                                    
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label> Sub-Objetivos : </label>
+                                <select class="form-control" name="id_sub_objetivo" id="cbosub" required="">
+                                    <option value="" selected> ---- Escoga un Sub-objetivo ---- </option>
+                                    
+                                </select>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
                 </div>
-
-                <div class="col-sm-4 col-sm-offset-1" id="plan-operativo">
-                    <br>
-                    <form role="form" name="form" method="post" id="miFormulario" >
-                        <div class="form-group">
-                            <label> Plan : </label>
-                            <select class="form-control"  name="cboplan" required="">
-                                <option value="" selected> ---- Escoga un Plan ---- </option>
-                                <option> Plan operativo 1</option>
-                                <option> Plab operativo 2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label> Linea : </label>
-                            <select class="form-control" name="cbolinea" required="">
-                                <option value="" selected> ---- Escoga una Linea ---- </option>
-                                <option> Linea 1</option>
-                                <option> Linea 2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label> Objetivos: </label>
-                            <select class="form-control" name="cboob" required="">
-                                <option value="" selected> ---- Escoga un Objetivo ---- </option>
-                                <option> Objetivo 1</option>
-                                <option> Objetivo 2</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label> Sub-Objetivos : </label>
-                            <select class="form-control" name="cbosub" required="">
-                                <option value="" selected> ---- Escoga un Sub-objetivo ---- </option>
-                                <option> Sub-Objetivo 1</option>
-                                <option> Sub-Objetivo 2</option>
-                            </select>
-                        </div>
-
-                    </form>
-                </div>
-            </section>
-         </div>
-            <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-1.11.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/bootstrap.min.js"></script> 
             <script src="<%=request.getContextPath()%>/static/js/ValidacionAldo.js"></script> 
+            <script src="<%=request.getContextPath()%>/static/js/app.js"></script> 
     </body>
 </html>
