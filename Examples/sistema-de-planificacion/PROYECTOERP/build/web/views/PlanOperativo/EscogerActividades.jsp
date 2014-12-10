@@ -4,11 +4,13 @@
     Author     : Autonoma
 --%>
 
+<%@page import="maristas.beans.PlanOperativoBean"%>
 <%@page import="maristas.beans.ActividadBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     ArrayList<ActividadBean> actividad = (ArrayList<ActividadBean>)request.getAttribute("actividad");
+    PlanOperativoBean planO = (PlanOperativoBean)request.getAttribute("planO");
 %>
 <!DOCTYPE html>
 <html>
@@ -43,12 +45,14 @@
                 <a href="<%=request.getContextPath()%>/PlanOperativoServlet" class="pull-right btn btn-info btn-lg">Regresar</a>
                 <br>
                     <br>
-                    <h1> Actividades <a onclick="crearActi()" class="pull-right btn btn-lg btn-info"  id="btnCrear"> Crear </a></h1>
+                    <h1> <%=  planO.getNombre() %> - Actividades<a onclick="crearActi()" class="pull-right btn btn-lg btn-info"  id="btnCrear"> Crear </a></h1>
                 <hr>
             </header>
             <form role="form" name="form" method="post" action="">
                 <input  type="hidden"  name="accion">
                 <input  type="hidden"  name="option">
+                <input  type="hidden"  name="id_plan_operativo" value="<%= planO.getId() %>">
+                
                 <div class="row col-sm-12 col-sm-offset-0" id="TableExecute">
                     <fieldset>
                         <table class="table table-stripped table-responsive">
@@ -56,10 +60,9 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Nombre</th>
-                                    <th>Descripcion</th>
                                     <th>Plan Estrategico</th>
-                                    <th>Linea</th>
-                                    <th>Objetivo</th>
+                                    <th>Gastos</th>
+                                    <th>Ingresos</th>
                                     <th>Sub-objetivo</th>
                                 </tr>
                             </thead>
@@ -70,16 +73,11 @@
                                         for(ActividadBean   obj:actividad) {   %>
                                         <tr>
                                            <td><%=obj.getId()%></td>
-                                           <td><%=obj.getNombre()%></td>
-                                           <td><%=obj.getDescripcion()%></td>                                           
+                                           <td><%=obj.getNombre()%></td>                                          
                                            <td><%=obj.getId_plan_operativo()%></td>
                                            <td><%=obj.getGastos()%></td>
                                            <td><%=obj.getIngresos()%></td>
                                            <td><%=obj.getId_sub_objetivo()%></td>
-                                           <td><%=obj.getId_presupuesto()%></td>
-                                           <td><a onclick="actualizar()">Actualizar</a>
-                                               <a onclick="eliminar()">Eliminar</a>
-                                               <a onclick="irActividades()">Crear</a></td>
                                        </tr>
                                       <%   }
                                       }%>

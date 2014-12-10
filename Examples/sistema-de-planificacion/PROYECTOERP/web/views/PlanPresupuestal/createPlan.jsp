@@ -7,8 +7,24 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/bootstrap.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/font-awesome.min.css">
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/css/main.css">
+        <script>
+           function init() {
+                var date = new Date();
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            var today = year + "-" + month + "-" + day;
+
+            document.getElementById('txtVigency').value = today;
+            document.getElementById('txtFinish').value = today;
+           }
+        </script>
     </head>
-    <body>
+    <body onload="init()">
         <div class="container">
                 <br>
                 <header>

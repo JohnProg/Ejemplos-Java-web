@@ -23,15 +23,31 @@ public class ObjetivoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //variables
         String pagina="/views/planEstrategico/objetivo/listObjetivo.jsp";
+        int option = 0;
+        if(request.getParameter("option") != null) {
+            option = Integer.parseInt(request.getParameter("option"));
+        }
         
+        //Mostrar vista lista plans
+        if(option == 1) {
+            pagina="/views/planEstrategico/linea/listObjetivo.jsp";
+            objetivoDAO i_s = new objetivoDAO();
+            ArrayList<ObjetivoBean> objetivoobj = i_s.GetObjetivos(Integer.parseInt(request.getParameter("id_linea")));
+            request.setAttribute("id_linea",request.getParameter("id_linea"));
+            request.setAttribute("objetivos", objetivoobj);
+        }  
+        // Mostrar vista crear
+        if(option == 2) {
+            request.setAttribute("id_linea", request.getParameter("id_linea"));
+            pagina="/views/planEstrategico/linea/createObjetivo.jsp";
+        }
+        //Mostrar vista actualizar plans
+        if(option == 3) {
+            pagina="/views/planEstrategico/linea/updateObjetivo.jsp";
+        }
         
-        objetivoDAO i_s = new objetivoDAO();
-        ArrayList<ObjetivoBean> objetivos = i_s.GetObjetivos();
-        request.setAttribute("objetivos", objetivos);  
         getServletContext().getRequestDispatcher(pagina).forward(request, response);
-    
     }
 
 
@@ -86,10 +102,12 @@ public class ObjetivoServlet extends HttpServlet {
                     estado=objObjetivoDAO.ActualizarObjetivo(objPlanBean);
                     //verificar estado de la actualizacion
                     if(estado ==1) {
+                        request.setAttribute("id_linea", request.getParameter("id_linea"));
                         request.setAttribute("status", "ok");
                         request.setAttribute("mensaje","Se actualizo satisfactoriamente.");
                     }
                     else{
+                        request.setAttribute("id_linea", request.getParameter("id_linea"));
                       request.setAttribute("status", "fail"); 
                       request.setAttribute("mensaje","Hubo un error al momento de actualizar.");
                     }
@@ -104,10 +122,12 @@ public class ObjetivoServlet extends HttpServlet {
                     estado = objObjetivoDAO.EliminarObjetivo(objObjetivoBean);
                     //verificar estado de la eliminacion
                     if(estado == 1) {
+                        request.setAttribute("id_linea", request.getParameter("id_linea"));
                         request.setAttribute("status", "ok"); 
                         request.setAttribute("mensaje","Se elimino correctamente.");
                     }
                     else {
+                        request.setAttribute("id_linea", request.getParameter("id_linea"));
                         request.setAttribute("status", "fail"); 
                         request.setAttribute("mensaje","Hubo un error al momento de eliminar.");
                     }
@@ -118,8 +138,9 @@ public class ObjetivoServlet extends HttpServlet {
                     pagina = "/views/planEstrategico/objetivo/listObjetivo.jsp";
 
                     objetivoDAO i_s = new objetivoDAO();
-                    ArrayList<ObjetivoBean> objetivos = i_s.GetObjetivos();
-                    request.setAttribute("objetivos", objetivos);  
+                    ArrayList<ObjetivoBean> objetivos = i_s.GetObjetivos(Integer.parseInt(request.getParameter("id_linea")));
+                    request.setAttribute("objetivos", objetivos); 
+                    request.setAttribute("id_linea", request.getParameter("id_linea"));
             }
         }
         

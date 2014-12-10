@@ -18,23 +18,33 @@ public class objetivoDAO {
     PreparedStatement   pt=null;
     ResultSet           rs=null;
    
-   public ArrayList<ObjetivoBean> GetObjetivos(){
+   public ArrayList<ObjetivoBean> GetObjetivos(int id_linea){
        lista = new ArrayList<ObjetivoBean>();
        
        try{
             connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
 
-            pt=cnn.prepareStatement("select id, linea, nombre, descripcion from Objetivo");
+            String sql = "select id,"
+                    + " linea,"
+                    + " nombre,"
+                    + " descripcion"
+                    + " from Objetivo";
+            
+            if(id_linea > 0){
+                sql = sql + " where linea="+id_linea;
+            }
+            
+            pt=cnn.prepareStatement(sql);
 
             rs=pt.executeQuery();
 
 
             while(rs.next()){
                 ObjetivoBean objObjetivo=new ObjetivoBean();
-
-                objObjetivo.setNombre(rs.getString(2));
-                objObjetivo.setId_linea(rs.getInt(3));
+                objObjetivo.setId(rs.getInt(1));
+                objObjetivo.setId_linea(rs.getInt(2));
+                objObjetivo.setNombre(rs.getString(3));
                 objObjetivo.setDescripcion(rs.getString(4));
 
                 lista.add(objObjetivo);                            

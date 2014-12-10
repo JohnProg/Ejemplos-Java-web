@@ -62,12 +62,11 @@
                     <ul class="nav navbar-nav">
                         <li class="active nav-item"><a href="#">Inicio</a></li>                      
                         <li class="nav-item">
-                            <a href="#" onclick="goToLoginView()">Iniciar Sesión</a>
+                            <a href="<%=request.getContextPath()%>/iniciarSesion.jsp">Iniciar Sesión</a>
                         </li>
                         <li class="nav-item nav-item-cta last">
                             <a class="btn btn-cta btn-cta-secondary" 
-                               href="#" 
-                               onclick="goToCreateAccountView()">Crear Cuenta</a>
+                               href="<%=request.getContextPath()%>/crearCuenta.jsp">Crear Cuenta</a>
                         </li>
                     </ul><!--//nav-->
                 </form><!--//navabr-collapse-->

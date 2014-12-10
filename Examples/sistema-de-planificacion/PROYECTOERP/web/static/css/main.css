@@ -4,6 +4,10 @@
 #login{
 	background-image: url(../img/FondoInicio.jpg);
 }
+#login.registro{
+	background-image: url(../img/leopard_fondo_espacial.jpg);
+        background-size: cover;
+}
 
 #login .container{
 	padding-top: 100px;
@@ -61,4 +65,8 @@ margin-top: 2px;
 }
 
 
-
+.user-image {
+     border-radius: 50%; 
+    height: 30px;
+    width: 30px;
+}

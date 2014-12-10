@@ -4,13 +4,16 @@
     Author     : Autonoma
 --%>
 
+<%@page import="maristas.beans.PlanOperativoBean"%>
+<%@page import="maristas.beans.PresupuestoBean"%>
 <%@page import="maristas.beans.ActividadBean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="maristas.beans.UsuarioBean"%>
-<% ArrayList<ActividadBean> Actividad = (ArrayList<ActividadBean>)request.getAttribute("Actividades");%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     UsuarioBean  userBean = null;
+    ArrayList<PresupuestoBean> plansP = (ArrayList<PresupuestoBean>)request.getAttribute("plansP");
+    PlanOperativoBean planO = (PlanOperativoBean)request.getAttribute("planO");
 %>
 <!DOCTYPE html>
 <html>
@@ -52,7 +55,7 @@
                     <br>
                         <form role="form" name="form" method="post" id="miFormulario" action="<%=request.getContextPath()%>/ActividadesServlet?option=1" >
                             <input  type="hidden"  name="accion">
-                            
+                            <input  type="hidden"  name="id_plan_operativo" value="<%= planO.getId() %>">
                             <div class="col-sm-4 col-sm-offset-2" id="plan-operativo">
                                 <div class="form-group" >
                                     <label for="nombre">Nombre :</label>
@@ -61,14 +64,29 @@
 
                                 <div class="form-group">
                                     <label for="mensaje">Costos :</label>
-                                    <input id="nombre" type="number" name="costo" class="form-control" placeholder="Costos"  required=""/>                  
+                                    <input id="nombre" type="number" name="gastos" class="form-control" placeholder="Costos"  required=""/>                  
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="mensaje">Ingresos :</label>
-                                    <input id="nombre" type="number" name="ingreso" class="form-control" placeholder="Ingresos"  required=""/>                  
+                                    <input id="nombre" type="number" name="ingresos" class="form-control" placeholder="Ingresos"  required=""/>                  
                                 </div>
-
+                                <div class="form-group">
+                                    <label for="cboarea">Plan Presupuestal :</label>
+                                    <select class="form-control" required="" name="id_presupuesto">
+                                         <option value="" selected> --- Escoge un plan ---</option>
+                                            <%
+                                                if(plansP != null) {
+                                                    for(PresupuestoBean   obj:plansP){
+                                            %>
+                                            <option  value="<%= obj.getId()%>">
+                                                <%= obj.getNombre()%>
+                                            </option>
+                                            <%      }
+                                                }
+                                            %>
+                                    </select>
+                                </div>
                                 <button class="btn btn-lg btn-info" id="btnCrear"> Crear Plan Operativo </button>
                             </div> 
                             

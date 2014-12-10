@@ -55,6 +55,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#">
+                        <img class="user-image" src="<%=request.getContextPath()%>/static/img/user.jpg">
                     <%  userBean = (UsuarioBean)session.getAttribute("SESSION"); 
                         if(userBean != null) {
                             out.println(userBean.getUsername());
@@ -63,24 +64,15 @@
                     </a>
                 </li>
                <li class="dropdown"><a onclick="cerrarSesion()"  href="#">Salir</a></li>
-              </li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
         <div class="container">
-            <br>
             <header>
-                    <br>
-                    <br>
                     <h1>Planes presupuestal: <a href="<%=request.getContextPath()%>/views/PlanPresupuestal/createPlan.jsp" class="pull-right btn btn-primary btn-lg">+ Crear</a></h1>
                     <hr>
-            </header>	
-            <%  userBean = (UsuarioBean)session.getAttribute("SESSION"); 
-                if(userBean != null) {
-                    out.println("Usuario: " + userBean.getUsername());
-                }
-            %>
+            </header>
             <br>
             <section class="row">            
                     <form class="col-sm-12" name="form">

@@ -13,6 +13,7 @@
     ArrayList<UnidadOrganicaBean> areas = (ArrayList<UnidadOrganicaBean>)request.getAttribute("areas");
     UsuarioBean  userBean = null;
     ArrayList<UsuarioBean> usuarios = (ArrayList<UsuarioBean>)request.getAttribute("usuarios");
+    PlanOperativoBean planO = (PlanOperativoBean)request.getAttribute("planO");
 %>
 <!DOCTYPE html>
 <html>
@@ -49,11 +50,11 @@
                     }
                     %>
                     
-                    <form role="form" name="form" method="post" id="miFormulario" action="<%=request.getContextPath()%>/PlanOperativoServlet?option=1">                         
-                        <input  type="hidden"  name="accion">
+                    <form role="form" name="form" method="post" id="miFormulario" action="<%=request.getContextPath()%>/PlanOperativoServlet?option=2">                         
+                        <input  type="hidden"  name="id" value="<%= planO.getId()%>">
                         <div class="form-group" style="width: 300px;">
                             <label for="nombre">Nombre :</label>
-                            <input id="nombre" type="text" name="nombre" autofocus="true" class="form-control" placeholder=""  required/>                  
+                            <input id="nombre" type="text" name="nombre" autofocus="true" value="<%= planO.getNombre() %>" class="form-control" placeholder=""  required/>                  
                         </div>
                         <div class="form-group" style="width: 300px;">
                             <label for="cboarea">Area :</label>
@@ -62,12 +63,17 @@
                                     <%
                                         if(areas != null) {
                                             for(UnidadOrganicaBean   obj:areas){
-                                    %>
-                                    <option value="<%= obj.getId()%>">
-                                        <%= obj.getNombre() %>
-                                    </option>
-                                    <%      }
-                                        }
+                                                if(planO.getId_unidad_organica() == obj.getId()){ %>
+                                                    <option selected value="<%= obj.getId()%>">
+                                                        <%= obj.getNombre() %>
+                                                    </option>
+                                                <% } else { %>
+                                                <option value="<%= obj.getId()%>">
+                                                        <%= obj.getNombre() %>
+                                                    </option>
+                                                <% }
+                                            }
+                                        } 
                                     %>
                             </select>
                         </div>
@@ -78,20 +84,25 @@
                                     <%
                                         if(areas != null) {
                                             for(UsuarioBean   obj:usuarios){
-                                    %>
-                                    <option value="<%= obj.getId()%>">
-                                        <%= obj.getUsername()%>
-                                    </option>
-                                    <%      }
+                                                if(planO.getId_encargado()== obj.getId()){ %>
+                                                    <option selected value="<%= obj.getId()%>">
+                                                        <%= obj.getUsername()%>
+                                                    </option>
+                                                <% } else { %>
+                                                <option value="<%= obj.getId()%>">
+                                                    <%= obj.getUsername()%>
+                                                </option>
+                                                <% }
+                                            }
                                         }
                                     %>
                             </select>
                         </div>
                         <div class="form-group" style="width: 300px;">
                             <label for="descripcion">Descripción :</label>
-                            <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
+                            <textarea id="descripcion" name="descripcion" class="form-control"><%= planO.getDescripcion()  %></textarea>
                         </div>
-                        <button style="width: 300px;" class="btn btn-lg btn-success" id="btnCrear"> Crear Plan Operativo </button>
+                        <button style="width: 300px;" class="btn btn-lg btn-success" id="btnCrear"> Actualizar Plan Operativo </button>
 
                     </form>
                 </div>

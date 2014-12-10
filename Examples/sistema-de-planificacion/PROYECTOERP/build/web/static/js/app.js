@@ -39,7 +39,7 @@ function initApp () {
             var html = "<option  value=0> ---- Escoga un Sub-objetivo ---- </option> ";
             for(var i in data){
                 var item = data[i];
-                html += "<option value="+item.id+">"+ item.nombre + "</option>"; 
+                html += "<option name=id_sub_objetivo value="+item.id+">"+ item.nombre + "</option>"; 
             }
             $("#cbosub").html(html);    
         });

@@ -10,6 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import maristas.beans.PlanOperativoBean;
+import maristas.beans.PresupuestoBean;
+import maristas.dao.PlanOperativoDAO;
+import maristas.dao.presupuestoDAO;
 
 /**
  *
@@ -35,8 +39,16 @@ public class ActividadesServlet extends HttpServlet {
         
             // Mostrar vista crear
             if(option == 1) {
+                presupuestoDAO p_pre = new presupuestoDAO();
+                ArrayList<PresupuestoBean> plans = p_pre.ListaPlanPr();
+                request.setAttribute("plansP", plans);
                 pagina="/views/PlanOperativo/CreateActividades.jsp";
-                
+                int id_plan_operativo = Integer.parseInt(request.getParameter("id_plan_operativo"));
+                PlanOperativoDAO i_s2 = new PlanOperativoDAO();
+                PlanOperativoBean objOB = new PlanOperativoBean();
+                                    objOB.setId(id_plan_operativo);
+                PlanOperativoBean planope2 = i_s2.getPlanO(objOB);
+                request.setAttribute("planO", planope2);
             } 
             else if(option == 2) {
                 //Mostrar vista crear actividades
@@ -61,9 +73,14 @@ public class ActividadesServlet extends HttpServlet {
           case 0: {
               //variables
                     pagina="/views/PlanOperativo/EscogerActividades.jsp";
+                    int id_plan_operativo = Integer.parseInt(request.getParameter("id_plan_operativo"));
                     ActividadDAO i_s = new ActividadDAO();
-                    ArrayList<ActividadBean> planope = i_s.getActividad();
-                    request.setAttribute("actividad", planope);
+                PlanOperativoDAO i_s3 = new PlanOperativoDAO();
+                PlanOperativoBean objOB2 = new PlanOperativoBean();
+                                    objOB2.setId(id_plan_operativo);
+                                    
+                ArrayList<ActividadBean> actividades = i_s.getActividad(objOB2);
+                request.setAttribute("actividad", actividades);
                     
                     
                     break;
@@ -71,7 +88,7 @@ public class ActividadesServlet extends HttpServlet {
           case 1: {
             // CREAR
             int estado = 0;
-            pagina="/views/PlanOperativo/CreateActividades.jsp";
+            pagina="/views/PlanOperativo/EscogerActividades.jsp";
             String nombre = request.getParameter("nombre");
             float gastos = Float.parseFloat(request.getParameter("gastos"));
             float ingresos = Float.parseFloat(request.getParameter("ingresos"));
@@ -81,13 +98,32 @@ public class ActividadesServlet extends HttpServlet {
             
             ActividadBean objActividadBean=new ActividadBean();
                      objActividadBean.setNombre(nombre);
+                     objActividadBean.setGastos(gastos);
+                     objActividadBean.setIngresos(ingresos);
                      objActividadBean.setId_plan_operativo(id_plan_operativo);
+                     objActividadBean.setId_sub_objetivo(id_sub_objetivo);
+                     objActividadBean.setId_presupuesto(id_presupuesto);
                      
             ActividadDAO  objActividadDAO=new ActividadDAO();
             estado = objActividadDAO.InsertarActividad(objActividadBean);
             
             //VALIDAR INSERCION
-            if(estado == 1) request.setAttribute("status","ok");
+            if(estado == 1) {
+                PlanOperativoDAO i_s2 = new PlanOperativoDAO();
+                PlanOperativoBean objOB = new PlanOperativoBean();
+                                    objOB.setId(id_plan_operativo);
+                PlanOperativoBean planope2 = i_s2.getPlanO(objOB);
+                request.setAttribute("planO", planope2);
+                
+                ActividadDAO i_s = new ActividadDAO();
+                PlanOperativoDAO i_s3 = new PlanOperativoDAO();
+                PlanOperativoBean objOB2 = new PlanOperativoBean();
+                                    objOB2.setId(id_plan_operativo);
+                                    
+                ArrayList<ActividadBean> actividades = i_s.getActividad(objOB2);
+                request.setAttribute("actividad", actividades);
+                request.setAttribute("status","ok");
+            }
             else request.setAttribute("status","fail");
             break;
           }

@@ -13,7 +13,7 @@ public class PlanOperativoDAO {
     PreparedStatement   pt=null;
     ResultSet           rs=null;
     
-    public ArrayList<PlanOperativoBean> getPlanO(){
+    public ArrayList<PlanOperativoBean> getPlansO(){
        lista = new ArrayList<PlanOperativoBean>();
        
        try{
@@ -49,15 +49,43 @@ public class PlanOperativoDAO {
            return lista;
        }
    }
-   
+   public PlanOperativoBean getPlanO(PlanOperativoBean objPlanOp){
+       try{
+            conecctionBDMysql cn = new conecctionBDMysql();
+            cnn = cn.getConnection();
+
+            pt=cnn.prepareStatement("select id, nombre, descripcion, id_plan_estrategico, id_encargado, id_unidad_org  from PlanOperativo where id = ?");
+            pt.setInt(1, objPlanOp.getId());
+            rs=pt.executeQuery();
+
+
+            if(rs.next()){
+                objPlanOp.setId(rs.getInt(1));
+                objPlanOp.setNombre(rs.getString(2));
+                objPlanOp.setDescripcion(rs.getString(3));
+                objPlanOp.setId_plan_estrategico(rs.getInt(4));
+                objPlanOp.setId_encargado(rs.getInt(5));
+                objPlanOp.setId_unidad_organica(rs.getInt(6));                           
+            }
+            rs.close();
+            pt.close();
+            cnn.close();
+            return objPlanOp;
+       } 
+       catch(Exception e){
+           return null;
+       }
+   }
    public int InsertarPlanOp(PlanOperativoBean objPlanOp) {
         int estado = 0;
         try{
             conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
-            pt=cnn.prepareStatement("insert into planoperativo(nombre, id_unidad_org) values(?,?)");
-            pt.setString(1, objPlanOp.getNombre());        
-            pt.setInt(2, objPlanOp.getId_unidad_organica());
+            pt=cnn.prepareStatement("insert into planoperativo(nombre, descripcion, id_encargado, id_unidad_org) values(?,?,?,?)");
+            pt.setString(1, objPlanOp.getNombre());
+            pt.setString(2, objPlanOp.getDescripcion());
+            pt.setInt(3, objPlanOp.getId_encargado());
+            pt.setInt(4, objPlanOp.getId_unidad_organica());
             estado = pt.executeUpdate();
             pt.close();
             cnn.close();
@@ -75,10 +103,17 @@ public class PlanOperativoDAO {
             cnn = cn.getConnection();     
             pt=cnn.prepareStatement("update planoperativo set "
                     + " nombre = ?,"
+                    + " descripcion = ?,"
+                    + " id_encargado = ?,"
                     + " id_unidad_org = ?,"
+                    + " id_plan_estrategico = ?"
                     + " where id = ?");
             pt.setString(1, objPlanOp.getNombre());
-            pt.setInt(2, objPlanOp.getId_unidad_organica());
+            pt.setString(2, objPlanOp.getDescripcion());
+            pt.setInt(3, objPlanOp.getId_encargado());
+            pt.setInt(4, objPlanOp.getId_unidad_organica());
+            pt.setInt(5, objPlanOp.getId_plan_estrategico());
+            pt.setInt(6, objPlanOp.getId());
             
             estado = pt.executeUpdate();
             pt.close();

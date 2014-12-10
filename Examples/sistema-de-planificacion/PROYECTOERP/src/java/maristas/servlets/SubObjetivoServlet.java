@@ -22,14 +22,33 @@ public class SubObjetivoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                //variables
-        String pagina="/views/planEstrategico/sub_objetivo/listSubObjetivo.jsp";
         
-        subObjetivoDAO i_s = new subObjetivoDAO();
-        ArrayList<SubObjetivoBean> objetivos = i_s.GetSubObjetivos();
-        request.setAttribute("sub_objetivos", objetivos);  
+        String pagina="/views/planEstrategico/linea/listLinea.jsp";
+        int option = 0;
+        if(request.getParameter("option") != null) {
+            option = Integer.parseInt(request.getParameter("option"));
+        }
+        
+        //Mostrar vista lista plans
+        if(option == 1) {
+            pagina="/views/planEstrategico/linea/listLinea.jsp";
+            subObjetivoDAO i_s = new subObjetivoDAO();
+            ArrayList<SubObjetivoBean> lineaobj = i_s.GetSubObjetivos(Integer.parseInt(request.getParameter("id_plan")));
+            request.setAttribute("id_objetivo",request.getParameter("id_objetivo"));
+            request.setAttribute("sub_objetivos", lineaobj);
+        }  
+        // Mostrar vista crear
+        if(option == 2) {
+            request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
+            pagina="/views/planEstrategico/subobjetivo/createSubObjetivo.jsp";
+        }
+        //Mostrar vista actualizar plans
+        if(option == 3) {
+            pagina="/views/planEstrategico/subobjetivo/updateSubObjetivo.jsp";
+        }
+        
         getServletContext().getRequestDispatcher(pagina).forward(request, response);
-    
+        
     }
 
     @Override
@@ -59,10 +78,12 @@ public class SubObjetivoServlet extends HttpServlet {
 
                     //verificar estado de la insercion
                     if(estado ==1) {
+                        request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                         request.setAttribute("status", "ok");
                         request.setAttribute("mensaje","Se creo satisfactoriamente.");
                     }
                     else{
+                      request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                       request.setAttribute("status", "fail"); 
                       request.setAttribute("mensaje","Hubo un error al momento de creacion.");
                     }
@@ -84,10 +105,12 @@ public class SubObjetivoServlet extends HttpServlet {
                     estado=objObjetivoDAO.ActualizarObjetivo(objSubObjetivoBean);
                     //verificar estado de la actualizacion
                     if(estado ==1) {
+                        request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                         request.setAttribute("status", "ok");
                         request.setAttribute("mensaje","Se actualizo satisfactoriamente.");
                     }
                     else{
+                      request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                       request.setAttribute("status", "fail"); 
                       request.setAttribute("mensaje","Hubo un error al momento de actualizar.");
                     }
@@ -102,10 +125,12 @@ public class SubObjetivoServlet extends HttpServlet {
                     estado = objSubObjetivoDAO.EliminarObjetivo(objSubObjetivoBean);
                     //verificar estado de la eliminacion
                     if(estado == 1) {
+                        request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                         request.setAttribute("status", "ok"); 
                         request.setAttribute("mensaje","Se elimino correctamente.");
                     }
                     else {
+                        request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                         request.setAttribute("status", "fail"); 
                         request.setAttribute("mensaje","Hubo un error al momento de eliminar.");
                     }
@@ -116,7 +141,7 @@ public class SubObjetivoServlet extends HttpServlet {
                     pagina = "/views/planEstrategico/sub_objetivo/listSubObjetivo.jsp";
 
                     subObjetivoDAO i_s = new subObjetivoDAO();
-                    ArrayList<SubObjetivoBean> objetivos = i_s.GetSubObjetivos();
+                    ArrayList<SubObjetivoBean> objetivos = i_s.GetSubObjetivos(Integer.parseInt(request.getParameter("id_objetivo")));
                     request.setAttribute("sub_objetivos", objetivos);  
             }
         }

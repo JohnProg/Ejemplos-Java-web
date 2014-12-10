@@ -50,18 +50,18 @@ public class UsuarioServlet extends HttpServlet {
                 HttpSession  miSesion = request.getSession();
                 miSesion.setAttribute("SESSION", objUsuBean1);
                 if(objUsuBean1.getId_rol() == 1){
-                    pagina = "/PlanEstrategicoServlet";
+                    response.sendRedirect("/PROYECTOERP/PlanEstrategicoServlet");
                 } else if(objUsuBean1.getId_rol() == 2){
-                    pagina = "/PlanOperativoServlet";
+                    response.sendRedirect("/PROYECTOERP/PlanOperativoServlet");
                 } else {
-                    pagina="/PlanPresupuestalServlet";
+                    response.sendRedirect("/PROYECTOERP/PlanPresupuestalServlet?accion=1");
                 }
             } else {
                 request.setAttribute("mensaje", "Ingresar correctamente sus datos!");
                 pagina = "/iniciarSesion.jsp";
+                getServletContext().getRequestDispatcher(pagina).forward(request, response);
             }
         }catch(Exception e){ }
-        getServletContext().getRequestDispatcher(pagina).forward(request, response);
     }
     
     /**

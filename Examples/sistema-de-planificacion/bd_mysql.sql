@@ -172,4 +172,8 @@ insert into SubObjetivo(objetivo, nombre, descripcion) values(1, "SubObjetivo3",
 insert into SubObjetivo(objetivo, nombre, descripcion) values(1, "SubObjetivo4", "Este es un SubObjetivo");
 insert into SubObjetivo(objetivo, nombre, descripcion) values(1, "SubObjetivo5", "Este es un SubObjetivo");
 
-select id, linea, nombre, descripcion from Objetivo where linea = 1
+select id, linea, nombre, descripcion from Objetivo where linea = 1;
+
+select * from actividad;
+select * from linea;
+delete from planoperativo where id=8;

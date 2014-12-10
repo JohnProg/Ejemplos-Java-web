@@ -16,14 +16,24 @@ public class subObjetivoDAO {
     PreparedStatement   pt=null;
     ResultSet           rs=null;
    
-   public ArrayList<SubObjetivoBean> GetSubObjetivos(){
+   public ArrayList<SubObjetivoBean> GetSubObjetivos(int id_objetivo){
        lista = new ArrayList<SubObjetivoBean>();
        
        try{
             connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
 
-            pt=cnn.prepareStatement("select id, id_objetivo, nombre, descripcion from SubObjetivo");
+            String sql = "select id,"
+                    + " id_objetivo,"
+                    + " nombre,"
+                    + " descripcion"
+                    + " from SubObjetivo";
+            
+            if(id_objetivo > 0){
+                sql = sql + " where id_objetivo="+id_objetivo;
+            }
+            
+            pt=cnn.prepareStatement(sql);
 
             rs=pt.executeQuery();
 

@@ -11,9 +11,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     ArrayList<UnidadOrganicaBean> areas = (ArrayList<UnidadOrganicaBean>)request.getAttribute("areas");
-%>
-<%
     UsuarioBean  userBean = null;
+    ArrayList<UsuarioBean> usuarios = (ArrayList<UsuarioBean>)request.getAttribute("usuarios");
 %>
 <!DOCTYPE html>
 <html>
@@ -24,18 +23,9 @@
         <title> Plan Operativo </title>
     </head>
     <body>
-         <script>
-             function cerrarSesion() {
-                document.form.action = "<%=request.getContextPath()%>/UsuarioServlet";
-                document.form.method = "GET";
-                document.form.accion.value="SALIR";
-                document.form.submit();
-            }
-        </script>
         <div class="container">
             <br>
-            <a href="<%=request.getContextPath()%>/PlanOperativoServlet" class="pull-right btn btn-info btn-lg">Regresar</a>
-            <a href="#" onclick="cerrarSesion()" class="pull-right btn btn-danger btn-lg" id="btnSalir">Salir</a>                
+            <a href="<%=request.getContextPath()%>/PlanOperativoServlet" class="pull-right btn btn-primary btn-lg">Regresar</a>
             <br><br><br>
             <% if(request.getAttribute("status") == "ok"){ %>
                             <div class="alert alert-success alert-dismissible fade in" role="alert">
@@ -49,10 +39,10 @@
                                 <%=request.getAttribute("mensaje") %>
                             </div>
                         <%}%>
-            <section class="row col-sm-4 col-sm-offset-4" style="">
-                <div class="col-sm-4 col-sm-offset-1" id="plan-operativo">
-                    <h2 style="width:200px; text-align:center;">Plan Operativo</h2>
-                    <br><br>
+            <section class="row ">
+                <div class="col-sm-4 col-sm-offset-4" id="plan-operativo">
+                    <h2>Plan Operativo</h2>
+                    <br>
                     <%  userBean = (UsuarioBean)session.getAttribute("DatosUsuario"); 
                     if(userBean != null) {
                     out.println(userBean.getUsername());
@@ -63,12 +53,11 @@
                         <input  type="hidden"  name="accion">
                         <div class="form-group" style="width: 300px;">
                             <label for="nombre">Nombre :</label>
-                            <input id="nombre" type="text" name="nombre" class="form-control" placeholder="Nombre y Apellido"  required=""/>                  
+                            <input id="nombre" type="text" name="nombre" autofocus="true" class="form-control" placeholder=""  required/>                  
                         </div>
-
                         <div class="form-group" style="width: 300px;">
                             <label for="cboarea">Area :</label>
-                            <select class="form-control" required="" name="id_unidad_organica">
+                            <select class="form-control" required="" name="id_unidad_org">
                                  <option value="" selected> --- Escoge un area ---</option>
                                     <%
                                         if(areas != null) {
@@ -81,11 +70,28 @@
                                         }
                                     %>
                             </select>
-                            
                         </div>
-                        
-                        <br>
-                        <button class="btn btn-lg btn-info" id="btnCrear"> Crear Plan Operativo </button>
+                        <div class="form-group" style="width: 300px;">
+                            <label for="cboarea">Encargado :</label>
+                            <select class="form-control" required="" name="id_encargado">
+                                 <option value="" selected> --- Escoge un encargado ---</option>
+                                    <%
+                                        if(areas != null) {
+                                            for(UsuarioBean   obj:usuarios){
+                                    %>
+                                    <option value="<%= obj.getId()%>">
+                                        <%= obj.getUsername()%>
+                                    </option>
+                                    <%      }
+                                        }
+                                    %>
+                            </select>
+                        </div>
+                        <div class="form-group" style="width: 300px;">
+                            <label for="descripcion">Descripción :</label>
+                            <textarea id="descripcion" name="descripcion" class="form-control"></textarea>
+                        </div>
+                        <button style="width: 300px;" class="btn btn-lg btn-success" id="btnCrear"> Crear Plan Operativo </button>
 
                     </form>
                 </div>

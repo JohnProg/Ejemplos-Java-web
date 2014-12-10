@@ -67,6 +67,7 @@
               <ul class="nav navbar-nav navbar-right">
                 <li>
                     <a href="#">
+                        <img class="user-image" src="<%=request.getContextPath()%>/static/img/user.jpg">
                     <%  userBean = (UsuarioBean)session.getAttribute("SESSION"); 
                         if(userBean != null) {
                             out.println(userBean.getUsername());
@@ -74,18 +75,14 @@
                     %>
                     </a>
                 </li>
-               <li class="dropdown"><a href="#" onclick="cerrarSesion()">Salir</a></li>
-              </li>
+               <li class="dropdown"><a onclick="cerrarSesion()"  href="#">Salir</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
         </nav>
         <div class="container">
-            <br>
             <header>
                 <a onclick="crear()" class="pull-right btn btn-primary btn-lg">+ Crear</a>
-                    <br>
-                    <br>
                     <h1>Planes estratégicos: </h1>
                     <hr>
             </header>	
@@ -138,7 +135,7 @@
                                                                <td>
                                                                    <a href="#" onclick="lineas(<%=obj.getId()%>)"><span class="label label-success">Lineas</span></a> |
                                                                    <a href="#" onclick="actualizar()"><span class="label label-primary">Actualizar</span></a> |
-                                                                   <a href="#" onclick="eliminar()"><span class="label label-warning">Eliminar</span></a>
+                                                                   <a href="#" onclick="eliminar()"><span class="label label-danger">Eliminar</span></a>
                                                            </tr>
                                                           <%   }
                                                           }%>
