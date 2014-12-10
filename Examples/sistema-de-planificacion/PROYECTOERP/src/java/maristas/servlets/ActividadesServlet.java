@@ -2,7 +2,7 @@
 package maristas.servlets;
 
 import maristas.beans.ActividadBean;
-import maristas.dao.ActividadDAO;
+import maristas.dao.MysqlActividadDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -10,10 +10,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import maristas.beans.PlanEstrategicoBean;
 import maristas.beans.PlanOperativoBean;
 import maristas.beans.PresupuestoBean;
-import maristas.dao.PlanOperativoDAO;
-import maristas.dao.MysqlPresupuestoDAO;
+import maristas.dao.MysqlPlanOperativoDAO;
+import maristas.dao.MysqlPlanPresupuestalDAO;
+import maristas.dao.planDAO;
 
 /**
  *
@@ -32,23 +34,27 @@ public class ActividadesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        String pagina = "";
-        int option = 0;
+        int option = 2;
         if(request.getParameter("option") != null) {
             option = Integer.parseInt(request.getParameter("option"));
         }
         
             // Mostrar vista crear
             if(option == 1) {
-                MysqlPresupuestoDAO p_pre = new MysqlPresupuestoDAO();
+                MysqlPlanPresupuestalDAO p_pre = new MysqlPlanPresupuestalDAO();
                 ArrayList<PresupuestoBean> plans = p_pre.ListaPlanPr();
                 request.setAttribute("plansP", plans);
                 pagina="/views/PlanOperativo/CreateActividades.jsp";
                 int id_plan_operativo = Integer.parseInt(request.getParameter("id_plan_operativo"));
-                PlanOperativoDAO i_s2 = new PlanOperativoDAO();
+                MysqlPlanOperativoDAO i_s2 = new MysqlPlanOperativoDAO();
                 PlanOperativoBean objOB = new PlanOperativoBean();
                                     objOB.setId(id_plan_operativo);
                 PlanOperativoBean planope2 = i_s2.getPlanO(objOB);
                 request.setAttribute("planO", planope2);
+                
+                planDAO i_s4 = new planDAO();
+                    ArrayList<PlanEstrategicoBean> plansE = i_s4.GetPlans();
+                    request.setAttribute("plansE", plansE);
             } 
             else if(option == 2) {
                 //Mostrar vista crear actividades
@@ -74,8 +80,8 @@ public class ActividadesServlet extends HttpServlet {
               //variables
                     pagina="/views/PlanOperativo/EscogerActividades.jsp";
                     int id_plan_operativo = Integer.parseInt(request.getParameter("id_plan_operativo"));
-                    ActividadDAO i_s = new ActividadDAO();
-                PlanOperativoDAO i_s3 = new PlanOperativoDAO();
+                    MysqlActividadDAO i_s = new MysqlActividadDAO();
+                MysqlPlanOperativoDAO i_s3 = new MysqlPlanOperativoDAO();
                 PlanOperativoBean objOB2 = new PlanOperativoBean();
                                     objOB2.setId(id_plan_operativo);
                                     
@@ -104,24 +110,29 @@ public class ActividadesServlet extends HttpServlet {
                      objActividadBean.setId_sub_objetivo(id_sub_objetivo);
                      objActividadBean.setId_presupuesto(id_presupuesto);
                      
-            ActividadDAO  objActividadDAO=new ActividadDAO();
+            MysqlActividadDAO  objActividadDAO=new MysqlActividadDAO();
             estado = objActividadDAO.InsertarActividad(objActividadBean);
             
             //VALIDAR INSERCION
             if(estado == 1) {
-                PlanOperativoDAO i_s2 = new PlanOperativoDAO();
+                MysqlPlanOperativoDAO i_s2 = new MysqlPlanOperativoDAO();
                 PlanOperativoBean objOB = new PlanOperativoBean();
                                     objOB.setId(id_plan_operativo);
                 PlanOperativoBean planope2 = i_s2.getPlanO(objOB);
                 request.setAttribute("planO", planope2);
                 
-                ActividadDAO i_s = new ActividadDAO();
-                PlanOperativoDAO i_s3 = new PlanOperativoDAO();
+                MysqlActividadDAO i_s = new MysqlActividadDAO();
+                
                 PlanOperativoBean objOB2 = new PlanOperativoBean();
                                     objOB2.setId(id_plan_operativo);
                                     
                 ArrayList<ActividadBean> actividades = i_s.getActividad(objOB2);
+                
                 request.setAttribute("actividad", actividades);
+                
+                planDAO i_s4 = new planDAO();
+                    ArrayList<PlanEstrategicoBean> plansE = i_s4.GetPlans();
+                    request.setAttribute("plansE", plansE);
                 request.setAttribute("status","ok");
             }
             else request.setAttribute("status","fail");

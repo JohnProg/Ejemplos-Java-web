@@ -25,7 +25,7 @@
     <body>
         <div class="container">
             <br>
-            <a href="<%=request.getContextPath()%>/PlanOperativoServlet" class="pull-right btn btn-primary btn-lg">Regresar</a>
+            <a href="<%=request.getContextPath()%>/PlanOperativoServlet?option=5" class="pull-right btn btn-primary btn-lg">Regresar</a>
             <br><br><br>
             <% if(request.getAttribute("status") == "ok"){ %>
                             <div class="alert alert-success alert-dismissible fade in" role="alert">

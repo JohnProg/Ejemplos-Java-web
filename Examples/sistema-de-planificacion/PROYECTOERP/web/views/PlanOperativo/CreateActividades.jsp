@@ -41,7 +41,7 @@
         
         <div class="container">
             <br>
-            <a href="<%=request.getContextPath()%>/PlanOperativoServlet?accion=&option=2" class="pull-right btn btn-info btn-lg">Regresar</a>
+            <a href="<%=request.getContextPath()%>/PlanOperativoServlet?accion=&option=2&id_plan_operativo=<%= planO.getId() %>" class="pull-right btn btn-info btn-lg">Regresar</a>
             <br>
             <%  userBean = (UsuarioBean)session.getAttribute("DatosUsuario"); 
                 if(userBean != null) {
@@ -59,7 +59,7 @@
                             <div class="col-sm-4 col-sm-offset-2" id="plan-operativo">
                                 <div class="form-group" >
                                     <label for="nombre">Nombre :</label>
-                                    <input id="nombre" type="text" name="nombre" class="form-control" placeholder="Nombre"  required=""/>                  
+                                    <input id="nombre" type="text" name="nombre" class="form-control" placeholder="Nombre"  autofocus="true" required=""/>                  
                                 </div>
 
                                 <div class="form-group">
@@ -93,7 +93,7 @@
                             <div class="col-sm-4 col-sm-offset-1" id="plan-operativo">
                                 <div class="form-group">
                                 <label> Plan : </label>
-                                <select class="form-control"  id="cboplanope" name="cboplanope" required="" data-ruta="<%=request.getContextPath()%>/PlanOperativoServletAjax">
+                                <select class="form-control"  id="cboplanope" name="cboplanope" required="true" data-ruta="<%=request.getContextPath()%>/PlanOperativoServletAjax">
                                                         
                                    <option  value="0" selected>---------</option>                            
                                 
@@ -106,20 +106,20 @@
                             </div>
                             <div class="form-group">
                                 <label> Linea : </label>
-                                <select class="form-control" id="cbolinea" name="cbolinea" required="" data-ruta="<%=request.getContextPath()%>/PlanOperativoServletAjax">
+                                <select class="form-control" id="cbolinea" name="cbolinea" required="true" data-ruta="<%=request.getContextPath()%>/PlanOperativoServletAjax">
                                     <option value="" selected> ---- Escoga una Linea ---- </option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label> Objetivos: </label>
-                                <select class="form-control" id="cboob" name="cboob" required="" data-ruta="<%=request.getContextPath()%>/PlanOperativoServletAjax">
+                                <select class="form-control" id="cboob" name="cboob" required="true" data-ruta="<%=request.getContextPath()%>/PlanOperativoServletAjax">
                                     <option value="" selected> ---- Escoga un Objetivo ---- </option>
                                     
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label> Sub-Objetivos : </label>
-                                <select class="form-control" name="id_sub_objetivo" id="cbosub" required="">
+                                <select class="form-control" name="id_sub_objetivo" id="cbosub" required="true">
                                     <option value="" selected> ---- Escoga un Sub-objetivo ---- </option>
                                     
                                 </select>

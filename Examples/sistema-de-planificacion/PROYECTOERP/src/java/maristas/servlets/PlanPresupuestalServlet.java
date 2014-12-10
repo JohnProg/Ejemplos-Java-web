@@ -17,9 +17,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import maristas.beans.PresupuestoBean;
-import maristas.dao.MysqlPresupuestoDAO;
+import maristas.dao.MysqlPlanPresupuestalDAO;
 import maristas.factoria.DAOFactory;
-import maristas.interfaces.PresupuestoDAO;
+import maristas.interfaces.PlanPresupuestalDAO;
 
 /**
  *
@@ -28,7 +28,7 @@ import maristas.interfaces.PresupuestoDAO;
 public class PlanPresupuestalServlet extends HttpServlet {
     PresupuestoBean objPlanPr = null;
     DAOFactory objDAOFactory = null;
-    PresupuestoDAO objPlanPrDAO = null;
+    PlanPresupuestalDAO objPlanPrDAO = null;
     ArrayList<PresupuestoBean> plans = null;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -73,13 +73,16 @@ public class PlanPresupuestalServlet extends HttpServlet {
             throws ServletException, IOException {
        //variables
         String pagina="/views/PlanPresupuestal/listPlan.jsp";
-        int opt = Integer.parseInt(request.getParameter("accion"));
+        int op = 1;
+        if(request.getParameter("accion") != null) {
+            op = Integer.parseInt(request.getParameter("accion"));
+        }
         int estado = 0;
         
         objDAOFactory = DAOFactory.getDAOFactory(DAOFactory.MYSQL);
         objPlanPrDAO = objDAOFactory.getPresupuestoDAO();
         try {
-            switch(opt) {
+            switch(op) {
                 //LIST
                 case 1: {                
                     plans = objPlanPrDAO.ListaPlanPr();

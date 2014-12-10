@@ -5,7 +5,10 @@
  */
 package maristas.factoria;
 
-import maristas.interfaces.PresupuestoDAO;
+import maristas.interfaces.ActividadDAO;
+import maristas.interfaces.PlanOperativoDAO;
+import maristas.interfaces.PlanPresupuestalDAO;
+import maristas.interfaces.UnidadOrganicaDAO;
 import maristas.interfaces.UsuarioDAO;
 
 /**
@@ -15,8 +18,12 @@ import maristas.interfaces.UsuarioDAO;
 public abstract class DAOFactory {
     public static final int MYSQL = 1;
 
-    public abstract PresupuestoDAO getPresupuestoDAO();
+    public abstract PlanPresupuestalDAO getPresupuestoDAO();
+    public abstract PlanOperativoDAO getPlanOperativoDAO();
     public abstract UsuarioDAO getUsuarioDAO();
+    public abstract ActividadDAO getActividadDAO();
+    public abstract UnidadOrganicaDAO getUnidadOrganicaDAO();
+    
     
     public static DAOFactory getDAOFactory(int op) {
         switch(op) {

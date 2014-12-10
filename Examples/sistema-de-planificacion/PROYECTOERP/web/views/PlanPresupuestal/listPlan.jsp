@@ -70,7 +70,7 @@
         </nav>
         <div class="container">
             <header>
-                    <h1>Planes presupuestal: <a href="<%=request.getContextPath()%>/views/PlanPresupuestal/createPlan.jsp" class="pull-right btn btn-primary btn-lg">+ Crear</a></h1>
+                    <h1>Planes presupuestal <a href="<%=request.getContextPath()%>/views/PlanPresupuestal/createPlan.jsp" class="pull-right btn btn-primary btn-lg">+ Crear</a></h1>
                     <hr>
             </header>
             <br>
@@ -125,8 +125,8 @@
                                                                <td><%=obj.getMonto()%></td>
                                                                <td><%=obj.getFecha_inicio()%></td>
                                                                <td><%=obj.getFecha_final()%></td>
-                                                               <td><a href="#" onclick="irVistaActualizar(<%=obj.getId()%>)">Actualizar</a>
-                                                                   <a href="#" onclick="eliminar(<%=obj.getId()%>)">Eliminar</a></td>
+                                                               <td><a href="#" onclick="irVistaActualizar(<%=obj.getId()%>)"><span class="label label-primary">Actualizar</span></a> | 
+                                                                   <a href="#" onclick="eliminar(<%=obj.getId()%>)"><span class="label label-danger">Eliminar</span></a></td>
                                                            </tr>
                                                           <%   }
                                                           }%>

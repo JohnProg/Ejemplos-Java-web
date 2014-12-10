@@ -5,9 +5,15 @@
  */
 package maristas.factoria;
 
-import maristas.dao.MysqlPresupuestoDAO;
+import maristas.dao.MysqlActividadDAO;
+import maristas.dao.MysqlPlanOperativoDAO;
+import maristas.dao.MysqlPlanPresupuestalDAO;
+import maristas.dao.MysqlUnidadOrganicaDAO;
 import maristas.dao.MysqlUsuarioDAO;
-import maristas.interfaces.PresupuestoDAO;
+import maristas.interfaces.ActividadDAO;
+import maristas.interfaces.PlanOperativoDAO;
+import maristas.interfaces.PlanPresupuestalDAO;
+import maristas.interfaces.UnidadOrganicaDAO;
 import maristas.interfaces.UsuarioDAO;
 
 /**
@@ -20,7 +26,20 @@ public class MysqlDAOFactory extends DAOFactory{
         return new MysqlUsuarioDAO();
     }
     
-    public PresupuestoDAO getPresupuestoDAO() {
-        return new MysqlPresupuestoDAO();
+    public PlanPresupuestalDAO getPresupuestoDAO() {
+        return new MysqlPlanPresupuestalDAO();
     }
+    
+    public PlanOperativoDAO getPlanOperativoDAO() {
+        return new MysqlPlanOperativoDAO();
+    }
+    
+    public ActividadDAO getActividadDAO() {
+        return new MysqlActividadDAO();
+    }
+    
+    public UnidadOrganicaDAO getUnidadOrganicaDAO() {
+        return new MysqlUnidadOrganicaDAO();
+    }
+    
 }

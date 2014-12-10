@@ -36,7 +36,7 @@ function initApp () {
             ruta = $(this).data("ruta");
         var  pag = ruta+"?accion=4&obj_id=" + objetivoId;
          $.get(pag, function(data) {
-            var html = "<option  value=0> ---- Escoga un Sub-objetivo ---- </option> ";
+            var html = "";
             for(var i in data){
                 var item = data[i];
                 html += "<option name=id_sub_objetivo value="+item.id+">"+ item.nombre + "</option>"; 

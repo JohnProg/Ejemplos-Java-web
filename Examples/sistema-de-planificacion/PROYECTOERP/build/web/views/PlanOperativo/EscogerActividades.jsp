@@ -4,6 +4,7 @@
     Author     : Autonoma
 --%>
 
+<%@page import="maristas.beans.PlanEstrategicoBean"%>
 <%@page import="maristas.beans.PlanOperativoBean"%>
 <%@page import="maristas.beans.ActividadBean"%>
 <%@page import="java.util.ArrayList"%>
@@ -11,6 +12,7 @@
 <%
     ArrayList<ActividadBean> actividad = (ArrayList<ActividadBean>)request.getAttribute("actividad");
     PlanOperativoBean planO = (PlanOperativoBean)request.getAttribute("planO");
+    ArrayList<PlanEstrategicoBean> plansE = (ArrayList<PlanEstrategicoBean>)request.getAttribute("plansE");
 %>
 <!DOCTYPE html>
 <html>
@@ -73,8 +75,14 @@
                                         for(ActividadBean   obj:actividad) {   %>
                                         <tr>
                                            <td><%=obj.getId()%></td>
-                                           <td><%=obj.getNombre()%></td>                                          
-                                           <td><%=obj.getId_plan_operativo()%></td>
+                                           <td><%=obj.getNombre()%></td>     
+                                           <td>
+                                               <% for(PlanEstrategicoBean obj1:plansE) {
+                                                    if(obj.getId_plan_operativo()== obj1.getId()) {
+                                                        out.print(obj1.getNombre());
+                                                    }
+                                                }%>
+                                           </td>
                                            <td><%=obj.getGastos()%></td>
                                            <td><%=obj.getIngresos()%></td>
                                            <td><%=obj.getId_sub_objetivo()%></td>

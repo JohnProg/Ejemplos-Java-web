@@ -52,7 +52,7 @@ public class UsuarioServlet extends HttpServlet {
                 if(objUsuBean1.getId_rol() == 1){
                     response.sendRedirect("/PROYECTOERP/PlanEstrategicoServlet");
                 } else if(objUsuBean1.getId_rol() == 2){
-                    response.sendRedirect("/PROYECTOERP/PlanOperativoServlet");
+                    response.sendRedirect("/PROYECTOERP/PlanOperativoServlet?option=5");
                 } else {
                     response.sendRedirect("/PROYECTOERP/PlanPresupuestalServlet?accion=1");
                 }
