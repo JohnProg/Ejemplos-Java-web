@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import maristas.beans.PlanOperativoBean;
 import maristas.beans.PresupuestoBean;
 import maristas.dao.PlanOperativoDAO;
-import maristas.dao.presupuestoDAO;
+import maristas.dao.MysqlPresupuestoDAO;
 
 /**
  *
@@ -39,7 +39,7 @@ public class ActividadesServlet extends HttpServlet {
         
             // Mostrar vista crear
             if(option == 1) {
-                presupuestoDAO p_pre = new presupuestoDAO();
+                MysqlPresupuestoDAO p_pre = new MysqlPresupuestoDAO();
                 ArrayList<PresupuestoBean> plans = p_pre.ListaPlanPr();
                 request.setAttribute("plansP", plans);
                 pagina="/views/PlanOperativo/CreateActividades.jsp";

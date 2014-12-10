@@ -9,8 +9,9 @@ import maristas.beans.ObjetivoBean;
 import maristas.beans.PresupuestoBean;
 import maristas.conexion.conecctionBDMysql;
 import maristas.conexion.connectionBD;
+import maristas.interfaces.PresupuestoDAO;
 
-public class presupuestoDAO {
+public class MysqlPresupuestoDAO implements PresupuestoDAO{
     ArrayList<PresupuestoBean> lista=null;
     Connection          cnn=null;
     PreparedStatement   pt=null;
@@ -51,8 +52,7 @@ public class presupuestoDAO {
            return lista;
        }
    }
-    public PresupuestoBean obtenerPlanPr(int id){
-       PresupuestoBean objPlanP = new PresupuestoBean();
+    public PresupuestoBean obtenerPlanPr(PresupuestoBean objPlanP){
        
        try{
             conecctionBDMysql cn = new conecctionBDMysql();
@@ -62,7 +62,7 @@ public class presupuestoDAO {
                     + " monto, fecha_inicio,"
                     + " fecha_final"
                     + " from PlanPresupuestal where id = ?");
-            pt.setInt(1, id);
+            pt.setInt(1, objPlanP.getId());
             rs=pt.executeQuery();
 
 
@@ -130,13 +130,13 @@ public class presupuestoDAO {
             return estado;
         }
     }
-    public int EliminarPlanPr(int id) {
+    public int EliminarPlanPr(PresupuestoBean objPlanP) {
         int estado = 0;
         try{
             conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("delete from PlanPresupuestal where id=?");
-            pt.setInt(1, id);
+            pt.setInt(1, objPlanP.getId());
             estado = pt.executeUpdate();
             pt.close();
             return estado;

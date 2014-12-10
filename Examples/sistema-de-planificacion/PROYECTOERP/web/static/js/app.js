@@ -47,7 +47,7 @@ function initApp () {
     var txtSearch = document.getElementById("txtSearch");
     txtSearch.addEventListener('keyup', searchByText);
     function searchByText () {
-        var $rows = $('.table tr');
+        var $rows = $('#table tr');
         var val = txtSearch.value.trim().toLowerCase();
 
         $rows.show().filter(function() {

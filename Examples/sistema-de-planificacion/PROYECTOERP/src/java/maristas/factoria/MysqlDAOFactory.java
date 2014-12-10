@@ -5,7 +5,9 @@
  */
 package maristas.factoria;
 
+import maristas.dao.MysqlPresupuestoDAO;
 import maristas.dao.MysqlUsuarioDAO;
+import maristas.interfaces.PresupuestoDAO;
 import maristas.interfaces.UsuarioDAO;
 
 /**
@@ -16,5 +18,9 @@ public class MysqlDAOFactory extends DAOFactory{
     
     public UsuarioDAO getUsuarioDAO() {
         return new MysqlUsuarioDAO();
+    }
+    
+    public PresupuestoDAO getPresupuestoDAO() {
+        return new MysqlPresupuestoDAO();
     }
 }

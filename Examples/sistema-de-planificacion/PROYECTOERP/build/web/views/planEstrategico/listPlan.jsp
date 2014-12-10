@@ -87,6 +87,18 @@
                     <hr>
             </header>	
             <br>
+            <% if(request.getAttribute("status") == "ok"){ %>
+                            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <%=request.getAttribute("mensaje") %>
+                            </div>
+                        <%}%>
+                        <% if(request.getAttribute("status") == "fail"){ %>
+                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                                <%=request.getAttribute("mensaje") %>
+                            </div>
+                        <%}%>
             <section class="row">            
                     <form class="col-sm-12" name="form">
                         <input  type="hidden"  name="option">
