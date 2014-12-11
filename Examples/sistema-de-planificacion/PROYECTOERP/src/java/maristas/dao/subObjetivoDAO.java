@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import maristas.beans.SubObjetivoBean;
 import maristas.conexion.conecctionBDMysql;
-import maristas.conexion.connectionBD;
 
 
 public class subObjetivoDAO {
@@ -20,17 +19,17 @@ public class subObjetivoDAO {
        lista = new ArrayList<SubObjetivoBean>();
        
        try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
 
             String sql = "select id,"
-                    + " id_objetivo,"
+                    + " objetivo,"
                     + " nombre,"
                     + " descripcion"
                     + " from SubObjetivo";
             
             if(id_objetivo > 0){
-                sql = sql + " where id_objetivo="+id_objetivo;
+                sql = sql + " where objetivo="+id_objetivo;
             }
             
             pt=cnn.prepareStatement(sql);
@@ -68,7 +67,7 @@ public class subObjetivoDAO {
             cnn = cn.getConnection();
 
             pt=cnn.prepareStatement("select id, "
-                    + " id_objetivo,  "
+                    + " objetivo,  "
                     + " nombre, descripcion "
                     + " from SubObjetivo"
                     + " where id=?");
@@ -88,15 +87,15 @@ public class subObjetivoDAO {
        }
    }
 
-   public int InsertarObjetivo(SubObjetivoBean objObjetivo) {
+   public int InsertarSubObjetivo(SubObjetivoBean objSubObjetivo) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
-            pt=cnn.prepareStatement("insert into Objetivo(id_linea, nombre, descripcion) values(?,?,?)");
-            pt.setInt(1, objObjetivo.getId_objetivo());
-            pt.setString(2, objObjetivo.getNombre());
-            pt.setString(3, objObjetivo.getDescripcion());
+            pt=cnn.prepareStatement("insert into SubObjetivo(objetivo, nombre, descripcion) values(?,?,?)");
+            pt.setInt(1, objSubObjetivo.getId_objetivo());
+            pt.setString(2, objSubObjetivo.getNombre());
+            pt.setString(3, objSubObjetivo.getDescripcion());
             estado = pt.executeUpdate();
             pt.close();
             cnn.close();
@@ -110,10 +109,10 @@ public class subObjetivoDAO {
    public int ActualizarObjetivo(SubObjetivoBean objPlan) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("update Objetivo set "
-                    + " id_linea = ?,"
+                    + " objetivo = ?,"
                     + " nombre=?,"
                     + " descripcion=?,"
                     + " where id = ?");
@@ -134,7 +133,7 @@ public class subObjetivoDAO {
    public int EliminarObjetivo(SubObjetivoBean objPlan) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("delete SubObjetivo where id=?");
             pt.setInt(1, objPlan.getId());

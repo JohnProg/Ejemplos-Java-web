@@ -1,4 +1,10 @@
+<%@page import="maristas.beans.UsuarioBean"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%
+ArrayList<UsuarioBean> usuarios= (ArrayList<UsuarioBean>) request.getAttribute("usuarios");
+%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -31,18 +37,20 @@
                     <a href="<%=request.getContextPath()%>/PlanEstrategicoServlet" class="pull-right btn btn-info btn-lg">Regresar</a>
                         <br>
                         <br>
-                        <h1>Crear plan estratégico:</h1>
+                        <h1>Crear plan estratégico</h1>
                         <hr>
                 </header>		
                 <br>
                 <section class="row">
                         <% if(request.getAttribute("status") == "ok"){ %>
-                            <div class="alert alert-success">
+                            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                 <%=request.getAttribute("mensaje") %>
                             </div>
                         <%}%>
                         <% if(request.getAttribute("status") == "fail"){ %>
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                 <%=request.getAttribute("mensaje") %>
                             </div>
                         <%}%>
@@ -54,7 +62,7 @@
                                                             <label class="label-control" >Nombre: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                            <input type="text" name="nombre" class="form-control" autofocus="true" id="txtName" placeholder=" Ingresa el nombre">
+                                                            <input type="text" name="nombre" required class="form-control" autofocus="true" id="txtName" placeholder=" Ingresa el nombre">
                                                     </div>			
                                             </div>									
                                             <br>
@@ -63,7 +71,7 @@
                                                             <label class="label-control" >Fecha de vigencia: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="date" name="fec_inicio"class="form-control" id="txtVigency" placeholder=" ">
+                                                        <input type="date" required name="fec_inicio"class="form-control" id="txtVigency" placeholder=" ">
                                                     </div>			
                                             </div>	
                                             <br>
@@ -72,7 +80,7 @@
                                                             <label class="label-control" >Fecha de término: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="date" name="fec_termino"class="form-control" id="txtFinish" placeholder=" ">
+                                                        <input type="date" required name="fec_termino"class="form-control" id="txtFinish" placeholder=" ">
                                                     </div>			
                                             </div>	
                                             <br>
@@ -81,7 +89,7 @@
                                                             <label class="label-control" >Año de inicio: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="text" name="anio_inicio"class="form-control" id="txtYearStart" placeholder=" ">
+                                                        <input type="number" required name="anio_inicio"class="form-control" id="txtYearStart" placeholder=" ">
                                                     </div>			
                                             </div>	
                                             <br>
@@ -90,7 +98,7 @@
                                                             <label class="label-control" >Año de término: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="text" name="anio_termino"class="form-control" id="txtYearFinish" placeholder=" ">
+                                                        <input type="number" required name="anio_termino"class="form-control" id="txtYearFinish" placeholder=" ">
                                                     </div>			
                                             </div>
                                             <br>
@@ -99,7 +107,13 @@
                                                             <label class="label-control" >Aprobado por: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <input type="text" name="aprobado_por"class="form-control" id="txtApprovedBy" placeholder=" ">
+                                                        <select name="aprobado_por" required class="form-control" id="txtApprovedBy">
+                                                            <%
+                                                                for(UsuarioBean obj:usuarios){
+                                                                    out.print("<option value="+ obj.getId() +">"+ obj.getUsername() +"</option>");
+                                                                }
+                                                            %>
+                                                        </select>
                                                     </div>			
                                             </div>
                                             <br>
@@ -108,7 +122,7 @@
                                                             <label class="label-control" >Descripción: </label>
                                                     </div>
                                                     <div class="col-sm-4">
-                                                        <textarea class="form-control" name="descripcion"id="txtDescription" col="3" placeholder="Ingresa la descripcion"></textarea>
+                                                        <textarea class="form-control" required name="descripcion"id="txtDescription" col="3" placeholder="Ingresa la descripcion"></textarea>
                                                     </div>			
                                             </div>
                                             <br>
@@ -124,5 +138,9 @@
                             </form>
                     </section>
             </div>
+                                                    <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-1.11.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/bootstrap.min.js"></script>
+            
     </body>
 </html>

@@ -70,3 +70,6 @@ margin-top: 2px;
     height: 30px;
     width: 30px;
 }
+li.dropdown {
+    margin-top: 4px;
+}

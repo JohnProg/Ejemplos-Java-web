@@ -23,23 +23,25 @@ public class SubObjetivoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String pagina="/views/planEstrategico/linea/listLinea.jsp";
+        String pagina="/views/planEstrategico/subobjetivo/listSubObjetivo.jsp";
         int option = 0;
         if(request.getParameter("option") != null) {
             option = Integer.parseInt(request.getParameter("option"));
         }
         
         //Mostrar vista lista plans
+        request.setAttribute("id_plan",request.getParameter("id_plan"));
+        request.setAttribute("id_linea", request.getParameter("id_linea"));
+        request.setAttribute("id_objetivo",request.getParameter("id_objetivo"));
+        
         if(option == 1) {
-            pagina="/views/planEstrategico/linea/listLinea.jsp";
+            pagina="/views/planEstrategico/subobjetivo/listSubObjetivo.jsp";
             subObjetivoDAO i_s = new subObjetivoDAO();
-            ArrayList<SubObjetivoBean> lineaobj = i_s.GetSubObjetivos(Integer.parseInt(request.getParameter("id_plan")));
-            request.setAttribute("id_objetivo",request.getParameter("id_objetivo"));
+            ArrayList<SubObjetivoBean> lineaobj = i_s.GetSubObjetivos(Integer.parseInt(request.getParameter("id_objetivo")));
             request.setAttribute("sub_objetivos", lineaobj);
         }  
         // Mostrar vista crear
         if(option == 2) {
-            request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
             pagina="/views/planEstrategico/subobjetivo/createSubObjetivo.jsp";
         }
         //Mostrar vista actualizar plans
@@ -56,7 +58,7 @@ public class SubObjetivoServlet extends HttpServlet {
             throws ServletException, IOException {
        
         
-        String opcad = request.getParameter("accion"),
+        String opcad = request.getParameter("option"),
         pagina = "";
         int estado = 0;
         int op;
@@ -74,23 +76,24 @@ public class SubObjetivoServlet extends HttpServlet {
                                 objSubObjetivoBean.setNombre(nombre);
                                 objSubObjetivoBean.setDescripcion(descripcion);
                     subObjetivoDAO  objSubObjetivoDAO=new subObjetivoDAO();
-                    estado=objSubObjetivoDAO.InsertarObjetivo(objSubObjetivoBean);
+                    estado=objSubObjetivoDAO.InsertarSubObjetivo(objSubObjetivoBean);
 
                     //verificar estado de la insercion
+                    request.setAttribute("id_plan",request.getParameter("id_plan"));
+                    request.setAttribute("id_linea", request.getParameter("id_linea"));
+                    request.setAttribute("id_objetivo",request.getParameter("id_objetivo"));
                     if(estado ==1) {
-                        request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                         request.setAttribute("status", "ok");
                         request.setAttribute("mensaje","Se creo satisfactoriamente.");
                     }
                     else{
-                      request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                       request.setAttribute("status", "fail"); 
                       request.setAttribute("mensaje","Hubo un error al momento de creacion.");
                     }
                     break;
             }
             case 2: { 
-                    pagina = "/views/planEstrategico/objetivo/updateSubObjetivo.jsp";
+                    pagina = "/views/planEstrategico/subobjetivo/updateSubObjetivo.jsp";
                     int id = Integer.parseInt(request.getParameter("id"));
                     int id_objetivo=Integer.parseInt(request.getParameter("id_objetivo"));
                     String nombre=request.getParameter("nombre");
@@ -104,13 +107,14 @@ public class SubObjetivoServlet extends HttpServlet {
                     subObjetivoDAO  objObjetivoDAO=new subObjetivoDAO();
                     estado=objObjetivoDAO.ActualizarObjetivo(objSubObjetivoBean);
                     //verificar estado de la actualizacion
+                    request.setAttribute("id_plan",request.getParameter("id_plan"));
+                    request.setAttribute("id_linea", request.getParameter("id_linea"));
+                    request.setAttribute("id_objetivo",request.getParameter("id_objetivo"));
                     if(estado ==1) {
-                        request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                         request.setAttribute("status", "ok");
                         request.setAttribute("mensaje","Se actualizo satisfactoriamente.");
                     }
                     else{
-                      request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                       request.setAttribute("status", "fail"); 
                       request.setAttribute("mensaje","Hubo un error al momento de actualizar.");
                     }
@@ -124,13 +128,14 @@ public class SubObjetivoServlet extends HttpServlet {
                     subObjetivoDAO  objSubObjetivoDAO=new subObjetivoDAO();
                     estado = objSubObjetivoDAO.EliminarObjetivo(objSubObjetivoBean);
                     //verificar estado de la eliminacion
+                    request.setAttribute("id_plan",request.getParameter("id_plan"));
+                    request.setAttribute("id_linea", request.getParameter("id_linea"));
+                    request.setAttribute("id_objetivo",request.getParameter("id_objetivo"));
                     if(estado == 1) {
-                        request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                         request.setAttribute("status", "ok"); 
                         request.setAttribute("mensaje","Se elimino correctamente.");
                     }
                     else {
-                        request.setAttribute("id_objetivo", request.getParameter("id_objetivo"));
                         request.setAttribute("status", "fail"); 
                         request.setAttribute("mensaje","Hubo un error al momento de eliminar.");
                     }

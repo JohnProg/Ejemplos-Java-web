@@ -72,7 +72,7 @@ public class LineaServlet extends HttpServlet {
                                 objLineaBean.setNombre(nombre);
                                 objLineaBean.setDescripcion(descripcion);
                     lineaDAO  objLineaDAO=new lineaDAO();
-                    estado=objLineaDAO.InsertarPlan(objLineaBean);
+                    estado=objLineaDAO.InsertarLinea(objLineaBean);
 
                     //verificar estado de la insercion
                     if(estado ==1) {

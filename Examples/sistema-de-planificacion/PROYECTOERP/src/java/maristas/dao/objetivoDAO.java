@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import maristas.beans.ObjetivoBean;
 import maristas.beans.PlanEstrategicoBean;
 import maristas.conexion.conecctionBDMysql;
-import maristas.conexion.connectionBD;
 
 
 public class objetivoDAO {
@@ -22,7 +21,7 @@ public class objetivoDAO {
        lista = new ArrayList<ObjetivoBean>();
        
        try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
 
             String sql = "select id,"
@@ -46,7 +45,6 @@ public class objetivoDAO {
                 objObjetivo.setId_linea(rs.getInt(2));
                 objObjetivo.setNombre(rs.getString(3));
                 objObjetivo.setDescripcion(rs.getString(4));
-
                 lista.add(objObjetivo);                            
             }
             rs.close();
@@ -70,7 +68,7 @@ public class objetivoDAO {
             pt=cnn.prepareStatement("select id, "
                     + " linea, nombre, "
                     + " descripcion "
-                    + " from objetivo"
+                    + " from Objetivo"
                     + " where id=?");
             pt.setInt(1, id_plan);
             rs=pt.executeQuery();
@@ -90,9 +88,9 @@ public class objetivoDAO {
    public int InsertarObjetivo(ObjetivoBean objObjetivo) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
-            pt=cnn.prepareStatement("insert into Objetivo(id_linea, nombre, descripcion) values(?,?,?)");
+            pt=cnn.prepareStatement("insert into Objetivo(linea, nombre, descripcion) values(?,?,?)");
             pt.setInt(1, objObjetivo.getId_linea());
             pt.setString(2, objObjetivo.getNombre());
             pt.setString(3, objObjetivo.getDescripcion());
@@ -109,10 +107,10 @@ public class objetivoDAO {
    public int ActualizarObjetivo(ObjetivoBean objPlan) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("update Objetivo set "
-                    + " id_linea = ?,"
+                    + " linea = ?,"
                     + " nombre=?,"
                     + " descripcion=?,"
                     + " where id = ?");
@@ -133,7 +131,7 @@ public class objetivoDAO {
    public int EliminarObjetivo(ObjetivoBean objPlan) {
         int estado = 0;
         try{
-            connectionBD cn = new connectionBD();
+            conecctionBDMysql cn = new conecctionBDMysql();
             cnn = cn.getConnection();
             pt=cnn.prepareStatement("delete Objetivo where id=?");
             pt.setInt(1, objPlan.getId());

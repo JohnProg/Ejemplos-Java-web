@@ -25,11 +25,10 @@
                 document.form.option.value="2";
                 document.form.submit();
             }
-            function crear(objetivo_id) {
+            function crear() {
                 document.form.action = "<%=request.getContextPath()%>/SubObjetivoServlet";
                 document.form.method = "GET";
                 document.form.option.value="2";
-                document.form.objetivo_id.value=objetivo_id;
                 document.form.submit();
             }
             function actualizar() {
@@ -81,14 +80,18 @@
 		<br>
 		<header>
 		<a onclick="crear()" class="pull-right btn btn-primary btn-lg">+ Crear</a>
-                <a href="#" onclick="regresar()" class="pull-right btn btn-danger btn-lg" id="btnSalir">Regresar</a>
+                <a href="<%=request.getContextPath()%>/PlanEstrategicoServlet" class="pull-right btn btn-info btn-lg">Regresar</a>
 		<hr>
                 <h1>Sub Objetivos </h1>
 		<hr>
 		</header>		
 		<br>
 		<section class="row">
-			<form class="col-sm-12">
+			<form class="col-sm-12" name="form">
+                            <input type="hidden" name="option">
+                            <input type="hidden" name="id_linea" value="<%=request.getAttribute("id_linea") %>">
+                            <input type="hidden" name="id_linea" value="<%=request.getAttribute("id_linea") %>">
+                            <input type="hidden" name="id_objetivo" value="<%=request.getAttribute("id_objetivo") %>">
 				<fieldset class="form-group">
 					<div class="row">
 						<div class="col-sm-1">
@@ -108,7 +111,6 @@
 								<th>#</th>
 								<th>Nombre</th>
 								<th>Descripción</th>
-								<th>Opciones</th>
 							</tr>
 						</thead>
                                                 <tbody id="table">
@@ -120,9 +122,6 @@
                                                                <td><%=obj.getId()%></td>
                                                                <td><%=obj.getNombre()%></td>
                                                                <td><%=obj.getDescripcion()%></td>
-                                                               <td>
-                                                                   <a onclick="actualizar()"><span class="label label-primary">Actualizar</span></a> |
-                                                                   <a onclick="eliminar()"><span class="label label-warning">Eliminar</span></a>
                                                            </tr>
                                                           <%   }
                                                           }%>
@@ -134,6 +133,7 @@
 	</div>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-1.11.1.min.js"></script>
             <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-migrate-1.2.1.min.js"></script>
+       <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/bootstrap.min.js"></script>
             <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/app.js"></script>
 
 </body>

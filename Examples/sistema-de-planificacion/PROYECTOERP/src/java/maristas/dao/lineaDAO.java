@@ -66,7 +66,7 @@ public class lineaDAO {
             pt=cnn.prepareStatement("select id, "
                     + " id_plan_estrategico, nombre, "
                     + " descripcion "
-                    + " from linea"
+                    + " from Linea"
                     + " where id=?");
             pt.setInt(1, id_linea);
             rs=pt.executeQuery();
@@ -95,7 +95,7 @@ public class lineaDAO {
             pt=cnn.prepareStatement("select id, "
                     + " id_plan_estrategico, nombre, "
                     + " descripcion "
-                    + " from linea"
+                    + " from Linea"
                     + " where id_plan_estrategico=?");
             pt.setInt(1, id_plan);
             rs=pt.executeQuery();
@@ -116,7 +116,7 @@ public class lineaDAO {
        }
    }
    
-   public int InsertarPlan(LineaBean objLinea) {
+   public int InsertarLinea(LineaBean objLinea) {
         int estado = 0;
         try{
             conecctionBDMysql cn = new conecctionBDMysql();

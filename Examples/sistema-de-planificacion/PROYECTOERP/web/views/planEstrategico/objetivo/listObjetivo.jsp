@@ -21,7 +21,7 @@
             function regresar(){
                 document.form.action = "<%=request.getContextPath()%>/LineaServlet";
                 document.form.method = "GET";
-                document.form.option.value="2";
+                document.form.option.value="1";
                 document.form.submit();
             }
             function sub_objetivos(objetivo_id){
@@ -31,11 +31,10 @@
                 document.form.id_objetivo.value=objetivo_id;
                 document.form.submit();
             }
-            function crear(objetivo_id) {
+            function crear() {
                 document.form.action = "<%=request.getContextPath()%>/ObjetivoServlet";
                 document.form.method = "GET";
                 document.form.option.value="2";
-                document.form.id_objetivo.value=objetivo_id;
                 document.form.submit();
             }
             function actualizar() {
@@ -87,16 +86,18 @@
 		<br>
 		<header>
                 <a onclick="crear()" class="pull-right btn btn-primary btn-lg">+ Crear</a>
-                <a href="#" onclick="regresar()" class="pull-right btn btn-danger btn-lg" id="btnSalir">Regresar</a>
+                <a href="<%=request.getContextPath()%>/PlanEstrategicoServlet" class="pull-right btn btn-info btn-lg">Regresar</a>
 		<hr>
-		<h1>Plan 1 >> Línea 1 >> Objetivos </h1>
+		<h1> Objetivos </h1>
 		</header>		
 		<br>
 		<section class="row">
                     
-			<form class="col-sm-12">
-                            <input  type="hidden"  name="option">
+			<form class="col-sm-12" name="form">
+                            <input type="hidden"  name="option">
                             <input type="hidden" name="id_linea" value="<%=request.getAttribute("id_linea") %>">
+                            <input type="hidden" name="id_linea" value="<%=request.getAttribute("id_linea") %>">
+                            <input type="hidden" name="id_objetivo" value="">
 				<fieldset class="form-group">
 					<div class="row">
 						<div class="col-sm-1">
@@ -129,9 +130,7 @@
                                                                <td><%=obj.getNombre()%></td>
                                                                <td><%=obj.getDescripcion()%></td>
                                                                <td>
-                                                                   <a onclick="lineas(<%=obj.getId()%>)"><span class="label label-success">Lineas</span></a> |
-                                                                   <a onclick="actualizar()"><span class="label label-primary">Actualizar</span></a> |
-                                                                   <a onclick="eliminar()"><span class="label label-warning">Eliminar</span></a>
+                                                                   <a href="#" onclick="sub_objetivos(<%=obj.getId()%>)"><span class="label label-success">SubObjetivos</span></a>
                                                            </tr>
                                                           <%   }
                                                           }%>
@@ -144,6 +143,7 @@
 	</div>
 	<script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-1.11.1.min.js"></script>
             <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-migrate-1.2.1.min.js"></script>
+       <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/bootstrap.min.js"></script>
             <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/app.js"></script>
 </body>
 </html>

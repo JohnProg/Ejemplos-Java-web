@@ -11,7 +11,7 @@
 	<div class="container">
 		<br>
 		<header>
-                    <a href="index.html" class="pull-right btn btn-danger btn-lg" id="btnSalir">Salir</a>
+                    <a href="<%=request.getContextPath()%>/PlanEstrategicoServlet" class="pull-right btn btn-info btn-lg">Regresar</a>
 		<br>
 			<br>
 			<h1>Crear Línea:</h1>
@@ -19,13 +19,15 @@
 		</header>		
 		<br>
 		<section class="row">
-                        <% if(request.getAttribute("status") == "ok"){ %>
-                            <div class="alert alert-success">
+                         <% if(request.getAttribute("status") == "ok"){ %>
+                            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                 <%=request.getAttribute("mensaje") %>
                             </div>
                         <%}%>
                         <% if(request.getAttribute("status") == "fail"){ %>
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                 <%=request.getAttribute("mensaje") %>
                             </div>
                         <%}%>
@@ -63,6 +65,8 @@
 			</form>
 		</section>
 	</div>
-	<script type="text/javascript" src="../../../static/js/line.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-1.11.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-migrate-1.2.1.min.js"></script>
+       <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/bootstrap.min.js"></script>
 </body>
 </html>

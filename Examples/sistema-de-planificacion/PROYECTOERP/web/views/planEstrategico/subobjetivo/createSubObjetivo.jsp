@@ -11,33 +11,37 @@
 	<div class="container">
 		<br>
 		<header>
-			<a href="index.html" class="pull-right btn btn-danger btn-lg" id="btnSalir">Salir</a>
+			<a href="<%=request.getContextPath()%>/PlanEstrategicoServlet" class="pull-right btn btn-info btn-lg">Regresar</a>
 			<br>
 			<h1>Crear sub objetivo:</h1>
 			<hr>
 		</header>		
 		<br>
 		<section class="row">
-                        <% if(request.getAttribute("status") == "ok"){ %>
-                            <div class="alert alert-success">
+                         <% if(request.getAttribute("status") == "ok"){ %>
+                            <div class="alert alert-success alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                 <%=request.getAttribute("mensaje") %>
                             </div>
                         <%}%>
                         <% if(request.getAttribute("status") == "fail"){ %>
-                            <div class="alert alert-danger">
+                            <div class="alert alert-danger alert-dismissible fade in" role="alert">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
                                 <%=request.getAttribute("mensaje") %>
                             </div>
                         <%}%>
 			<form class="col-sm-12">
                             <input type="hidden" name="option" value="1">
-                            <input type="hidden" name="id_objetivo" value="<%=request.getAttribute("id_objetivo") %>"> 
+                            <input type="hidden" name="id_linea" value="<%=request.getAttribute("id_linea") %>">
+                            <input type="hidden" name="id_linea" value="<%=request.getAttribute("id_linea") %>">
+                            <input type="hidden" name="id_objetivo" value="">
 				<fieldset class="form-group">
 					<div class="row">
 						<div class="col-sm-2">
 							<label class="label-control" >Nombre: </label>
 						</div>
 						<div class="col-sm-4">
-							<input type="text" class="form-control" autofocus="true" id="txtName" placeholder=" Ingresa el nombre">
+							<input type="text" class="form-control" autofocus="true" name="nombre" id="nombre" placeholder=" Ingresa el nombre">
 						</div>			
 					</div>									
 					<br>
@@ -46,7 +50,7 @@
 							<label class="label-control" >Descripción: </label>
 						</div>
 						<div class="col-sm-4">
-							<textarea class="form-control" id="txtDescription" col="3" placeholder="Ingresa la descripcion"></textarea>
+							<textarea class="form-control" name="descripcion" id="descripcion" col="3" placeholder="Ingresa la descripcion"></textarea>
 						</div>			
 					</div>
 					<br>
@@ -62,6 +66,8 @@
 			</form>
 		</section>
 	</div>
-	<script type="text/javascript" src="../../../static/js/subgoal.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-1.11.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-migrate-1.2.1.min.js"></script>
+       <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/bootstrap.min.js"></script>
 </body>
 </html>

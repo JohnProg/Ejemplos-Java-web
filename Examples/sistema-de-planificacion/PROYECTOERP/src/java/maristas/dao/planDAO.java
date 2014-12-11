@@ -23,7 +23,7 @@ public class planDAO {
                     + " fecha_inicio, fecha_termino,"
                     + " anio_inicio, anio_termino,"
                     + " aprobado_por, descripcion"
-                    + " from planestrategico");
+                    + " from PlanEstrategico");
             rs=pt.executeQuery();
 
 
@@ -51,29 +51,27 @@ public class planDAO {
        }
    }
    
-   public PlanEstrategicoBean GetPlan(int id_plan){
-       PlanEstrategicoBean objPlan = new PlanEstrategicoBean();
+   public PlanEstrategicoBean GetPlan(PlanEstrategicoBean objPlan){
        
        try{
             conecctionBDMysql cn = new conecctionBDMysql();
             //connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
 
-            pt=cnn.prepareStatement("select id, nombre,"
-                    + " fecha_inicio, fecha_termino,"
-                    + " anio_inicio, anio_termino,"
-                    + " aprobado_por, descripcion"
-                    + " from planestrategico where id=?");
-            pt.setInt(1, id_plan);
+            pt=cnn.prepareStatement("select * from PlanEstrategico where id=?");
+            pt.setInt(1, objPlan.getId());
             rs=pt.executeQuery();
 
-                objPlan.setNombre(rs.getString(2));
-                objPlan.setFec_vigencia(rs.getString(3));
-                objPlan.setFec_termino(rs.getString(4));
-                objPlan.setAnio_inicio(rs.getString(5));
-                objPlan.setAnio_termino(rs.getString(6));
-                objPlan.setAprobado_por(rs.getInt(7));
-                objPlan.setDescripcion(rs.getString(8));
+                if(rs.next()){
+                    objPlan.setId(rs.getInt(1));
+                    objPlan.setNombre(rs.getString(2));
+                    objPlan.setFec_vigencia(rs.getString(3));
+                    objPlan.setFec_termino(rs.getString(4));
+                    objPlan.setAnio_inicio(rs.getString(5));
+                    objPlan.setAnio_termino(rs.getString(6));
+                    objPlan.setAprobado_por(rs.getInt(7));
+                    objPlan.setDescripcion(rs.getString(8));
+                }
             rs.close();
             pt.close();
             cnn.close();
@@ -90,7 +88,7 @@ public class planDAO {
             conecctionBDMysql cn = new conecctionBDMysql();
             //connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
-            pt=cnn.prepareStatement("insert into planestrategico(nombre, fecha_inicio, fecha_termino, anio_inicio, anio_termino, aprobado_por, descripcion) " +
+            pt=cnn.prepareStatement("insert into PlanEstrategico(nombre, fecha_inicio, fecha_termino, anio_inicio, anio_termino, aprobado_por, descripcion) " +
                     "values(?, ?, ?, ?, ?, ?, ?)");
             pt.setString(1, objPlan.getNombre());
             pt.setString(2, objPlan.getFec_vigencia());
@@ -115,7 +113,7 @@ public class planDAO {
             conecctionBDMysql cn = new conecctionBDMysql();
             //connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
-            pt=cnn.prepareStatement("update planestrategico set "
+            pt=cnn.prepareStatement("update PlanEstrategico set "
                     + " nombre = ?,"
                     + " fecha_inicio=?,"
                     + " fecha_termino=?,"
@@ -148,7 +146,7 @@ public class planDAO {
             conecctionBDMysql cn = new conecctionBDMysql();
             //connectionBD cn = new connectionBD();
             cnn = cn.getConnection();
-            pt=cnn.prepareStatement("delete planestrategico where id=?");
+            pt=cnn.prepareStatement("delete FROM PlanEstrategico where id=?");
             pt.setInt(1, objPlan.getId());
             estado = pt.executeUpdate();
             pt.close();

@@ -6,6 +6,8 @@
     PlanEstrategicoBean  objEmpleBean = null;
     UsuarioBean  userBean = null;
     ArrayList<PlanEstrategicoBean> plans=null;
+    ArrayList<UsuarioBean> usuarios= (ArrayList<UsuarioBean>) request.getAttribute("usuarios");
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -32,25 +34,22 @@
                 document.form.id_plan.value=plan_id;
                 document.form.submit();
             }
-            function actualizar() {
-                document.form.action = "<%=request.getContextPath()%>/PlanEstrategicoServlet";
+            function actualizar(id) {
+                document.form.action = "<%=request.getContextPath()%>/PlanEstrategicoServlet?option=3&id_plan="+id;
                 document.form.method = "GET";
-                document.form.accion.value="2";
-                document.form.submit();
-            }
-            function eliminar() {
-                debugger
-                document.form.action = "<%=request.getContextPath()%>/PlanEstrategicoServlet";
-                document.form.method = "POST";
                 document.form.option.value="3";
-                debugger
+                document.form.id_plan.value=id;
                 document.form.submit();
             }
-            function cerrarSesion() {
-                document.form.action = "<%=request.getContextPath()%>/cerrarSesion";
-                document.form.method = "GET";
-                document.form.accion.value="SALIR";
-                document.form.submit();
+            function eliminar(id) {
+                var resp = confirm("Estas seguro que desea eliminar");
+                if(resp) {
+                    document.form.action = "<%=request.getContextPath()%>/PlanEstrategicoServlet?option=2&id_plan="+id;
+                    document.form.method = "GET";
+                    document.form.option.value="2";
+                    document.form.id_plan.value=id;
+                    document.form.submit();
+                }
             }
             
         </script>
@@ -75,7 +74,7 @@
                     %>
                     </a>
                 </li>
-               <li class="dropdown"><a onclick="cerrarSesion()"  href="#">Salir</a></li>
+               <li class="dropdown"><a href="<%=request.getContextPath()%>/cerrarSesion">Salir</a></li>
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
@@ -83,7 +82,7 @@
         <div class="container">
             <header>
                 <a onclick="crear()" class="pull-right btn btn-primary btn-lg">+ Crear</a>
-                    <h1>Planes estratégicos: </h1>
+                    <h1>Planes estratégicos</h1>
                     <hr>
             </header>	
             <br>
@@ -96,7 +95,7 @@
                         <% if(request.getAttribute("status") == "fail"){ %>
                             <div class="alert alert-danger alert-dismissible fade in" role="alert">
                                 <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                                <%=request.getAttribute("mensaje") %>
+                                No se pudo eliminar porque esta asociada a otra tabla.
                             </div>
                         <%}%>
             <section class="row">            
@@ -142,12 +141,17 @@
                                                                <td><%=obj.getFec_termino()%></td>
                                                                <td><%=obj.getAnio_inicio()%></td>
                                                                <td><%=obj.getAnio_termino()%></td>
-                                                               <td><%=obj.getAprobado_por()%></td>
+                                                               <td><%
+                                                                for(UsuarioBean obj2:usuarios) {
+                                                                    if(obj2.getId() == obj.getAprobado_por()){
+                                                                        out.println(obj2.getUsername());
+                                                                    }
+                                                                }%></td>
                                                                <td><%=obj.getDescripcion()%></td>
                                                                <td>
                                                                    <a href="#" onclick="lineas(<%=obj.getId()%>)"><span class="label label-success">Lineas</span></a> |
-                                                                   <a href="#" onclick="actualizar()"><span class="label label-primary">Actualizar</span></a> |
-                                                                   <a href="#" onclick="eliminar()"><span class="label label-danger">Eliminar</span></a>
+                                                                   <a href="#" onclick="actualizar(<%=obj.getId()%>)"><span class="label label-primary">Editar</span></a> |
+                                                                   <a href="#" onclick="eliminar(<%=obj.getId()%>)"><span class="label label-danger">Eliminar</span></a>
                                                            </tr>
                                                           <%   }
                                                           }%>
@@ -159,6 +163,7 @@
         </div>
             <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-1.11.1.min.js"></script>
             <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/jquery-migrate-1.2.1.min.js"></script>
+            <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/plugins/bootstrap.min.js"></script>
             <script type="text/javascript" src="<%=request.getContextPath()%>/static/js/app.js"></script>
     </body>
 </html>
